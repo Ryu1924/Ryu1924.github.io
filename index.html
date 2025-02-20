@@ -1,17 +1,229 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta content="utf-8">
-        <link rel="stylesheet" type="text/css" href="css.css">
-        <title></title>
-    </head>
-    <body>
-        <div class="loader">   
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>       
-        </div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Leidy! 🎂</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffb3b3);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4081;
+            animation: floatHeart 5s linear infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+            pointer-events: auto;
+        }
+
+        .heart:hover {
+            transform: scale(1.5);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .photo-item {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 1rem;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts"></div>
+    
+    <div class="container">
+        <h1>¡Feliz Cumpleaños Leidy! 🎉</h1>
         
-    </body>
+        <div class="card" onclick="showConfetti()">
+            <p class="message">Haz clic en la tarjeta para lanzar confeti 🎊</p>
+            <div id="secretMessage" style="display: none;">
+                <p>Vas a ver cómo todo va a ir cambiando poco a poco. 💖</p>
+                <p>Por favor resiste y no decaigas ante este mundo de mierda✨</p>
+                <p>Eres una muy bonita persona, y sé que de cierta forma quieres reforzar tus debilidades, no te detengas hasta lograrlo, que de igual manera cuando lo hagas, vas a querer mejorar otras cosas.</p>
+            </div>
+        </div>
+
+        <div class="photo-grid">
+            <img src="foto1.jpg" class="photo-item" onclick="showMessage('¡A ver si ')">
+            <img src="foto2.jpg" class="photo-item" onclick="showMessage('este año')">
+            <img src="foto3.jpg" class="photo-item" onclick="showMessage('vamos al mar! 🌟😄🥂')">
+        </div>
+
+        <button class="button" onclick="createHearts()">¡Haz llover amor! 💖</button>
+    </div>
+
+    <div id="customMessage" class="hidden-message"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.onclick = () => {
+                    heart.style.animation = 'none';
+                    heart.style.transform = 'scale(2)';
+                    setTimeout(() => heart.remove(), 500);
+                };
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        function showConfetti() {
+            const card = document.querySelector('.card');
+            card.classList.add('clicked');
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            document.getElementById('secretMessage').style.display = 'block';
+        }
+
+        function showMessage(msg) {
+            const messageDiv = document.getElementById('customMessage');
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = msg;
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Crear corazones iniciales
+        setInterval(createHearts, 3000);
+    </script>
+</body>
 </html>
