@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriCheck — ¿Qué sello lleva tu producto?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="site-head">
+  <div class="wordmark">
+    <span class="wm-nutri">NUTRI</span><span class="wm-check">CHECK</span>
+  </div>
+  <p class="tagline">Escanea una etiqueta nutricional y descubre qué sellos de advertencia le corresponden, según la Resolución 2492 de 2022 (Colombia).</p>
+</header>
+
+<main>
+
+  <!-- ESTACIÓN DE ESCANEO -->
+  <section class="station" id="station">
+
+    <div class="panel scan-panel">
+      <h2 class="panel-title">01 — Escanea la etiqueta</h2>
+
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Subir imagen de la etiqueta nutricional">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <div class="dz-empty" id="dzEmpty">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3" y="5" width="18" height="14" rx="1.5"/>
+            <circle cx="9" cy="10.5" r="1.6"/>
+            <path d="M3 16l5-4.5 4 3.5 3.5-3 5.5 5"/>
+          </svg>
+          <p><strong>Arrastra una foto</strong> de la tabla nutricional<br>o haz clic para elegir un archivo</p>
+          <span class="dz-hint">JPG · PNG · WEBP</span>
+        </div>
+
+        <img id="preview" class="dz-preview" alt="Vista previa de la etiqueta" hidden>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+
+      <button class="btn ghost" id="scanBtn" disabled>Leer imagen (OCR)</button>
+      <p class="ocr-status" id="ocrStatus" aria-live="polite"></p>
+    </div>
+
+    <div class="panel data-panel">
+      <h2 class="panel-title">02 — Confirma los datos</h2>
+      <p class="panel-note">El OCR es una ayuda, no es exacto. Revisa y corrige los valores <strong>por cada 100&nbsp;g o 100&nbsp;ml</strong> antes de calcular.</p>
+
+      <div class="segmented" role="radiogroup" aria-label="Tipo de producto">
+        <button type="button" class="seg-btn is-active" data-tipo="solido" role="radio" aria-checked="true">Sólido</button>
+        <button type="button" class="seg-btn" data-tipo="liquido" role="radio" aria-checked="false">Líquido</button>
+      </div>
+
+      <form id="nutriForm" class="nutri-form">
+        <div class="field">
+          <label for="kcal">Energía <span>(kcal / 100 g o ml)</span></label>
+          <input type="number" step="any" min="0" id="kcal" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="sodio">Sodio <span>(mg / 100 g o ml)</span></label>
+          <input type="number" step="any" min="0" id="sodio" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="azucares">Azúcares <span>(g / 100 g o ml)</span></label>
+          <input type="number" step="any" min="0" id="azucares" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="gsat">Grasas saturadas <span>(g / 100 g o ml)</span></label>
+          <input type="number" step="any" min="0" id="gsat" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="gtrans">Grasas trans <span>(g / 100 g o ml)</span></label>
+          <input type="number" step="any" min="0" id="gtrans" inputmode="decimal">
+        </div>
+        <div class="field checkbox-field">
+          <label class="cb">
+            <input type="checkbox" id="edulcorantes">
+            <span>El listado de ingredientes menciona edulcorantes</span>
+          </label>
+        </div>
+      </form>
+
+      <button class="btn primary" id="checkBtn">Verificar sellos</button>
+    </div>
+
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="result" id="result" hidden>
+    <h2 class="panel-title">03 — Resultado</h2>
+    <p class="result-summary" id="resultSummary"></p>
+    <div class="seals" id="seals"></div>
+    <details class="how-it-works">
+      <summary>¿Cómo se calculó esto?</summary>
+      <ul id="calcDetails"></ul>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <p>Basado en los criterios de la <strong>Resolución 2492 de 2022</strong> (que modifica la Resolución 810 de 2021), Ministerio de Salud y Protección Social de Colombia. Esta herramienta es informativa y no reemplaza el rotulado oficial del fabricante ni asesoría profesional en nutrición.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
