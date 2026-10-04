@@ -82,7 +82,8 @@ svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke
 .services{padding:64px 0}
 .services h3.grp{margin:34px 0 14px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column}
+.card{position:relative;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #2b1a0922}
 .card h3{margin-bottom:8px}
 .card p{color:var(--muted);font-size:1rem;flex:1}
 .card .from{display:block;margin:14px 0;font-weight:600}
@@ -194,8 +195,91 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
 .wk .wing{animation-duration:.09s}
 .wk.rest .wing{animation-duration:.5s}
 @media (prefers-reduced-motion:reduce){.fw,.fw.busy .pt,.cell.dep{animation:none}}
+
+.winwrap{display:flex;flex-direction:column;gap:10px}
+.hint{font-size:.88rem;color:#d9c49c}
+.session-top{cursor:grab;user-select:none;touch-action:none}
+.ttl{flex:1}
+.wc{display:flex;gap:2px}
+.wc button{width:30px;height:24px;border:0;border-radius:4px;background:transparent;color:#d9c49c;font:600 .95rem/1 var(--body);cursor:pointer}
+.wc button:hover{background:#4a3216;color:#fff}
+.wc #winClose:hover{background:#c42b1c}
+.session{transition:opacity .3s,box-shadow .2s}
+.session.dragging{box-shadow:0 28px 50px #000a}
+.session.dragging .session-top{cursor:grabbing}
+.session-body{overflow:hidden;max-height:320px;transition:max-height .35s,padding .35s}
+.session.min .session-body{max-height:0;padding-top:0;padding-bottom:0}
+.session.gone{opacity:0;visibility:hidden;pointer-events:none}
+.session.back{animation:popin .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes popin{from{opacity:0;transform:scale(.85)}}
+.bsod{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:#0078d7;color:#fff;padding:24px;transition:background .5s}
+.bsod[hidden]{display:none}
+.bsod.fixing{background:var(--ink)}
+.bs-in{max-width:640px}
+.smile{font:300 clamp(5rem,16vw,9rem)/1.2 var(--body);margin-bottom:8px}
+.bsod h2{font:600 clamp(1.3rem,3.6vw,1.9rem)/1.25 var(--body);margin-bottom:14px}
+.bsod p{margin:0 0 10px;font-size:1.1rem}
+.bsod .code{font-size:.9rem;opacity:.85;margin:18px 0 22px}
+.bs-b{display:none}
+.bsod.fixing .bs-a{display:none}
+.bsod.fixing .bs-b{display:block}
+.spin{width:54px;height:54px;border-radius:50%;border:6px solid #4a3216;border-top-color:var(--tag);animation:spin .9s linear infinite;margin-bottom:20px}
+.bs-b p{opacity:0;animation:fadein .4s forwards}
+.bs-b p:nth-of-type(1){animation-delay:.1s}.bs-b p:nth-of-type(2){animation-delay:.8s}.bs-b p:nth-of-type(3){animation-delay:1.5s}
+@keyframes fadein{to{opacity:1}}
+.toast{position:fixed;left:50%;bottom:22px;z-index:150;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;border:2px solid var(--tag);border-radius:12px;padding:12px 16px;display:flex;gap:14px;align-items:center;transition:opacity .3s,transform .3s;max-width:calc(100vw - 100px)}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast .btn{padding:8px 14px;font-size:.92rem;white-space:nowrap}
+
+.tm{padding:20px 0 70px}
+.tm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center}
+.tm-pts{list-style:none;margin:0 0 22px;padding:0}
+.tm-pts li{padding:5px 0 5px 28px;position:relative;color:var(--muted)}
+.tm-pts li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+.tmw{background:#1d1106;border:1px solid #4a3216;border-radius:12px;overflow:hidden;color:#f1e3c6;box-shadow:0 18px 36px #2b1a0933}
+.tmw-top{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#34210c;font-size:.88rem;color:#d9c49c}
+.tmw-top .st{margin-left:auto;padding:2px 10px;border-radius:999px;font-weight:600;font-size:.8rem}
+.st.bad{background:#e5533d33;color:#ff9a8a}.st.busy{background:#ffb81c33;color:#ffd24d}.st.ok{background:#46d19b33;color:#7fe0b4}
+.tmw-body{padding:16px}
+.mt{display:grid;grid-template-columns:70px 1fr 46px;gap:10px;align-items:center;padding:5px 0;font-size:.95rem}
+.mb{height:10px;background:#3d280f;border-radius:5px;overflow:hidden}
+.mb i{display:block;height:100%;width:0;border-radius:5px}
+.mt b{text-align:right;font-variant-numeric:tabular-nums}
+.graph{width:100%;height:64px;display:block;margin:10px 0;background:#150c04;border:1px solid #3d280f;border-radius:8px}
+.graph polyline{fill:none;stroke:var(--tag);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.boot{display:flex;justify-content:space-between;align-items:center;padding:6px 0 10px;border-bottom:1px solid #3d280f;margin-bottom:8px}
+.boot b{font:800 1.3rem var(--head);color:var(--tag)}
+.lbl{font-size:.85rem;color:#d9c49c;margin-bottom:4px}
+.procs{list-style:none;margin:0 0 14px;padding:0;font-size:.9rem}
+.procs li{display:flex;align-items:center;gap:8px;padding:4px 0;transition:opacity .4s}
+.procs .pd{width:8px;height:8px;border-radius:50%;background:#e5533d;flex:none;transition:background .3s}
+.procs em{margin-left:auto;font-style:normal;color:#ff9a8a;font-size:.82rem;transition:color .3s}
+.procs li.off{opacity:.55}.procs li.off .pd{background:#46d19b}.procs li.off em{color:#7fe0b4}.procs li.off span:nth-child(2){text-decoration:line-through}
+.tmw .btn{width:100%}
+
+.diag{background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:24px;margin:0 0 8px}
+.dq-n{font:600 .9rem var(--body);color:var(--muted);margin-bottom:6px}
+.dq{font:700 1.35rem var(--head);margin:0 0 14px;outline:none}
+.dopts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.dopt{padding:14px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:600 1rem var(--body);text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .1s}
+.dopt:hover{border-color:var(--ink);background:#fff3d6}
+.dopt:active{transform:scale(.98)}
+.dlink{margin-top:14px;background:none;border:0;color:var(--blue);font:600 .95rem var(--body);cursor:pointer;padding:4px 0}
+.drec{list-style:none;margin:0 0 10px;padding:0}
+.drec li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.dtot{margin:10px 0}
+.dact{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+#cotizador{scroll-margin-top:80px}
+
+.inst{position:absolute;top:18px;right:18px;width:132px;opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .2s;pointer-events:none}
+.card:hover .inst,.card:focus-within .inst{opacity:1;transform:none}
+.il{display:block;font:600 .74rem var(--body);color:var(--muted);margin-bottom:4px}
+.ib{height:6px;border-radius:4px;background:var(--line);overflow:hidden}
+.ib i{display:block;height:100%;width:0;background:var(--blue)}
+.inst.ok .il{color:var(--ok)}.inst.ok .ib i{background:var(--ok)}
+@media (prefers-reduced-motion:reduce){.spin,.session.back{animation:none}.bs-b p{animation:none;opacity:1}.card:hover{transform:none}}
 @media (max-width:860px){
-  .hero-grid,.grid2,.about-grid,.calc-grid{grid-template-columns:1fr}
+  .hero-grid,.grid2,.about-grid,.calc-grid,.tm-grid,.dopts{grid-template-columns:1fr}
   .calc-sum{position:static}
   .cards{grid-template-columns:1fr}
 }
@@ -251,12 +335,12 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
     <div class="wrap hero-grid">
       <div>
         <h1>Tu Windows como nuevo, sin salir de casa.</h1>
-        <p class="lead">Mantenimiento remoto de Windows, licencias de Microsoft Office e instalación de Revit y AutoCAD. Todo por videollamada, con descuento este mes.</p>
+        <p class="lead">Mantenimiento remoto de Windows, licencias de Microsoft Office e instalación de Revit y AutoCAD. Todo realizado de manera remota, con descuento este mes.</p>
         <a class="btn" href="#ofertas">Ver ofertas</a>
       </div>
-      <div class="session" aria-hidden="true">
-        <div class="session-top"><span class="dot"></span> RustDesk · sesión remota activa</div>
-        <div class="session-body">
+      <div class="winwrap"><div class="session" id="win">
+        <div class="session-top" id="winBar"><span class="dot"></span><span class="ttl">RustDesk · sesión remota activa</span><span class="wc"><button type="button" id="winMin" aria-label="Minimizar ventana">–</button><button type="button" id="winClose" aria-label="Cerrar ventana">✕</button></span></div>
+        <div class="session-body" id="winBody">
           <div class="chk done"><b>✓</b><span>Limpieza de archivos temporales</span><span class="v">12 GB</span></div>
           <div class="chk done"><b>✓</b><span>Programas de inicio optimizados</span><span class="v">Listo</span></div>
           <div class="chk done"><b>✓</b><span>Actualizaciones y controladores</span><span class="v">Listo</span></div>
@@ -264,6 +348,7 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
           <div class="prog"><i></i></div>
         </div>
       </div>
+      <p class="hint">Puedes arrastrar esta ventana, minimizarla… o cerrarla.</p></div>
     </div>
   </div>
 
@@ -306,12 +391,38 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
       <p class="fine">Los precios y las versiones disponibles pueden cambiar. Confirma el valor final antes de agendar.</p>
     </div>
   </div>
+  <div class="tm" id="diferencia">
+    <div class="wrap tm-grid">
+      <div>
+        <h2>Mira la diferencia</h2>
+        <p class="sub">Así se ve un equipo lento antes y después del mantenimiento remoto. Pulsa el botón y míralo en vivo.</p>
+        <ul class="tm-pts"><li>Menos programas abiertos al encender</li><li>Disco liberado y memoria disponible</li><li>Arranque mucho más rápido</li></ul>
+        <a class="btn wa" href="#" data-wa data-prog="Mantenimiento remoto de Windows"><svg class="i"><use href="#wa"/></svg>Quiero esto en mi PC</a>
+        <p class="fine">Simulación ilustrativa. Los resultados reales dependen de cada equipo.</p>
+      </div>
+      <div class="tmw" id="tm">
+        <div class="tmw-top"><svg class="i s"><use href="#pc"/></svg>Administrador de tareas · Rendimiento<span class="st bad" id="tmState">Lento</span></div>
+        <div class="tmw-body">
+          <div class="mt"><span>CPU</span><div class="mb"><i id="bCpu"></i></div><b id="nCpu">96%</b></div>
+          <div class="mt"><span>Memoria</span><div class="mb"><i id="bMem"></i></div><b id="nMem">92%</b></div>
+          <div class="mt"><span>Disco</span><div class="mb"><i id="bDsk"></i></div><b id="nDsk">100%</b></div>
+          <svg class="graph" viewBox="0 0 240 60" preserveAspectRatio="none" aria-hidden="true"><polyline id="gLine" points=""/></svg>
+          <div class="boot"><span>Tiempo de arranque</span><b id="nBoot">3:20</b></div>
+          <p class="lbl">Procesos innecesarios</p>
+          <ul class="procs" id="procs"><li><span class="pd"></span><span>Barra de herramientas del navegador</span><em>Activo</em></li><li><span class="pd"></span><span>Programa de inicio desconocido</span><em>Activo</em></li><li><span class="pd"></span><span>Software publicitario</span><em>Activo</em></li><li><span class="pd"></span><span>Actualizador de programa antiguo</span><em>Activo</em></li><li><span class="pd"></span><span>Archivos temporales (12 GB)</span><em>Activo</em></li><li><span class="pd"></span><span>Extensión sospechosa del navegador</span><em>Activo</em></li></ul>
+          <button type="button" class="btn" id="tmGo">Optimizar mi PC</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="services has-garden" id="servicios">
   <div class="wrap">
     <h2>Servicios</h2>
     <p class="sub">Todo se hace de forma remota con <strong>RustDesk</strong>: tú ves la pantalla y yo trabajo en tu equipo. Todos los precios están en pesos colombianos (COP).</p>
+
+    <div class="diag" id="diagnostico"><h3>Diagnóstico rápido</h3><p class="sub" style="margin:6px 0 16px">Responde unas preguntas y te recomendamos qué necesitas.</p><div id="dgBody" aria-live="polite"></div></div>
 
     <h3 class="grp">Mantenimiento de Windows</h3>
     <div class="cards">
@@ -543,6 +654,21 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
 
 <a class="fab" href="#" data-wa aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
 
+<div class="bsod" id="bsod" role="dialog" aria-modal="true" aria-labelledby="bsT" hidden>
+  <div class="bs-in">
+    <div class="bs-a">
+      <div class="smile">:(</div>
+      <h2 id="bsT">Tu PC tuvo un problema y necesita reiniciarse.</h2>
+      <p>Solo estamos recopilando información del error y luego te ayudamos a repararlo.</p>
+      <p><span id="bsPct">0</span>% completado</p>
+      <p class="code">Código de detención: ABEJA_SIN_MANTENIMIENTO</p>
+      <button type="button" class="btn" id="bsFix">Reparar con BeeSystems</button>
+    </div>
+    <div class="bs-b"><div class="spin"></div><p>Limpiando archivos temporales…</p><p>Revisando virus y malware…</p><p>Optimizando el inicio de Windows…</p></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"><span>¡Equipo reparado! Así de fácil es el mantenimiento remoto.</span><a class="btn" href="#" data-wa data-prog="Mantenimiento remoto de Windows"><svg class="i"><use href="#wa"/></svg>Pedir el mío</a></div>
+
 <script>
   var WHATSAPP = "573206204196";
   document.getElementById("y").textContent = new Date().getFullYear();
@@ -731,6 +857,136 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
     requestAnimationFrame(frame);
   }
 
+  /* Ventana arrastrable + pantalla azul */
+  var win = document.getElementById("win"), wbar = document.getElementById("winBar"), wmin = document.getElementById("winMin"), wclose = document.getElementById("winClose");
+  var bsod = document.getElementById("bsod"), fix = document.getElementById("bsFix"), pctEl = document.getElementById("bsPct"), toast = document.getElementById("toast");
+  if (win && wbar) {
+    var ox = 0, oy = 0, sx = 0, sy = 0, base = null, drag = false, pctT, rebooting = false;
+    wbar.addEventListener("pointerdown", function (e) {
+      if (e.target.closest("button")) return;
+      var rc = win.getBoundingClientRect();
+      base = { l: rc.left - ox, t: rc.top - oy, w: rc.width };
+      sx = e.clientX - ox; sy = e.clientY - oy; drag = true; win.classList.add("dragging"); win.style.transition = "none";
+      wbar.setPointerCapture(e.pointerId);
+    });
+    wbar.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      ox = Math.min(innerWidth - base.w - 8 - base.l, Math.max(8 - base.l, e.clientX - sx));
+      oy = Math.min(innerHeight - 56 - base.t, Math.max(64 - base.t, e.clientY - sy));
+      win.style.transform = "translate(" + ox + "px," + oy + "px)";
+    });
+    var endDrag = function () { drag = false; win.classList.remove("dragging"); };
+    wbar.addEventListener("pointerup", endDrag); wbar.addEventListener("pointercancel", endDrag);
+    wbar.addEventListener("dblclick", function (e) {
+      if (e.target.closest("button")) return;
+      ox = oy = 0; win.style.transition = "transform .35s cubic-bezier(.3,1.4,.5,1)"; win.style.transform = "";
+    });
+    wmin.addEventListener("click", function () {
+      var m = win.classList.toggle("min");
+      wmin.setAttribute("aria-label", m ? "Restaurar ventana" : "Minimizar ventana"); wmin.textContent = m ? "▢" : "–";
+    });
+    wclose.addEventListener("click", function () {
+      win.classList.add("gone");
+      setTimeout(function () {
+        bsod.classList.remove("fixing"); bsod.hidden = false; document.documentElement.style.overflow = "hidden";
+        var p = 0; pctEl.textContent = "0"; clearInterval(pctT);
+        pctT = setInterval(function () { p = Math.min(100, p + 1 + Math.random() * 4); pctEl.textContent = Math.floor(p); if (p >= 100) clearInterval(pctT); }, 90);
+        fix.focus();
+      }, reduce ? 0 : 350);
+    });
+    var closeBsod = function () {
+      clearInterval(pctT); bsod.hidden = true; document.documentElement.style.overflow = "";
+      ox = oy = 0; win.style.transform = ""; win.style.transition = ""; win.classList.remove("gone", "min"); wmin.textContent = "–";
+      win.classList.add("back"); setTimeout(function () { win.classList.remove("back"); }, 600);
+      toast.classList.add("show"); clearTimeout(toast._t); toast._t = setTimeout(function () { toast.classList.remove("show"); }, 7000);
+      wclose.focus({ preventScroll: true });
+    };
+    fix.addEventListener("click", function () {
+      if (rebooting) return; rebooting = true; bsod.classList.add("fixing");
+      setTimeout(function () { rebooting = false; closeBsod(); }, reduce ? 300 : 2500);
+    });
+    addEventListener("keydown", function (e) { if (e.key === "Escape" && !bsod.hidden && !rebooting) closeBsod(); });
+  }
+
+  /* Administrador de tareas: antes y después */
+  var tmEl = document.getElementById("tm");
+  if (tmEl) {
+    var K = ["cpu", "mem", "dsk"], BARS = { cpu: "bCpu", mem: "bMem", dsk: "bDsk" }, NUMS = { cpu: "nCpu", mem: "nMem", dsk: "nDsk" };
+    Object.keys(BARS).forEach(function (k) { BARS[k] = document.getElementById(BARS[k]); NUMS[k] = document.getElementById(NUMS[k]); });
+    var nBoot = document.getElementById("nBoot"), line = document.getElementById("gLine"), stEl = document.getElementById("tmState"), goBtn = document.getElementById("tmGo"), procs = [].slice.call(document.querySelectorAll("#procs li"));
+    var SLOW = { cpu: 96, mem: 92, dsk: 100, boot: 200 }, FAST = { cpu: 14, mem: 38, dsk: 6, boot: 38 };
+    var cur = { cpu: 96, mem: 92, dsk: 100, boot: 200 }, from = null, to = null, t0 = 0, dur = 2600, mode = "slow", busy = false, hist = [], tmVis = true, lastS = 0;
+    for (var q = 0; q < 48; q++) hist.push(90);
+    var colr = function (v) { return v >= 80 ? "#e5533d" : v >= 45 ? "#ffb81c" : "#46d19b"; };
+    var mmss = function (s) { s = Math.round(s); return Math.floor(s / 60) + ":" + ("0" + s % 60).slice(-2); };
+    var paint = function () {
+      K.forEach(function (k) { var v = Math.round(cur[k]); BARS[k].style.width = v + "%"; BARS[k].style.background = colr(v); NUMS[k].textContent = v + "%"; });
+      nBoot.textContent = mmss(cur.boot);
+    };
+    var graph = function () {
+      var amp = cur.cpu > 60 ? 9 : 3;
+      hist.push(Math.max(2, Math.min(100, cur.cpu + (Math.random() - 0.5) * 2 * amp))); hist.shift();
+      line.setAttribute("points", hist.map(function (v, i) { return (i * 240 / 47).toFixed(1) + "," + (58 - v / 100 * 54).toFixed(1); }).join(" "));
+    };
+    var settle = function () { for (var i = 0; i < 48; i++) graph(); };
+    paint(); settle();
+    if (!reduce) {
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { tmVis = en[0].isIntersecting; }).observe(tmEl);
+      (function loop(t) {
+        requestAnimationFrame(loop);
+        if (!tmVis) return;
+        if (to) {
+          var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+          ["cpu", "mem", "dsk", "boot"].forEach(function (k) { cur[k] = from[k] + (to[k] - from[k]) * e; });
+          paint(); if (p >= 1) to = null;
+        }
+        if (t - lastS > 110) { lastS = t; graph(); }
+      })(0);
+    }
+    goBtn.addEventListener("click", function () {
+      if (busy) return; busy = true;
+      var fast = mode === "slow", tgt = fast ? FAST : SLOW, d = fast ? 2600 : 1200;
+      goBtn.disabled = true; stEl.textContent = fast ? "Optimizando…" : "Restaurando…"; stEl.className = "st busy";
+      if (reduce) { cur = { cpu: tgt.cpu, mem: tgt.mem, dsk: tgt.dsk, boot: tgt.boot }; paint(); settle(); }
+      else { from = { cpu: cur.cpu, mem: cur.mem, dsk: cur.dsk, boot: cur.boot }; to = tgt; t0 = performance.now(); dur = d; }
+      procs.forEach(function (li, i) {
+        setTimeout(function () { li.classList.toggle("off", fast); li.querySelector("em").textContent = fast ? "Finalizado ✓" : "Activo"; }, reduce ? 0 : (fast ? 350 * (i + 1) : 100 * i));
+      });
+      setTimeout(function () {
+        busy = false; mode = fast ? "fast" : "slow"; goBtn.disabled = false;
+        stEl.textContent = fast ? "Optimizado" : "Lento"; stEl.className = "st " + (fast ? "ok" : "bad");
+        goBtn.textContent = fast ? "Volver a como estaba" : "Optimizar mi PC"; goBtn.classList.toggle("line", fast);
+      }, reduce ? 0 : d + 300);
+    });
+  }
+
+  /* Barras de instalación al pasar el mouse por los programas */
+  document.querySelectorAll(".services .cards").forEach(function (grid) {
+    var g = grid.previousElementSibling;
+    if (!g || /Mantenimiento/.test(g.textContent)) return;
+    grid.querySelectorAll(".card").forEach(function (card) {
+      var pill = document.createElement("div"); pill.className = "inst"; pill.setAttribute("aria-hidden", "true");
+      pill.innerHTML = '<span class="il">Instalando… 0%</span><div class="ib"><i></i></div>'; card.appendChild(pill);
+      var il = pill.firstChild, fe = pill.querySelector("i"), raf = 0, rt;
+      var show = function (v) {
+        fe.style.width = v + "%";
+        if (v >= 100) { il.textContent = "Instalado ✓"; pill.classList.add("ok"); } else { il.textContent = "Instalando… " + Math.floor(v) + "%"; pill.classList.remove("ok"); }
+      };
+      var start = function () {
+        clearTimeout(rt); if (raf || pill.classList.contains("ok")) return;
+        if (reduce) { show(100); return; }
+        var t0 = performance.now();
+        (function s(t) {
+          var p = Math.min(1, (t - t0) / 1700), v = p < 0.55 ? p / 0.55 * 62 : p < 0.7 ? 62 + (p - 0.55) / 0.15 * 4 : 66 + (p - 0.7) / 0.3 * 34;
+          show(v); raf = p < 1 ? requestAnimationFrame(s) : 0;
+        })(t0);
+      };
+      var stop = function () { cancelAnimationFrame(raf); raf = 0; rt = setTimeout(function () { show(0); }, 250); };
+      card.addEventListener("pointerenter", start); card.addEventListener("pointerleave", stop);
+      card.addEventListener("focusin", start); card.addEventListener("focusout", stop);
+    });
+  });
+
   /* Cotizador interactivo: se arma con las tarjetas de servicios */
   var host = document.getElementById("calcItems"), items = [], sel = {};
   document.querySelectorAll(".services .cards").forEach(function (grid) {
@@ -767,6 +1023,63 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
     btn.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
     btn.setAttribute("aria-disabled", ch.length ? "false" : "true");
   }
+  /* Diagnóstico rápido */
+  var dg = document.getElementById("dgBody");
+  if (dg) {
+    var FLOW = {
+      start: { q: "¿Qué está pasando con tu equipo?", o: [["Está lento o se traba", "slow", "age"], ["Tengo virus o ventanas raras", "virus", "office"], ["No arranca bien o quiero empezar de cero", "reset", "office"], ["Solo necesito instalar programas", "prog", "ptype"]] },
+      age: { q: "¿Qué tan viejo es tu computador?", o: [["Menos de 3 años", "new", "office"], ["Entre 3 y 6 años", "mid", "office"], ["Más de 6 años", "old", "office"]] },
+      office: { q: "¿Necesitas Microsoft Office?", o: [["Sí, lo necesito", "yes", "end"], ["Ya lo tengo", "no", "end"]] },
+      ptype: { q: "¿Qué tipo de programas necesitas?", o: [["Oficina (Word, Excel, PowerPoint)", "office", "end"], ["Arquitectura e ingeniería (Revit, AutoCAD…)", "eng", "end"], ["Diseño y video (Photoshop, Premiere…)", "design", "end"]] }
+    };
+    var ans = [], step = "start";
+    var byName = function (n) { return items.filter(function (i) { return i.name === n; })[0]; };
+    var has = function (v) { return ans.some(function (a) { return a[1] === v; }); };
+    var recNames = function () {
+      var n = [];
+      if (has("slow")) n.push("Mantenimiento y limpieza");
+      if (has("virus")) n.push("Eliminación de virus", "Mantenimiento y limpieza");
+      if (has("reset")) n.push("Windows desde cero");
+      if (has("yes") || has("office")) n.push("Microsoft Office");
+      if (has("eng")) n.push("Revit", "AutoCAD");
+      if (has("design")) n.push("Photoshop", "Premiere Pro");
+      return n.filter(function (x, i) { return n.indexOf(x) === i; });
+    };
+    var view = function (focus) {
+      var h;
+      if (step !== "end") {
+        var f = FLOW[step];
+        h = '<p class="dq-n">Pregunta ' + (ans.length + 1) + '</p><h4 class="dq">' + f.q + '</h4><div class="dopts">' +
+          f.o.map(function (o, i) { return '<button type="button" class="dopt" data-i="' + i + '">' + o[0] + "</button>"; }).join("") + "</div>" +
+          (ans.length ? '<button type="button" class="dlink" data-act="back">← Volver</button>' : "");
+      } else {
+        var rec = recNames().map(byName).filter(Boolean), total = rec.reduce(function (a, i) { return a + i.price; }, 0);
+        var msg = "Hola, hice el diagnóstico rápido en tu página.\n" + ans.map(function (a) { return "- " + a[2]; }).join("\n") + "\nMe recomendaron: " + rec.map(function (i) { return i.wa; }).join(", ") + ".\nTotal estimado: " + money(total) + ".";
+        h = '<p class="dq-n">Tu recomendación</p><h4 class="dq">Esto es lo que necesitas</h4><ul class="drec">' +
+          rec.map(function (i) { return "<li><span>" + i.name + "</span><span>" + (i.from ? "desde " : "") + money(i.price) + "</span></li>"; }).join("") +
+          '</ul><p class="dtot">Total estimado: <b>' + money(total) + "</b></p>" +
+          (has("old") && has("slow") ? '<p class="fine">Con un equipo de más de 6 años, quizá convenga además instalar Windows desde cero; lo revisamos en la sesión.</p>' : "") +
+          '<div class="dact"><button type="button" class="btn" data-act="quote">Ver mi cotización</button><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/' + WHATSAPP + "?text=" + encodeURIComponent(msg) + '">Enviar por WhatsApp</a><button type="button" class="dlink" data-act="again" style="margin:0">Empezar de nuevo</button></div>';
+      }
+      dg.innerHTML = h;
+      if (focus) { var q = dg.querySelector(".dq"); if (q) { q.tabIndex = -1; q.focus({ preventScroll: true }); } }
+    };
+    dg.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var act = b.getAttribute("data-act");
+      if (b.classList.contains("dopt")) { var o = FLOW[step].o[+b.getAttribute("data-i")]; ans.push([step, o[1], o[0]]); step = o[2]; view(true); }
+      else if (act === "back") { var l = ans.pop(); step = l[0]; view(true); }
+      else if (act === "again") { ans = []; step = "start"; view(true); }
+      else if (act === "quote") {
+        items.forEach(function (i) { sel[i.id] = false; });
+        recNames().forEach(function (n) { var it = byName(n); if (it) sel[it.id] = true; });
+        host.querySelectorAll(".chip").forEach(function (c, i) { c.setAttribute("aria-pressed", !!sel[i]); });
+        update(); document.getElementById("cotizador").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }
+    });
+    view(false);
+  }
+
   update();
 })();
 </script>
