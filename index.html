@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeeSystems | Soporte remoto para Windows, Office, Revit y AutoCAD</title>
+<meta name="description" content="BeeSystems: mantenimiento remoto de Windows, licencias de Microsoft Office e instalación de Revit y AutoCAD, con descuento. Atención por videollamada.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 2l19 11v22L24 46 5 35V13z' fill='%23ffb81c' stroke='%23ffb81c' stroke-width='4' stroke-linejoin='round'/%3E%3Cellipse cx='22' cy='16' rx='5' ry='9' transform='rotate(-18 22 22)' fill='%23fff'/%3E%3Cellipse cx='31' cy='16' rx='5' ry='9' transform='rotate(18 31 22)' fill='%23fff'/%3E%3Cellipse cx='26' cy='29' rx='11' ry='8.5' fill='%232b1a09'/%3E%3Crect x='22' y='22' width='3.4' height='14' fill='%23ffb81c'/%3E%3Crect x='28' y='22' width='3.4' height='14' fill='%23ffb81c'/%3E%3Ccircle cx='13.5' cy='29' r='5' fill='%232b1a09'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b1a09; --paper:#fff8ea; --white:#fff; --line:#ecd9b0;
+  --blue:#a85f00; --tag:#ffb81c; --tag-ink:#2b1a09; --ok:#0b8f6f; --muted:#6b5a45; --wa:#128c4a;
+  --head:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"Source Sans 3","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font:18px/1.55 var(--body);color:var(--ink);background:var(--paper)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+section[id]{scroll-margin-top:64px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.7rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.3rem;font-weight:700}
+p{margin:0}
+.sub{margin:10px 0 28px;color:var(--muted)}
+svg.i{width:1.2em;height:1.2em;flex:none}
+svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:8px;font:600 1rem var(--body);text-decoration:none;background:var(--tag);color:var(--tag-ink);border:2px solid var(--tag);cursor:pointer;text-align:center}
+.btn:hover{background:#ffd04d}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.dark:hover{background:#4a3216}
+.btn.line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:#fff}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn.wa:hover{background:#0e7440}
+
+.nav{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;border-bottom:1px solid #4a3216}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:9px 0;gap:14px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none}
+.logo svg{width:36px;height:36px}
+.nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
+.nav li a{display:block;padding:8px 12px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.98rem}
+.nav li a:hover{background:#4a3216;color:#fff}
+
+.hero{background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97'%3E%3Cpath d='M28 0l28 16.17v32.33L28 64.67 0 48.5V16.17zM28 64.67V97' fill='none' stroke='%23ffb81c' stroke-opacity='.14' stroke-width='1.5'/%3E%3C/svg%3E");color:#fff;padding:48px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero p.lead{margin:18px 0 26px;font-size:1.2rem;color:#ecdcbc;max-width:34em}
+.session{background:#1d1106;border:1px solid #4a3216;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px #0006}
+.session-top{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#34210c;font-size:.85rem;color:#d9c49c}
+.dot{width:9px;height:9px;border-radius:50%;background:#46d19b}
+.session-body{padding:18px;font-size:.98rem;color:#f1e3c6}
+.chk{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #3d280f}
+.chk:last-child{border:0}
+.chk b{color:#46d19b;font-weight:600}
+.chk span:last-child{margin-left:auto;color:#c9b184;font-size:.9rem}
+
+.offers{padding:60px 0 20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.deal{position:relative;background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:28px 26px 26px}
+.stamp{position:absolute;top:-16px;right:20px;background:var(--tag);color:var(--tag-ink);font-family:var(--head);font-weight:800;font-size:1.25rem;padding:6px 16px;border-radius:8px;transform:rotate(3deg)}
+.price{display:flex;align-items:baseline;gap:12px;margin:14px 0 4px;flex-wrap:wrap}
+.old{font-size:1.2rem;color:var(--muted);text-decoration:line-through}
+.new .cop{font-size:1rem;font-weight:700;margin-left:2px}
+.new{font-family:var(--head);font-weight:800;font-size:2.6rem}
+.unit{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+.deal ul{margin:0 0 22px;padding:0;list-style:none}
+.deal li{padding:6px 0 6px 28px;position:relative}
+.deal li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+.deal .btn{width:100%}
+.fine{font-size:.88rem;color:var(--muted);margin-top:12px}
+
+.ic{width:48px;height:48px;border-radius:12px;background:#fdebc4;color:var(--blue);display:grid;place-items:center;margin-bottom:14px;font-size:1.5rem}
+.deal .ic{margin-bottom:10px}
+.services{padding:64px 0}
+.services h3.grp{margin:34px 0 14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column}
+.card h3{margin-bottom:8px}
+.card p{color:var(--muted);font-size:1rem;flex:1}
+.card .from{display:block;margin:14px 0;font-weight:600}
+.card .from s{color:var(--muted);font-weight:400}
+.card .btn{padding:10px 16px}
+.quote-all{margin-top:26px;background:var(--white);border:2px dashed var(--ink);border-radius:12px;padding:22px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.quote-all p{max-width:36em}
+
+.about{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.about p+p{margin-top:14px}
+.about p{color:var(--muted)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;padding:0 0 18px 48px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font:800 1rem var(--head);display:grid;place-items:center}
+.steps strong{display:block;font-family:var(--head);font-size:1.1rem}
+.steps span{color:var(--muted);font-size:1rem}
+.faq{margin-top:34px}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:13px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:10px}
+
+.contact{padding:64px 0}
+.wa-box{background:var(--ink);color:#fff;border-radius:16px;padding:40px 24px;text-align:center}
+.wa-box>svg{width:64px;height:64px;margin-bottom:12px}
+.wa-box p{color:#ecdcbc;margin:12px auto 8px;max-width:32em}
+.wa-box .num{font-family:var(--head);font-weight:800;font-size:1.8rem;color:#fff;margin:0 0 22px}
+.wa-box .btn{font-size:1.1rem;padding:15px 28px}
+.pay{margin-top:28px;background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:26px;text-align:center}
+.pay p{color:var(--muted);margin:8px auto 18px;max-width:34em}
+.pay-row{display:flex;gap:14px;justify-content:center;align-items:stretch;flex-wrap:wrap}
+.pay-item{display:flex;align-items:center;justify-content:center;gap:10px;min-width:190px;padding:12px 20px;border:1px solid var(--line);border-radius:10px;background:#fff;font:700 1.25rem var(--head)}
+.pay-item img{height:38px;width:auto;display:block}
+.pay-num{margin-top:18px;font:800 1.3rem var(--head)}
+footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem}
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px #0005}
+.fab:hover{background:#0e7440}
+.fab svg{width:32px;height:32px}
+
+
+.hero{position:relative;z-index:2}
+.hero .hero-grid{position:relative;z-index:1}
+.bee{position:fixed;left:0;top:0;z-index:100;pointer-events:none;will-change:transform}
+.bee svg{display:block;filter:drop-shadow(0 0 7px #ffb81c) drop-shadow(0 3px 3px #0007)}
+.wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .16s ease-in-out infinite alternate}
+@keyframes flap{to{transform:scaleY(.45)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}}
+.chk{opacity:.4;transition:opacity .3s}
+.chk.run,.chk.done{opacity:1}
+.chk b{display:inline-block;width:1.2em;text-align:center}
+.chk.run b{animation:spin .8s linear infinite;color:var(--tag)}
+.prog{height:6px;background:#3d280f;border-radius:4px;margin-top:14px;overflow:hidden}
+.prog i{display:block;height:100%;width:100%;background:var(--tag);transition:width .5s}
+
+.calc{margin-top:56px}
+.calc-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+.cg{margin-bottom:20px}
+.cg h4{font:700 1rem var(--head);margin:0 0 10px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:2px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:600 .95rem var(--body);cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
+.chip:hover{border-color:var(--ink)}
+.chip:active{transform:scale(.96)}
+.chip .ck{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font-size:.7rem;line-height:1;color:#fff}
+.chip .pr{font-weight:400;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--tag);border-color:var(--tag)}
+.chip[aria-pressed="true"] .ck{background:var(--ink);border-color:var(--ink)}
+.chip[aria-pressed="true"] .ck::after{content:"✓"}
+.chip[aria-pressed="true"] .pr{color:var(--ink)}
+.calc-sum{position:sticky;top:78px;background:var(--ink);color:#fff;border-radius:14px;padding:22px}
+.calc-sum h3{margin-bottom:12px}
+.calc-sum ul{list-style:none;margin:0 0 12px;padding:0;max-height:220px;overflow:auto;font-size:.98rem}
+.calc-sum li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid #4a3216;animation:pop .25s ease-out}
+.calc-sum #sumEmpty{color:#d9c49c}
+.tot div{display:flex;justify-content:space-between;padding:3px 0;color:#ecdcbc}
+.tot .big{font:800 1.5rem var(--head);color:var(--tag);margin:6px 0}
+.tot .save{color:#7fe0b4}
+.calc-sum .btn{width:100%;margin-top:14px}
+.calc-sum .btn[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.calc-sum .fine{color:#d9c49c}
+@media (prefers-reduced-motion:reduce){.wing,.chk.run b,.calc-sum li{animation:none}.bee{display:none}}
+
+.drips{position:absolute;left:0;right:0;bottom:-48px;height:62px;pointer-events:none}
+.drips svg,.combpanel svg{display:block;overflow:visible}
+.has-comb{position:relative}
+.about.has-comb,.contact.has-comb{padding-top:150px}
+.services.has-garden,.about.has-garden{padding-bottom:160px}
+.combpanel{position:absolute;top:-120px;left:0;right:0;height:260px;pointer-events:none;z-index:1}
+.dr,.cell,.clu{pointer-events:all}
+.dr{transform-box:fill-box;transform-origin:50% 0;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.dr:hover{transform:scaleY(1.45)}
+.cell{transition:fill .2s,transform .25s;transform-box:fill-box;transform-origin:center}
+.cell:hover{fill:#ffe08a;transform:scale(1.1)}
+.cell.e:hover{fill:#ffb81c}
+.bz{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes wig{from{transform:rotate(-9deg) translateY(-1px)}to{transform:rotate(9deg) translateY(1px)}}
+.clu:hover .bz{animation:wig .3s ease-in-out infinite alternate}
+@media (prefers-reduced-motion:reduce){.clu:hover .bz{animation:none}.dr,.cell{transition:none}}
+
+.fw{animation:sway 4s ease-in-out infinite alternate;pointer-events:all}
+@keyframes sway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
+.hd,.pt{transform-box:fill-box;transform-origin:center}
+.hd{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.fw:hover .hd{transform:scale(1.28) rotate(18deg)}
+.fw.busy .pt{animation:pulse .45s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scale(1.15)}}
+.cell.dep{animation:dep .85s ease-out}
+@keyframes dep{40%{transform:scale(1.16);filter:brightness(1.35)}}
+.wk .wing{animation-duration:.09s}
+.wk.rest .wing{animation-duration:.5s}
+@media (prefers-reduced-motion:reduce){.fw,.fw.busy .pt,.cell.dep{animation:none}}
+@media (max-width:860px){
+  .hero-grid,.grid2,.about-grid,.calc-grid{grid-template-columns:1fr}
+  .calc-sum{position:static}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:520px){.logo{width:100%}.nav li a{padding:7px 9px}}
+</style>
+</head>
+<body>
+<div class="bee" id="bee" aria-hidden="true"><svg viewBox="0 0 48 48" width="54" height="54"><g transform="rotate(-18 22 22)"><ellipse class="wing" cx="22" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".9" stroke="#2b1a09" stroke-width=".9"/></g><g transform="rotate(18 31 22)"><ellipse class="wing" cx="31" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".9" stroke="#2b1a09" stroke-width=".9"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><rect x="22" y="22" width="3.400" height="14" fill="#2b1a09"/><rect x="28" y="22" width="3.400" height="14" fill="#2b1a09"/><circle cx="13.500" cy="29" r="5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.600"/><circle cx="12" cy="28" r="1.200" fill="#2b1a09"/><path d="M11 25.500L8 21.500M15.500 25L14 20.500" stroke="#2b1a09" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M36.500 26.500l5 2.500-5 2.500z" fill="#2b1a09"/></svg></div>
+
+<!-- Iconos y logo (dibujos propios, no logos oficiales de las marcas) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 48 48"><path d="M24 2l19 11v22L24 46 5 35V13z" fill="#ffb81c" stroke="#ffb81c" stroke-width="4" stroke-linejoin="round"/><ellipse cx="22" cy="16" rx="5" ry="9" transform="rotate(-18 22 22)" fill="#fff"/><ellipse cx="31" cy="16" rx="5" ry="9" transform="rotate(18 31 22)" fill="#fff"/><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#2b1a09"/><rect x="22" y="22" width="3.4" height="14" fill="#ffb81c"/><rect x="28" y="22" width="3.4" height="14" fill="#ffb81c"/><circle cx="13.5" cy="29" r="5" fill="#2b1a09"/><path d="M11 25.500L8 21.500M15.500 25L14 20.500" stroke="#2b1a09" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M36.500 26.500l5 2.500-5 2.500z" fill="#2b1a09"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z" fill="currentColor"/><path fill="#fff" d="M8.6 7.3c-.5.4-.7 1.300-.3 2.300.9 2 2.400 3.600 4.400 4.500 1.100.4 1.900.2 2.300-.3l.5-.7c.1-.2.1-.4-.1-.5l-1.600-.9c-.2-.1-.4 0-.5.1l-.5.6c-.1.1-.3.1-.4.1-.9-.4-1.600-1.100-2.100-2-.1-.1 0-.3.1-.4l.5-.6c.1-.1.1-.3.1-.5L9.200 7.200c-.1-.2-.3-.3-.5-.2z"/></symbol>
+  <symbol id="office" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.500 8h7M8.500 12h7M8.500 16h4"/></symbol>
+  <symbol id="revit" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12zM9 21v-5h6v5M8 11.500h2M14 11.500h2"/></symbol>
+  <symbol id="cad" viewBox="0 0 24 24"><path d="M4 20V4l16 16zM8 14v3h3"/></symbol>
+  <symbol id="tool" viewBox="0 0 24 24"><path d="M14.700 6.300a4 4 0 0 0-5.400 5.100L3 17.700 6.300 21l6.300-6.300a4 4 0 0 0 5.100-5.400l-2.500 2.500-2.300-.6-.6-2.300z"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6zM8.500 12l2.500 2.500 4.500-5"/></symbol>
+  <symbol id="pc" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 21h8M12 16v5"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.500"/><path d="M21 16l-5-5-8 9"/></symbol>
+  <symbol id="pen" viewBox="0 0 24 24"><path d="M12 3l6 8-6 10-6-10zM12 3v10"/><circle cx="12" cy="14" r="1.200"/></symbol>
+  <symbol id="film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M16 4v16M3 9h5M3 15h5M16 9h5M16 15h5"/></symbol>
+  <symbol id="fx" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></symbol>
+  <symbol id="cube" viewBox="0 0 24 24"><path d="M12 3l8 4.500v9L12 21l-8-4.500v-9zM12 12l8-4.500M12 12L4 7.500M12 12v9"/></symbol>
+  <symbol id="key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></symbol>
+  <symbol id="sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
+  <symbol id="layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+  <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.600 5.600l1.400 1.400M17 17l1.400 1.400M5.600 18.400L7 17M17 7l1.400-1.400"/></symbol>
+  <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="road" viewBox="0 0 24 24"><path d="M8 3L4 21M16 3l4 18M12 4v3M12 11v3M12 18v3"/></symbol>
+  <symbol id="gantt" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M10 13h7M7 17h5"/></symbol>
+  <symbol id="pdf" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6zM14 3v5h5M9 14h6M9 17h4"/></symbol>
+  <symbol id="beemini" viewBox="0 0 48 48"><g transform="rotate(-18 22 22)"><ellipse cx="22" cy="16" rx="5" ry="9" fill="#fff" stroke="#2b1a09" stroke-width="1"/></g><g transform="rotate(18 31 22)"><ellipse cx="31" cy="16" rx="5" ry="9" fill="#fff" stroke="#2b1a09" stroke-width="1"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#2b1a09" stroke="#fff3cf" stroke-width="1.200"/><rect x="22" y="22" width="3.400" height="14" fill="#ffb81c"/><rect x="28" y="22" width="3.400" height="14" fill="#ffb81c"/><circle cx="13.500" cy="29" r="5" fill="#2b1a09" stroke="#fff3cf" stroke-width="1.200"/><path d="M11 25.500L8 21.500M15.500 25L14 20.500" stroke="#2b1a09" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M36.500 26.500l5 2.500-5 2.500z" fill="#2b1a09"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap bar">
+    <a class="logo" href="#inicio"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Sobre nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section id="inicio">
+  <div class="hero">
+    <div class="drips" id="heroDrips" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Tu Windows como nuevo, sin salir de casa.</h1>
+        <p class="lead">Mantenimiento remoto de Windows, licencias de Microsoft Office e instalación de Revit y AutoCAD. Todo por videollamada, con descuento este mes.</p>
+        <a class="btn" href="#ofertas">Ver ofertas</a>
+      </div>
+      <div class="session" aria-hidden="true">
+        <div class="session-top"><span class="dot"></span> RustDesk · sesión remota activa</div>
+        <div class="session-body">
+          <div class="chk done"><b>✓</b><span>Limpieza de archivos temporales</span><span class="v">12 GB</span></div>
+          <div class="chk done"><b>✓</b><span>Programas de inicio optimizados</span><span class="v">Listo</span></div>
+          <div class="chk done"><b>✓</b><span>Actualizaciones y controladores</span><span class="v">Listo</span></div>
+          <div class="chk done"><b>✓</b><span>Revisión de virus y malware</span><span class="v">0 amenazas</span></div>
+          <div class="prog"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offers" id="ofertas">
+    <div class="wrap">
+      <h2>Ofertas del mes</h2>
+      <p class="sub">Todos los precios están en pesos colombianos (COP). Cupos limitados por semana.</p>
+      <div class="grid2">
+        <article class="deal">
+          <div class="stamp">-35%</div>
+          <div class="ic"><svg class="i s"><use href="#tool"/></svg></div>
+          <h3>Mantenimiento remoto de Windows</h3>
+          <div class="price"><span class="old">$80.000 COP</span><span class="new">$52.000<small class="cop"> COP</small></span></div>
+          <p class="unit">por equipo · sesión de 1 a 2 horas</p>
+          <ul>
+            <li>Limpieza de archivos basura y disco</li>
+            <li>Optimización de inicio y rendimiento</li>
+            <li>Actualización de Windows y controladores</li>
+            <li>Revisión de virus y malware</li>
+            <li>Reporte de lo que se hizo</li>
+          </ul>
+          <a class="btn dark" href="#" data-wa data-offer="Mantenimiento remoto de Windows"><svg class="i"><use href="#wa"/></svg>Quiero esta oferta</a>
+        </article>
+        <article class="deal">
+          <div class="stamp">-57%</div>
+          <div class="ic"><svg class="i s"><use href="#office"/></svg></div>
+          <h3>Licencia de Microsoft Office</h3>
+          <div class="price"><span class="old">$150.000 COP</span><span class="new">$65.000<small class="cop"> COP</small></span></div>
+          <p class="unit">licencia original + instalación incluida</p>
+          <ul>
+            <li>Word, Excel, PowerPoint y más</li>
+            <li>Licencia legítima, activada en tu cuenta</li>
+            <li>Instalación remota paso a paso</li>
+            <li>Configuración inicial y migración de archivos</li>
+            <li>Soporte posterior por WhatsApp</li>
+          </ul>
+          <a class="btn dark" href="#" data-wa data-offer="Licencia de Microsoft Office"><svg class="i"><use href="#wa"/></svg>Quiero esta oferta</a>
+        </article>
+      </div>
+      <p class="fine">Los precios y las versiones disponibles pueden cambiar. Confirma el valor final antes de agendar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services has-garden" id="servicios">
+  <div class="wrap">
+    <h2>Servicios</h2>
+    <p class="sub">Todo se hace de forma remota con <strong>RustDesk</strong>: tú ves la pantalla y yo trabajo en tu equipo. Todos los precios están en pesos colombianos (COP).</p>
+
+    <h3 class="grp">Mantenimiento de Windows</h3>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#tool"/></svg></div>
+        <h3>Mantenimiento y limpieza</h3>
+        <p>Libero espacio, quito lo que ralentiza el arranque y dejo el equipo más rápido.</p>
+        <span class="from">$52.000 COP <s>$80.000 COP</s></span>
+        <a class="btn line" href="#" data-wa data-prog="Mantenimiento remoto de Windows">Cotizar servicio</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#shield"/></svg></div>
+        <h3>Eliminación de virus</h3>
+        <p>Detecto y elimino virus, malware y programas no deseados, y dejo la protección configurada.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn line" href="#" data-wa data-prog="Eliminación de virus y malware">Cotizar servicio</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#pc"/></svg></div>
+        <h3>Windows desde cero</h3>
+        <p>Instalación limpia con tus programas y controladores. Te explico cómo respaldar tus archivos.</p>
+        <span class="from">Desde $70.000 COP</span>
+        <a class="btn line" href="#" data-wa data-prog="Instalación de Windows desde cero">Cotizar servicio</a>
+      </div>
+    </div>
+
+    <h3 class="grp">Oficina e ingeniería</h3>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#office"/></svg></div>
+        <h3>Microsoft Office</h3>
+        <p>Licencia original con instalación y configuración inicial. Word, Excel, PowerPoint y más.</p>
+        <span class="from">$65.000 COP <s>$150.000 COP</s></span>
+        <a class="btn" href="#" data-wa data-prog="Microsoft Office">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#revit"/></svg></div>
+        <h3>Revit</h3>
+        <p>Instalación y ajuste del equipo para que corra fluido con modelos pesados.</p>
+        <span class="from">Desde $60.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Revit">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#cad"/></svg></div>
+        <h3>AutoCAD</h3>
+        <p>Instalación para empezar a dibujar de inmediato.</p>
+        <span class="from">Desde $50.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="AutoCAD">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#road"/></svg></div>
+        <h3>Civil 3D</h3>
+        <p>Instalación y configuración para diseño de obras civiles, topografía y vías.</p>
+        <span class="from">Desde $60.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Civil 3D">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#gantt"/></svg></div>
+        <h3>Microsoft Project</h3>
+        <p>Instalación y configuración para planear y controlar cronogramas de obra.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Microsoft Project">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#pdf"/></svg></div>
+        <h3>Adobe Acrobat</h3>
+        <p>Instalación para editar, firmar y convertir archivos PDF.</p>
+        <span class="from">Desde $40.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Adobe Acrobat">Cotizar programa</a>
+      </div>
+    </div>
+
+    <h3 class="grp">Diseño, video y 3D</h3>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#img"/></svg></div>
+        <h3>Photoshop</h3>
+        <p>Instalación y ajuste de rendimiento para editar fotos sin que se trabe.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Photoshop">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#pen"/></svg></div>
+        <h3>Illustrator</h3>
+        <p>Instalación y configuración para diseño vectorial, logos e ilustración.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Illustrator">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#film"/></svg></div>
+        <h3>Premiere Pro</h3>
+        <p>Instalación y ajustes para editar video con fluidez.</p>
+        <span class="from">Desde $55.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Premiere Pro">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#fx"/></svg></div>
+        <h3>After Effects</h3>
+        <p>Instalación y configuración de memoria y caché para animación y efectos.</p>
+        <span class="from">Desde $55.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="After Effects">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#cube"/></svg></div>
+        <h3>SketchUp</h3>
+        <p>Instalación y configuración para modelado 3D de arquitectura y diseño.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="SketchUp">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#sliders"/></svg></div>
+        <h3>Lightroom</h3>
+        <p>Instalación y ajustes para revelar y organizar tus fotos.</p>
+        <span class="from">Desde $45.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Lightroom">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#layers"/></svg></div>
+        <h3>3ds Max</h3>
+        <p>Instalación y ajuste del equipo para modelado y renders.</p>
+        <span class="from">Desde $60.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="3ds Max">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#sun"/></svg></div>
+        <h3>Lumion</h3>
+        <p>Instalación y configuración de la tarjeta gráfica para renders de arquitectura.</p>
+        <span class="from">Desde $60.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Lumion">Cotizar programa</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg class="i s"><use href="#eye"/></svg></div>
+        <h3>Enscape</h3>
+        <p>Instalación y vinculación con Revit, SketchUp o ArchiCAD para renders en tiempo real.</p>
+        <span class="from">Desde $55.000 COP</span>
+        <a class="btn" href="#" data-wa data-prog="Enscape">Cotizar programa</a>
+      </div>
+    </div>
+    <p class="fine">Se debe analizar el hardware del computador para determinar qué versión del programa se va a instalar. Los programas de Adobe, Autodesk y similares requieren una licencia o suscripción activa.</p>
+
+    <div class="quote-all">
+      <div style="display:flex;gap:14px;align-items:center">
+        <div class="ic" style="margin:0"><svg class="i s"><use href="#plus"/></svg></div>
+        <p><strong>¿Necesitas otro programa?</strong> Dime cuál (Blender, DaVinci Resolve, Navisworks, etc.) y te cotizo la instalación y configuración.</p>
+      </div>
+      <a class="btn dark" href="#" data-wa data-prog="Otro programa">Cotizar programa</a>
+    </div>
+    <div class="calc" id="cotizador">
+      <h3 class="grp" style="margin-top:0">Arma tu cotización</h3>
+      <p class="sub" style="margin:8px 0 20px">Marca lo que necesitas y mira el total al instante. Luego la envías por WhatsApp.</p>
+      <div class="calc-grid">
+        <div id="calcItems"></div>
+        <aside class="calc-sum" aria-live="polite">
+          <h3>Tu cotización</h3>
+          <ul id="sumList"></ul>
+          <p id="sumEmpty">Marca uno o más servicios para ver el total.</p>
+          <div class="tot" id="tot" hidden>
+            <div class="save" id="saveRow"><span>Ahorras</span><span id="vSave"></span></div>
+            <div class="big"><span>Total estimado</span><span id="vTotal"></span></div>
+            <div><span>50% al inicio</span><span id="vHalf1"></span></div>
+            <div><span>50% al final</span><span id="vHalf2"></span></div>
+          </div>
+          <a class="btn wa" id="sumBtn" href="#" aria-disabled="true" target="_blank" rel="noopener"><svg class="i"><use href="#wa"/></svg>Enviar por WhatsApp</a>
+          <p class="fine">Los precios "Desde" pueden variar según tu equipo. El valor final se confirma por WhatsApp. Valores en COP.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about has-comb has-garden" id="nosotros">
+  <div class="combpanel" data-seed="3" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <h2>Sobre nosotros</h2>
+        <p class="sub" style="margin-bottom:14px">Soporte técnico remoto, claro y sin vueltas.</p>
+        <p>En BeeSystems nos dedicamos al mantenimiento de equipos con Windows y a la instalación de programas de oficina e ingeniería, como Microsoft Office, Revit y AutoCAD, siempre a distancia.</p>
+        <p>Trabajamos con licencias legítimas, te explicamos cada paso mientras lo hacemos y el pago es en dos partes: 50% al inicio y 50% al final, cuando todo quedó funcionando.</p>
+        <div class="faq">
+          <details><summary>¿Es seguro que alguien entre a mi computador?</summary><p>Tú inicias la sesión y la puedes cortar cuando quieras. Ves en pantalla todo lo que hago y no necesito tus contraseñas personales.</p></details>
+          <details><summary>¿Qué es RustDesk?</summary><p>Es el programa de acceso remoto que usamos: gratuito y de código abierto. Te guío para descargarlo; tú me compartes el ID y la contraseña que muestra y, al cerrar el programa, la conexión termina.</p></details>
+          <details><summary>¿Qué necesito para la sesión?</summary><p>Un computador con Windows, internet estable, RustDesk instalado (te ayudo con eso) y estar frente a la pantalla durante la sesión.</p></details>
+          <details><summary>¿Cómo es el pago?</summary><p>50% al inicio para reservar tu sesión y 50% al final, cuando revisas que todo funcione. Se paga con Nequi o Llave Bre-B al 320 620 4196.</p></details>
+          <details><summary>¿Y si el problema no se resuelve?</summary><p>Si no logro solucionar lo que acordamos, te devuelvo el 50% que pagaste al inicio y no pagas el resto.</p></details>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:20px">Cómo trabajamos</h3>
+        <ol class="steps">
+          <li><strong>Escríbenos</strong><span>Cuéntanos qué le pasa a tu equipo o qué necesitas instalar.</span></li>
+          <li><strong>Agendamos</strong><span>Elegimos día y hora que te queden bien.</span></li>
+          <li><strong>Nos conectamos</strong><span>Entramos a tu PC con RustDesk, un programa gratuito y de código abierto. Tú ves todo lo que hacemos.</span></li>
+          <li><strong>Pago en dos partes</strong><span>50% al inicio y 50% al final, cuando revises que todo funcione. Pagas con Nequi o Llave Bre-B.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact has-comb" id="contacto">
+  <div class="combpanel" data-seed="8" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2>Contacto</h2>
+    <p class="sub">Una sola vía, la más rápida.</p>
+    <div class="wa-box">
+      <svg aria-hidden="true" style="color:#25d366"><use href="#wa"/></svg>
+      <h3>Escríbenos por WhatsApp</h3>
+      <p>Cuéntanos qué necesitas y te respondemos hoy con horarios y el valor final.</p>
+      <p class="num">320 620 4196</p>
+      <a class="btn wa" href="#" data-wa><svg class="i"><use href="#wa"/></svg>Abrir WhatsApp</a>
+    </div>
+    <div class="pay">
+      <h3>Medios de pago</h3>
+      <p>Los pagos son en pesos colombianos (COP). Todo se paga con Nequi o con Llave Bre-B. Es el mismo número de celular en los dos.</p>
+      <div class="pay-row">
+        <div class="pay-item"><img alt="Nequi" src="data:image/png;base64,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"></div>
+        <div class="pay-item"><svg class="i s" style="color:var(--blue)" aria-hidden="true"><use href="#key"/></svg>Llave Bre-B</div>
+      </div>
+      <p class="pay-num">320 620 4196</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia</div>
+</footer>
+
+<a class="fab" href="#" data-wa aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
+
+<script>
+  var WHATSAPP = "573206204196";
+  document.getElementById("y").textContent = new Date().getFullYear();
+  document.querySelectorAll("[data-wa]").forEach(function (a) {
+    var o = a.getAttribute("data-offer"), p = a.getAttribute("data-prog");
+    var t = o ? "Hola, quiero la oferta de: " + o + "."
+          : p ? "Hola, quiero cotizar: " + p + "."
+          : "Hola, vi tu página y quiero información sobre tus servicios.";
+    a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(t);
+    a.target = "_blank"; a.rel = "noopener";
+  });
+</script>
+
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var money = function (n) { return "$" + Math.round(n).toLocaleString("es-CO") + " COP"; };
+
+  /* Sesión remota animada */
+  var rows = [].slice.call(document.querySelectorAll(".session .chk")), bar = document.querySelector(".prog i");
+  var vals = ["12 GB", "Listo", "Listo", "0 amenazas"];
+  function finish(i) { var r = rows[i]; r.classList.remove("run"); r.classList.add("done"); r.querySelector("b").textContent = "✓"; r.querySelector(".v").textContent = vals[i]; }
+  function reset() { rows.forEach(function (r) { r.classList.remove("run", "done"); r.querySelector("b").textContent = "•"; r.querySelector(".v").textContent = ""; }); bar.style.width = "0"; }
+  function play() {
+    reset(); var i = 0;
+    (function step() {
+      if (i >= rows.length) { setTimeout(play, 5000); return; }
+      var k = i, r = rows[k], v = r.querySelector(".v"), t0 = performance.now(), dur = 900;
+      r.classList.add("run"); r.querySelector("b").textContent = "⟳";
+      if (k === 0) (function c(t) { var p = Math.min(1, (t - t0) / dur); v.textContent = Math.round(12 * p) + " GB"; if (p < 1) requestAnimationFrame(c); })(t0);
+      setTimeout(function () { finish(k); bar.style.width = ((k + 1) / rows.length * 100) + "%"; i = k + 1; step(); }, dur);
+    })();
+  }
+  if (rows.length && !reduce) play();
+
+  /* Miel escurriendo y panales con abejas */
+  function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var HONEY = ["#ffb81c", "#f5a800", "#ffc83d", "#e89a00"], F = function (n) { return n.toFixed(1); };
+  function hex(cx, cy, r) {
+    var h = r / 2, w = r * 0.866;
+    return [[cx, cy - r], [cx + w, cy - h], [cx + w, cy + h], [cx, cy + r], [cx - w, cy + h], [cx - w, cy - h]].map(function (p) { return F(p[0]) + "," + F(p[1]); }).join(" ");
+  }
+  function drop(x, y, L) {
+    return '<g class="dr"><rect x="' + F(x - 4.5) + '" y="' + y + '" width="9" height="' + F(L) + '" rx="4.5" fill="#ffb81c"/><circle cx="' + F(x) + '" cy="' + F(y + L) + '" r="6" fill="#ffb81c"/></g>';
+  }
+  document.querySelectorAll(".drips").forEach(function (el) {
+    var r = rng(11), W = 2000, o = '<rect width="' + W + '" height="12" fill="#ffb81c"/>', x;
+    for (x = 0; x < W; x += 20) o += '<circle cx="' + x + '" cy="' + F(11 + r() * 3) + '" r="' + F(8 + r() * 3) + '" fill="#ffb81c"/>';
+    for (x = 60; x < W; x += 60 + r() * 150) o += drop(x, 10, 10 + r() * 16);
+    el.innerHTML = '<svg viewBox="0 0 ' + W + ' 62" preserveAspectRatio="xMidYMin slice" width="100%" height="62">' + o + '</svg>';
+  });
+  /* Ecosistema: flores, panal y abejas obreras que van y vienen */
+  var PET = [["#b78be8", "#ffd23f"], ["#ffffff", "#ffb81c"], ["#ff9078", "#ffe08a"], ["#ffd23f", "#6b3a10"], ["#f06aa8", "#ffe08a"]], zones = [];
+  var BEE = '<g transform="rotate(-18 22 22)"><ellipse class="wing" cx="22" cy="16" rx="5" ry="9" fill="#fff" stroke="#2b1a09" stroke-width="1"/></g><g transform="rotate(18 31 22)"><ellipse class="wing" cx="31" cy="16" rx="5" ry="9" fill="#fff" stroke="#2b1a09" stroke-width="1"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#2b1a09" stroke="#fff3cf" stroke-width="1.2"/><rect x="22" y="22" width="3.4" height="14" fill="#ffb81c"/><rect x="28" y="22" width="3.4" height="14" fill="#ffb81c"/><circle cx="13.5" cy="29" r="5" fill="#2b1a09" stroke="#fff3cf" stroke-width="1.2"/><path d="M11 25.5L8 21.5M15.5 25L14 20.5" stroke="#2b1a09" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M36.5 26.5l5 2.5-5 2.5z" fill="#2b1a09"/><circle class="pl" cx="26" cy="39" r="3.5" fill="#ffb81c" stroke="#2b1a09" stroke-width=".8" opacity="0"/>';
+  var pick1 = function (arr) { return arr[Math.floor(Math.random() * arr.length)]; };
+
+  document.querySelectorAll(".combpanel").forEach(function (el) {
+    var r = rng(+el.getAttribute("data-seed") || 1), W = 2000, R = 27, w = R * 1.732, OY = 120;
+    var o = '<rect width="' + W + '" height="7" fill="#7a4a0a"/>', d = "", bz = "", fs = "", gr = "", wks = "", cells = [], fl = [], cr = [], x, i, k, n;
+    for (i = 0; i < 2; i++) for (x = -w + (i ? w / 2 : 0); x < W + w; x += w) {
+      var cy = R + 6 + i * R * 1.5, e = r() < 0.2;
+      o += '<polygon class="cell' + (e ? " e" : "") + '" points="' + hex(x, cy, R - 1.5) + '" fill="' + (e ? "#4a3012" : HONEY[Math.floor(r() * 4)]) + '"/>';
+      cells.push({ x: x, y: cy + OY, e: e });
+      if (i && r() < 0.2) d += drop(x, 94, 10 + r() * 16);
+    }
+    for (k = 0; k < 3; k++) {
+      var cx = 1000 + (k - 1) * 300 + (r() - 0.5) * 120, cyy = 48 + r() * 30, gg = "";
+      n = 4 + Math.floor(r() * 3);
+      for (i = 0; i < n; i++) {
+        cr.push({ hx: cx + (r() - 0.5) * 50, hy: cyy + (r() - 0.5) * 34, rot: (r() - 0.5) * 70, ph: r() * 6.28, sp: 0.0007 + r() * 0.0008, rx: 6 + r() * 10, ry: 4 + r() * 6 });
+        gg += '<g class="cb"><g class="bz" style="animation-delay:-' + F(r() * 0.3) + 's"><use href="#beemini" x="-24" y="-24" width="48" height="48" transform="scale(' + F(0.5 + r() * 0.15) + ')"/></g></g>';
+      }
+      bz += '<g class="clu">' + gg + "</g>";
+    }
+    for (x = 0; x < W; x += 14 + r() * 10) gr += '<path d="M' + F(x) + " 120L" + F(x + 3) + " " + F(120 - 8 - r() * 10) + "L" + F(x + 6) + ' 120z" fill="#6f9f3d"/>';
+    for (x = 30; x < W; x += 80 + r() * 110) {
+      var hg = 55 + r() * 45, ln = (r() - 0.5) * 30, hx = x + ln, hy = 120 - hg, c = PET[Math.floor(r() * PET.length)], nn = 6 + Math.floor(r() * 3), p = 7 + r() * 3.5, pet = "", ly = F(120 - hg * 0.35);
+      for (i = 0; i < nn; i++) pet += '<ellipse cx="0" cy="' + F(-p * 1.05) + '" rx="' + F(p * 0.55) + '" ry="' + F(p) + '" transform="rotate(' + F(i * 360 / nn) + ')" fill="' + c[0] + '" stroke="#2b1a09" stroke-opacity=".25" stroke-width=".8"/>';
+      fs += '<g class="fw" style="transform-origin:' + F(x) + "px 120px;animation-duration:" + F(3 + r() * 2.5) + "s;animation-delay:-" + F(r() * 4) + 's">' +
+        '<path d="M' + F(x) + " 120Q" + F(x + ln * 0.2) + " " + F(hy + hg * 0.5) + " " + F(hx) + " " + F(hy) + '" stroke="#5f8f35" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+        '<ellipse cx="' + F(x - 8) + '" cy="' + ly + '" rx="9" ry="3.5" transform="rotate(-30 ' + F(x - 8) + " " + ly + ')" fill="#6f9f3d"/>' +
+        '<ellipse cx="' + F(x + 8) + '" cy="' + ly + '" rx="9" ry="3.5" transform="rotate(30 ' + F(x + 8) + " " + ly + ')" fill="#6f9f3d"/>' +
+        '<g transform="translate(' + F(hx) + " " + F(hy) + ')"><g class="hd"><g class="pt">' + pet + '<circle r="' + F(p * 0.55) + '" fill="' + c[1] + '" stroke="#2b1a09" stroke-opacity=".3" stroke-width=".8"/></g></g></g></g>';
+      fl.push({ x: hx, y: hy, busy: 0 });
+    }
+    for (i = 0; i < 3; i++) wks += '<g class="wk"><g class="fc"><g transform="scale(.62) translate(-26 -26)">' + BEE + "</g></g></g>";
+    el.innerHTML = '<svg viewBox="0 0 ' + W + ' 260" preserveAspectRatio="xMidYMin slice" width="100%" height="260">' + gr + fs + '<g transform="translate(0 ' + OY + ')">' + o + d + bz + "</g>" + wks + "</svg>";
+
+    var polys = el.querySelectorAll(".cell"), cbs = el.querySelectorAll(".cb"), fws = el.querySelectorAll(".fw"), wk = el.querySelectorAll(".wk");
+    cells.forEach(function (c, j) { c.poly = polys[j]; });
+    cr.forEach(function (c, j) { c.g = cbs[j]; });
+    fl.forEach(function (f, j) { f.el = fws[j]; });
+    var z = { el: el, cells: cells, fl: fl, cr: cr, vis: true, eat: 6000 + Math.random() * 4000, wk: [] };
+    z.range = function () { var cw = el.clientWidth; return [Math.max(30, 1000 - cw / 2 + 30), Math.min(1970, 1000 + cw / 2 - 30)]; };
+    z.flower = function (avoid) { var v = z.range(), a = fl.filter(function (f) { return f.x >= v[0] && f.x <= v[1] && f !== avoid; }); return pick1(a.length ? a : fl); };
+    z.cell = function () { var v = z.range(), a = cells.filter(function (c) { return c.x >= v[0] && c.x <= v[1]; }), em = a.filter(function (c) { return c.e; }); return pick1(em.length && Math.random() < 0.55 ? em : a); };
+    var cnt = el.clientWidth < 700 ? 2 : 3;
+    wk.forEach(function (g, j) {
+      if (reduce || j >= cnt) { g.style.display = "none"; return; }
+      var f0 = z.flower(); z.wk.push({ g: g, fc: g.querySelector(".fc"), pl: g.querySelector(".pl"), x: f0.x, y: f0.y - 40, face: 1, ph: Math.random() * 6.28, s: "wait", until: Math.random() * 2500, load: false });
+    });
+    zones.push(z);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { z.vis = en[0].isIntersecting; }).observe(el);
+  });
+
+  function crawl(z, t) {
+    z.cr.forEach(function (c) {
+      var a = t * c.sp + c.ph;
+      c.g.setAttribute("transform", "translate(" + F(c.hx + Math.sin(a) * c.rx + Math.sin(a * 2.3) * c.rx * 0.4) + " " + F(c.hy + Math.cos(a * 1.3) * c.ry) + ") rotate(" + F(c.rot + Math.sin(a * 1.7) * 14) + ")");
+    });
+  }
+  function fill(c) {
+    c.e = false; c.poly.classList.remove("e"); c.poly.setAttribute("fill", pick1(HONEY));
+    c.poly.classList.add("dep"); setTimeout(function () { c.poly.classList.remove("dep"); }, 900);
+  }
+  function go(b, tx, ty, dt) {
+    var dx = tx - b.x, dy = ty - b.y, d = Math.hypot(dx, dy);
+    if (d < 5) return true;
+    var sp = Math.min(d, Math.min(3.2, Math.max(0.9, d * 0.05)) * dt);
+    b.x += dx / d * sp; b.y += dy / d * sp;
+    if (Math.abs(dx) > 4) b.face = dx > 0 ? -1 : 1;
+    return false;
+  }
+  function work(z, b, t, dt) {
+    var ox = 0, oy = 0, f = b.f, c = b.c;
+    if (b.s === "wait") { if (t > b.until) { b.f = z.flower(); b.s = "toF"; } }
+    else if (b.s === "toF") {
+      ox = Math.sin(t / 210 + b.ph) * 3; oy = Math.cos(t / 170 + b.ph) * 3;
+      if (go(b, f.x, f.y - 6, dt)) { b.s = "col"; b.until = t + 1800 + Math.random() * 1800; f.busy++; f.el.classList.add("busy"); }
+    } else if (b.s === "col") {
+      b.x = f.x + Math.sin(t / 160 + b.ph) * 5; b.y = f.y - 6 + Math.cos(t / 130 + b.ph) * 3;
+      if (t > b.until) { f.busy--; if (f.busy <= 0) { f.busy = 0; f.el.classList.remove("busy"); } b.load = true; b.pl.setAttribute("opacity", 1); b.c = z.cell(); b.s = "toH"; }
+    } else if (b.s === "toH") {
+      ox = Math.sin(t / 210 + b.ph) * 3; oy = Math.cos(t / 170 + b.ph) * 3;
+      if (go(b, c.x, c.y, dt)) { b.s = "dep"; b.until = t + 2400 + Math.random() * 2000; b.off = t + 700; g_rest(b, 1); fill(c); }
+    } else if (b.s === "dep") {
+      b.x = c.x + Math.sin(t / 700) * 1.5;
+      if (b.load && t > b.off) { b.load = false; b.pl.setAttribute("opacity", 0); }
+      if (t > b.until) { g_rest(b, 0); b.f = z.flower(b.f); b.s = "toF"; }
+    }
+    b.g.setAttribute("transform", "translate(" + F(b.x + ox) + " " + F(b.y + oy) + ")");
+    b.fc.setAttribute("transform", "scale(" + b.face + " 1)");
+  }
+  function g_rest(b, on) { b.g.classList[on ? "add" : "remove"]("rest"); }
+
+  if (zones.length) {
+    if (reduce) zones.forEach(function (z) { crawl(z, 0); });
+    else {
+      var lastE = 0;
+      (function loop(t) {
+        requestAnimationFrame(loop);
+        var dt = Math.min(40, t - lastE) / 16.7; lastE = t;
+        zones.forEach(function (z) {
+          if (!z.vis) return;
+          crawl(z, t);
+          z.wk.forEach(function (b) { work(z, b, t, dt); });
+          if (t > z.eat) {
+            z.eat = t + 7000 + Math.random() * 5000;
+            var hc = z.cells.filter(function (c) { return !c.e; }), v = z.range();
+            hc = hc.filter(function (c) { return c.x >= v[0] && c.x <= v[1]; });
+            if (hc.length > 3) { var ce = pick1(hc); ce.e = true; ce.poly.classList.add("e"); ce.poly.setAttribute("fill", "#4a3012"); }
+          }
+        });
+      })(0);
+    }
+  }
+
+  /* Abeja que sigue el mouse por toda la página */
+  var bee = document.getElementById("bee");
+  if (bee && !reduce) {
+    var W = innerWidth, H = innerHeight, x = W * 0.3, y = H * 0.3, tx = x, ty = y, mx = null, my = 0, mt, face = 1, last = 0;
+    var pick = function () { tx = 40 + Math.random() * Math.max(60, W - 120); ty = 60 + Math.random() * Math.max(60, H - 140); }; pick();
+    addEventListener("resize", function () { W = innerWidth; H = innerHeight; });
+    addEventListener("pointermove", function (e) { mx = e.clientX; my = e.clientY; clearTimeout(mt); mt = setTimeout(function () { mx = null; }, 3000); }, { passive: true });
+    document.addEventListener("pointerleave", function () { mx = null; });
+    var frame = function (t) {
+      requestAnimationFrame(frame);
+      var dt = Math.min(40, t - last) / 16.7; last = t;
+      var gx = mx !== null ? mx + 30 : tx, gy = mx !== null ? my - 30 : ty, dx = gx - x, dy = gy - y;
+      if (mx === null && Math.hypot(dx, dy) < 30) pick();
+      var k = (mx !== null ? 0.07 : 0.016) * dt;
+      x += dx * k; y += dy * k + Math.sin(t / 160) * 0.6;
+      if (Math.abs(dx) > 12) face = dx > 0 ? -1 : 1;
+      bee.style.transform = "translate(" + F(x - 27) + "px," + F(y - 27) + "px) scaleX(" + face + ")";
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* Cotizador interactivo: se arma con las tarjetas de servicios */
+  var host = document.getElementById("calcItems"), items = [], sel = {};
+  document.querySelectorAll(".services .cards").forEach(function (grid) {
+    var g = grid.previousElementSibling, wrap = document.createElement("div"), chips = document.createElement("div");
+    wrap.className = "cg"; chips.className = "chips";
+    var h = document.createElement("h4"); h.textContent = g ? g.textContent : ""; wrap.appendChild(h); wrap.appendChild(chips);
+    grid.querySelectorAll(".card").forEach(function (c) {
+      var from = c.querySelector(".from"), nums = (from.textContent.match(/\$[\d.]+/g) || []).map(function (n) { return parseInt(n.replace(/\D/g, ""), 10); });
+      var btn = c.querySelector("[data-prog]"), it = { id: items.length, name: c.querySelector("h3").textContent, wa: btn ? btn.getAttribute("data-prog") : c.querySelector("h3").textContent, price: nums[0], old: nums[1] || 0, from: /Desde/.test(from.textContent) };
+      var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="ck"></span><span>' + it.name + '</span><span class="pr">' + (it.from ? "desde " : "") + "$" + it.price.toLocaleString("es-CO") + "</span>";
+      b.addEventListener("click", function () { sel[it.id] = !sel[it.id]; b.setAttribute("aria-pressed", sel[it.id]); update(); });
+      chips.appendChild(b); items.push(it);
+    });
+    host.appendChild(wrap);
+  });
+
+  var list = document.getElementById("sumList"), empty = document.getElementById("sumEmpty"), tot = document.getElementById("tot"), btn = document.getElementById("sumBtn");
+  var els = { total: document.getElementById("vTotal"), save: document.getElementById("vSave"), h1: document.getElementById("vHalf1"), h2: document.getElementById("vHalf2") };
+  function tween(el, to) {
+    var from = el._v || 0; el._v = to;
+    if (reduce) { el.textContent = money(to); return; }
+    var t0 = performance.now();
+    (function s(t) { var p = Math.min(1, (t - t0) / 350); el.textContent = money(from + (to - from) * p); if (p < 1) requestAnimationFrame(s); })(t0);
+  }
+  function update() {
+    var ch = items.filter(function (i) { return sel[i.id]; }), total = 0, save = 0;
+    ch.forEach(function (i) { total += i.price; if (i.old) save += i.old - i.price; });
+    list.innerHTML = ch.map(function (i) { return "<li><span>" + i.name + "</span><span>" + (i.from ? "desde " : "") + "$" + i.price.toLocaleString("es-CO") + "</span></li>"; }).join("");
+    empty.hidden = ch.length > 0; tot.hidden = ch.length === 0;
+    document.getElementById("saveRow").hidden = save <= 0;
+    tween(els.total, total); tween(els.save, save); tween(els.h1, total / 2); tween(els.h2, total / 2);
+    var msg = "Hola, quiero cotizar:\n" + ch.map(function (i) { return "- " + i.wa + " (" + (i.from ? "desde " : "") + money(i.price) + ")"; }).join("\n") + "\nTotal estimado: " + money(total) + ".";
+    btn.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+    btn.setAttribute("aria-disabled", ch.length ? "false" : "true");
+  }
+  update();
+})();
+</script>
+</body>
+</html>
