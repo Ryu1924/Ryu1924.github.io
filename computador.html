@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo funciona un computador | BeeSystems</title>
+<meta name="description" content="Explicación sencilla de cómo funciona un computador: procesador, memoria, almacenamiento, arranque de Windows y por qué se vuelve lento. Con abejas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 2l19 11v22L24 46 5 35V13z' fill='%23ffb81c' stroke='%23ffb81c' stroke-width='4' stroke-linejoin='round'/%3E%3Cellipse cx='22' cy='16' rx='5' ry='9' transform='rotate(-18 22 22)' fill='%23fff'/%3E%3Cellipse cx='31' cy='16' rx='5' ry='9' transform='rotate(18 31 22)' fill='%23fff'/%3E%3Cellipse cx='26' cy='29' rx='11' ry='8.5' fill='%232b1a09'/%3E%3Crect x='22' y='22' width='3.4' height='14' fill='%23ffb81c'/%3E%3Crect x='28' y='22' width='3.4' height='14' fill='%23ffb81c'/%3E%3Ccircle cx='13.5' cy='29' r='5' fill='%232b1a09'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--ink:#2b1a09;--paper:#fff8ea;--white:#fff;--line:#ecd9b0;--blue:#a85f00;--tag:#ffb81c;--tag-ink:#2b1a09;--ok:#0b8f6f;--muted:#6b5a45;--wa:#128c4a;--head:"Bricolage Grotesque","Trebuchet MS",sans-serif;--body:"Source Sans 3","Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font:18px/1.55 var(--body);color:var(--ink);background:var(--paper)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--head);line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+.sub{margin:10px 0 26px;color:var(--muted)}
+.fine{font-size:.88rem;color:var(--muted);margin-top:12px}
+svg.i{width:1.2em;height:1.2em;flex:none}
+svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:8px;font:600 1rem var(--body);text-decoration:none;background:var(--tag);color:var(--tag-ink);border:2px solid var(--tag);cursor:pointer;text-align:center}
+.btn:hover{background:#ffd04d}
+.btn:disabled{opacity:.6;cursor:default}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:#fff}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn.wa:hover{background:#0e7440}
+.nav{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;border-bottom:1px solid #4a3216}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:9px 0;gap:14px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none}
+.logo svg{width:36px;height:36px}
+.nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
+.nav li a{display:block;padding:8px 12px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.98rem}
+.nav li a:hover{background:#4a3216;color:#fff}
+.nav li a[aria-current="page"]{background:#4a3216;color:#fff}
+.nav li a.navcta,.nav li a.navcta:hover{background:var(--tag);color:var(--tag-ink)}
+.nav li a.navcta:hover{background:#ffd04d}
+.hero{background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97'%3E%3Cpath d='M28 0l28 16.17v32.33L28 64.67 0 48.5V16.17zM28 64.67V97' fill='none' stroke='%23ffb81c' stroke-opacity='.14' stroke-width='1.5'/%3E%3C/svg%3E");color:#fff;padding:48px 0 56px}
+.hero .lead{margin:16px 0 0;font-size:1.2rem;color:#ecdcbc;max-width:40em}
+.bee{position:fixed;left:0;top:0;z-index:100;pointer-events:none;will-change:transform}
+.bee svg{display:block;filter:drop-shadow(0 0 7px #ffb81c) drop-shadow(0 3px 3px #0007)}
+.wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .16s ease-in-out infinite alternate}
+@keyframes flap{to{transform:scaleY(.45)}}
+footer{padding:26px 0 40px;text-align:center;color:var(--muted);font-size:.92rem}
+@media (prefers-reduced-motion:reduce){.wing{animation:none}.bee{display:none}}
+@media (max-width:520px){.logo{width:100%}.nav li a{padding:7px 9px}}
+
+.sec{padding:60px 0}
+.sec.alt{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.scene-sec{padding:40px 0 20px}
+.scene{position:relative;background:linear-gradient(#fff3d6,#fff8ea);border:2px solid var(--ink);border-radius:16px;padding:12px;overflow-x:auto}
+.scene svg{display:block;width:100%;min-width:760px;height:auto}
+.scene svg text{font-family:var(--body)}
+.part{cursor:help}
+.part:hover{filter:brightness(1.18)}
+.part:focus-visible{outline:none;filter:drop-shadow(0 0 4px #ffb81c)}
+#workers{pointer-events:none}
+.fw{animation:sway 4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
+.hd,.pt{transform-box:fill-box;transform-origin:center}
+.fw.busy .pt{animation:pulse .45s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scale(1.15)}}
+.blades{animation:spin var(--fan,1.1s) linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.queen{animation:bob 1.8s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-4px)}}
+.cell{transition:fill .25s}
+.cell.dep{animation:dep .8s ease-out;transform-box:fill-box;transform-origin:center}
+@keyframes dep{40%{transform:scale(1.18);filter:brightness(1.4)}}
+.wk .wing{animation-duration:.09s}
+.tip{position:absolute;z-index:5;max-width:250px;background:var(--ink);color:#fff;border:2px solid var(--tag);border-radius:10px;padding:8px 12px;font-size:.88rem;line-height:1.35;pointer-events:none}
+.tip[hidden]{display:none}
+.tip b{display:block;color:var(--tag);font-family:var(--head);font-size:1rem}
+.ctrl{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px;align-items:center}
+.cnt{font-weight:600;margin-left:6px}
+.legend{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.lg{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.lg b{display:block;font-family:var(--head);margin-bottom:2px}
+.lg span{color:var(--muted);font-size:.95rem}
+
+.ic{width:46px;height:46px;border-radius:12px;background:#fdebc4;color:var(--blue);display:grid;place-items:center;margin-bottom:12px;font-size:1.4rem}
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pc{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;transition:transform .2s,box-shadow .2s}
+.pc:hover{transform:translateY(-3px);box-shadow:0 10px 24px #2b1a0922}
+.pc h3{margin-bottom:6px}
+.pc p{color:var(--muted);font-size:1rem}
+.pc .hive{margin-top:10px;padding-left:10px;border-left:3px solid var(--tag);color:var(--ink);font-size:.95rem}
+
+.boot{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+.pbar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:16px 0}
+.pbar i{display:block;height:100%;width:0;background:var(--tag);transition:width .5s}
+.bsteps{list-style:none;margin:0;padding:0;counter-reset:b}
+.bsteps li{counter-increment:b;position:relative;padding:12px 14px 12px 56px;border:2px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--white);opacity:.55;transition:opacity .3s,border-color .3s,background .3s}
+.bsteps li::before{content:counter(b);position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--line);color:var(--ink);font:800 .95rem var(--head);display:grid;place-items:center}
+.bsteps li.on{opacity:1;border-color:var(--ink);background:#fff3d6}
+.bsteps li.on::before{background:var(--tag)}
+.bsteps li.done{opacity:1}
+.bsteps li.done::before{background:var(--ok);color:#fff;content:"✓"}
+.bsteps strong{display:block;font-family:var(--head)}
+.bsteps span{color:var(--muted);font-size:.98rem}
+
+.flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr;gap:0;align-items:stretch}
+.fb{background:var(--white);border:2px solid var(--ink);border-radius:12px;padding:16px}
+.fb h3{margin-bottom:4px}
+.fb p{color:var(--muted);font-size:.96rem}
+.ar{position:relative;align-self:center;height:4px;background:repeating-linear-gradient(90deg,var(--tag) 0 8px,transparent 8px 14px);background-size:14px 4px;animation:march .6s linear infinite}
+@keyframes march{to{background-position:14px 0}}
+.causes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cz{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:18px}
+.cz h3{margin-bottom:6px;font-size:1.1rem}
+.cz p{color:var(--muted);font-size:.98rem}
+.cz .fx{margin-top:8px;font-size:.95rem}
+.cz .fx b{color:var(--ok)}
+.todo{list-style:none;margin:0;padding:0;columns:2;column-gap:30px}
+.todo li{padding:7px 0 7px 30px;position:relative;break-inside:avoid}
+.todo li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+details{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:13px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:8px;color:var(--muted)}
+.cta{background:var(--ink);color:#fff;border-radius:16px;padding:40px 24px;text-align:center;border:2px solid var(--tag)}
+.cta p{color:#ecdcbc;margin:12px auto 22px;max-width:34em}
+
+.fb{padding:0;overflow:hidden;animation:act 8s ease-in-out infinite both;animation-delay:calc(var(--i,0) * 2s)}
+.fb .txt{padding:12px 16px 16px}
+.art{display:block;width:100%;height:auto;background:linear-gradient(#fff3d6,#ffe9b8);border-bottom:2px solid var(--ink)}
+@keyframes act{0%{box-shadow:0 0 0 0 #ffb81c00;transform:translateY(0)}3%,22%{box-shadow:0 0 0 6px #ffb81c66;transform:translateY(-5px)}26%,100%{box-shadow:0 0 0 0 #ffb81c00;transform:translateY(0)}}
+.ar i{position:absolute;top:-6px;left:0;width:16px;height:16px;border-radius:4px;background:var(--ink);border:2px solid var(--tag);opacity:0;animation:pk 8s linear infinite both;animation-delay:calc(var(--i,0) * 2s + 1.3s)}
+@keyframes pk{0%{left:0;opacity:0}1%{opacity:1}10%{left:calc(100% - 16px);opacity:1}11%,100%{left:calc(100% - 16px);opacity:0}}
+@keyframes pkv{0%{top:0;opacity:0}1%{opacity:1}10%{top:calc(100% - 16px);opacity:1}11%,100%{top:calc(100% - 16px);opacity:0}}
+.flow.paused *{animation-play-state:paused!important}
+.a-spin{animation:spin 2.2s linear infinite}
+.a-arm{animation:arm 8s ease-in-out infinite both}
+@keyframes arm{0%{transform:rotate(0)}4%{transform:rotate(-9deg)}8%{transform:rotate(5deg)}12%{transform:rotate(-12deg)}16%{transform:rotate(3deg)}25%,100%{transform:rotate(0)}}
+.a-file{animation:lift 8s ease-in-out infinite both}
+@keyframes lift{0%{opacity:1;transform:none}10%{transform:translate(0,-8px) scale(1.12)}22%{transform:translate(26px,-8px) scale(1.12);opacity:0}23%,92%{transform:none;opacity:0}100%{opacity:1;transform:none}}
+.a-chip{animation:chip 8s linear infinite both;animation-delay:calc(2s + var(--k) * .18s)}
+@keyframes chip{0%{fill:#1a1a1a}3%,24%{fill:#ffb81c}30%,100%{fill:#1a1a1a}}
+.a-led{animation:led 1.2s ease-in-out infinite alternate}
+.a-core{animation:core 8s ease-in-out infinite both;animation-delay:calc(4s + var(--k) * .3s);transform-box:fill-box;transform-origin:center}
+@keyframes core{0%{transform:scale(1);fill:#3d280f}3%{transform:scale(1.15);fill:#ffb81c}6%{transform:scale(1);fill:#3d280f}9%{transform:scale(1.15);fill:#ffb81c}12%{transform:scale(1);fill:#3d280f}15%{transform:scale(1.15);fill:#ffb81c}18%,100%{transform:scale(1);fill:#3d280f}}
+.a-wave{stroke-dasharray:4 4;animation:march2 .6s linear infinite}
+@keyframes march2{to{stroke-dashoffset:-8}}
+.a-win{animation:win 8s ease-out infinite both;animation-delay:6s;transform-box:fill-box;transform-origin:center}
+@keyframes win{0%{transform:scale(.15);opacity:0}6%{transform:scale(1.06);opacity:1}9%{transform:scale(1)}85%{transform:scale(1);opacity:1}93%,100%{transform:scale(.9);opacity:0}}
+.a-bar{animation:barg 8s ease-out infinite both;animation-delay:calc(6s + var(--k) * .25s);transform-box:fill-box;transform-origin:bottom}
+@keyframes barg{0%,8%{transform:scaleY(0)}20%,100%{transform:scaleY(1)}}
+.pud{animation:pud 3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes pud{to{transform:scale(1.06,1.18)}}
+.hdr{transform-box:fill-box;transform-origin:50% 0;animation:dg 3.2s ease-in-out infinite alternate}
+@keyframes dg{from{transform:scaleY(.82)}to{transform:scaleY(1.1)}}
+.fall{animation:fall 2.4s ease-in infinite}
+@keyframes fall{0%{transform:translateY(0) scale(.5);opacity:0}12%{transform:translateY(0) scale(1);opacity:1}88%{opacity:1}100%{transform:translateY(var(--d));opacity:0}}
+.blades.fast{animation-duration:calc(var(--fan,1.1s) * .5)}
+.led{animation:led 1.6s ease-in-out infinite alternate}
+@keyframes led{from{opacity:.3}to{opacity:1}}
+.blink{animation:led .5s steps(1) infinite alternate}
+.tr{stroke-dasharray:5 7;animation:march2 1s linear infinite}
+.hive{transform-box:fill-box;transform-origin:50% 100%}
+.hive.pulse{animation:hp .45s ease-out}
+@keyframes hp{40%{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){.fb,.ar i,.a-spin,.a-arm,.a-file,.a-chip,.a-led,.a-core,.a-wave,.a-win,.a-bar,.pud,.hdr,.fall,.led,.blink,.tr,.hive.pulse{animation:none}.fall{opacity:0}.ar i{opacity:0}}
+@media (prefers-reduced-motion:reduce){.fw,.fw.busy .pt,.blades,.queen,.cell.dep,.ar{animation:none}}
+@media (max-width:900px){.parts,.legend{grid-template-columns:repeat(2,1fr)}.boot,.causes{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.ar{width:4px;height:36px;justify-self:center;background:repeating-linear-gradient(180deg,var(--tag) 0 8px,transparent 8px 14px)}.ar i{left:-6px;top:0;animation-name:pkv}.todo{columns:1}}
+@media (max-width:520px){.parts,.legend{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bee" id="bee" aria-hidden="true"><svg viewBox="0 0 48 48" width="54" height="54"><g transform="rotate(-18 22 22)"><ellipse class="wing" cx="22" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".9" stroke="#2b1a09" stroke-width=".9"/></g><g transform="rotate(18 31 22)"><ellipse class="wing" cx="31" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".9" stroke="#2b1a09" stroke-width=".9"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><rect x="22" y="22" width="3.400" height="14" fill="#2b1a09"/><rect x="28" y="22" width="3.400" height="14" fill="#2b1a09"/><circle cx="13.500" cy="29" r="5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.600"/><circle cx="12" cy="28" r="1.200" fill="#2b1a09"/><path d="M11 25.500L8 21.500M15.500 25L14 20.500" stroke="#2b1a09" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M36.500 26.500l5 2.500-5 2.500z" fill="#2b1a09"/></svg></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 48 48"><path d="M24 2l19 11v22L24 46 5 35V13z" fill="#ffb81c" stroke="#ffb81c" stroke-width="4" stroke-linejoin="round"/><ellipse cx="22" cy="16" rx="5" ry="9" transform="rotate(-18 22 22)" fill="#fff"/><ellipse cx="31" cy="16" rx="5" ry="9" transform="rotate(18 31 22)" fill="#fff"/><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#2b1a09"/><rect x="22" y="22" width="3.4" height="14" fill="#ffb81c"/><rect x="28" y="22" width="3.4" height="14" fill="#ffb81c"/><circle cx="13.5" cy="29" r="5" fill="#2b1a09"/><path d="M11 25.500L8 21.500M15.500 25L14 20.500" stroke="#2b1a09" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M36.500 26.500l5 2.500-5 2.500z" fill="#2b1a09"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAA4J0lEQVR42u19eXwc1ZXud++t6lVSa98sWV7k3TLGAiwwIAjYMaCEhESBSZzJ4oGEgYQfScYhGRhImAB5mUlCMibBhJkk45D3bAgQjGNiDBbgeMN4l2VbyNZirdbS3eqtqu6974+qbrdkdaslLxiT0q/cstRdqlvnnO/s5xJcmAdJ8n8S/1pZWUnmzp3LsrOzSV9fn/zd737HAegJruvIy8tTPB4Pvemmm+wFBQUKALS0tOhvvPGG5vV6RU9Pjw4gkuDzam1trVJSUoK+vj554MABvmvXLmn9bvjr8O9H+v8F96AvVMIPYYDa2lpaUlLC3nvvPVlXV6cBENFf1tbWeu65557ikpKSSdnZ2VMYYyV2u71MSpmpKEoBADcABsBGCGHWxwwppW69BjjnnQC8mqYd55yf6O3tfb+tra35xz/+cfuGDRt8cfdCq6urbQsWLCBtbW187dq1IgEDXPCMcCEQPnpS62TWqQBQamtrbffff78TgD3+c2vWrJnY2tp6i9/v/6Gmaa8ahvE+5zwiz/LBOQ8bhtGoadorfr//B21tbTUvvvhi6bB12O+//37n0qVL7dH7jlsHHbZO8ncESALtAEgU3o8fP466urpw9CHv379/XllZ2Q0Oh+NGxtgCSmnWCNcW8ciQ4KGTJBIa/7MoUw79A0L0cc7fC4fDrzc2Nr6xYMGCfVH1UV1d7cjPzydNTU2GpSbGoio+2hI/e/bsqLTboh/Yv3//JT6f7yFd19/lnIvhAiql1KWUhvW9kGf/ENa1Detv8WEIIQzD2On3+x85cODA/Djmst1///3O2bNn20ZABHqhIcIHTvi77rrLZT0o3HfffZk9PT2fj0QiG6SU4WEEiRL8XBB7LEwRZYh4ZohEIpENnZ2dX3jggQei6KTcddddro8yIwwn/hDC19TUxAj/wgsvlAwMDHxP1/XDIxCdC/FB0nxUhBjCDLquHx0YGPh+nL2QjBEuSiZISHgAqkV4GwCsX7++xOv1PmoYRkfcMzQuAEkfLzIYcYzQ6fV6f7R+/fqSqGqora11AlDjGOGiQ4OR4F4BoCxdutReVVXlBIAHHnggy+fzPWAYRnscjBrD9eyH9ODWWkxuNowOn8/3QFQ1VFZWukbwGoYzwkWj6xUA6rJly9zRBXZ0dNyhadqhuKelc86FEEKejZMLLrng0uCGNLghdW5InevWefr/o++Lfu6s3QfngnMeUw+aph3q7u6+I+plWM9EvRjUwkiQrwBQysvL7ZWVlS4A2Lp166xgMPjy2SR8lNBRQp4NW0EIMeSaZ8oUwxkhGAy+tHXr1llRNCgvLx8JDc4ZE5BzdD0ynBlqamrUdevWaQDEyZMn/9nj8TyqKEomAC6EIIQQOp4/KCEhpAQlBHT4JSTgNwbhM/zo0/vhNbzwGwGERAia0MAlBwGFQhhUqsLFXEhjbmQo6chSPfAoHqQraac9JSFF7G+ScT5CKaUAAEop5ZwP9Pf3P5iXl/crALSmpsa2bt06PS4eIc9V3ICcB+LTZcuWqatXrw6sW7eu7LrrrvuF2+3+JABwzjmllI2X6IxQEHJqCV7dh7ZwOxqDTWgOtaIj0omTWh+CIoSIiMCQ3Pq0HDEORKwvRhjs1AY3dSPHlo0iewHKnKWY6pqMUscEeNSMeEKCSzFuZhBCcMYYA4BAIPDSO++8882lS5e2Llu2zL169WptBAaQZ5MJyDkgfgyqysvL2eTJk5WNGzcGjh07dvOECROeVlW1RAjBAVAST71UHpYpNGBxPHM82IL9/nrs89fjWKgZA4YXmtRBCYFCFCiEgRIGSqhJIJJ40dL6x2QwASE5dMnBpQEhJWxEQaaSiSnOMsxNn4VL0ueizHUqGswFNxX6GMEsqm0YY0zTtJYTJ07cOWXKlL8uXrzYfezYMaOxsZHHRTfPKhKQc0R8Ul1dzY4fP47m5uZwV1fXAzk5OY8xxogQwiCEKGMlPI2T9s5wF7YNvIsd3vfQFDyOoAiBEQYbtUGhCqj1vqiky3E+p6hER1+llNCFEVMfLurEFGcZLs9cgKrMy1HkKIi9L3rPY2QEg1KqcM5Ff3//iry8vP+srq52WM/RGCb9ZwUJyLmQ/KqqKnXbtm1GTU2Nunr16pUej+fLJtoJjEXXDyf8Hu8BbOx9E3t9B+HlXqhUhYPaEdUicgi8nysL9xTUc8ERERHoQoeHZeCS9Lm4Mbcal3rmjZsRLNuAUEqJ1+t9JjMz85sARFVVFdu2bZs+jAHOmAnI2ZZ8y9iLPPvss9l33HHHH10u1w1CCAMASxXyo0SkhEJKiS3927G++69oCBwFB4dTcUIhivkEiPhgXR5JQQAY0kCIh0Alw0z3NNySvwSLshaCEBJTXanaCFJKCYBTSpXBwcENq1at+sK3v/1tb2VlpX3Xrl3a2WQCcg6IH37++edLb7755hedTuelY4V8IUVMx+/ofw8vdL6CQ4EjYJTCyZzmAz3NKL4wvF8KAiklQjwELgRmuafjs4WfxOVZl8YQY4xoYFBKlXA4vP3FF1+87fOf/3xnbW2tfe3atWcNCcjZIv7ixYttGzduDG3YsGFKdXX1Kw6HYybn3KCUKmOF+2PBZjzX/gJ2DOwCIRQuxQkQnHN4P5tqAhIIGiFIKXC5ZwGWTajFJNfEMasFIYTBGFPC4fD+V155peZzn/tcW01NjSOJmyjPJQOMSPzKykp1165dkXXr1pUtXrz4LzabbfpYJJ9LAYUy6ELH8x2v4MWudQjJMNIUtyXxAh/Gg8JUYYNGAC7ixKcLbsFnij4JlSowBAdLkQnikODghg0bbvr0pz/dbqmDM2YCdqbEr6qqUnbu3Gn86le/Krjtttv+YrfbZ6ZKfAkJKSUUytAYaMIT7/8cm/rqYFdscDCH+Xvy4a2ViCKWg9ohiMBO73vY5zuIqa5JyLVnm7YBGd02IIRQKaWhqmrhpEmTrs/Ly/vTvn37AmVlZUpbW5s8E8Fm40CKWGiyrKyMlZaWys9+9rPub3zjG6+4XK75qRJfQIKBglKKP3f+BT899hR6jF5kKBkfesKPxAgUBE7mQqfWhTdPvgM3c2FG+rTY78fABMUVFRVV27ZtWxMMBjkA6vV6R4oNkLESdizST8vLy+nHPvYxtmrVKsPn872Qnp5ekzLxLUMvxMP4VfN/Y+PJzUhT08Ao+9DCfeoSR2EIA4N6AEtzb8DXJ30FdmpL2UCM2gRer/dPmZmZty9btsy+evVqA6dK4MakCsg4iE8A0NraWtvatWsHu7u7f5mXl3evEEInhKip6vvuyEk80fhzHAocgceWcV58+AvJSCQgGNC8qEibjQfK70OOLTtluyBqE3R1df1HYWHhv9TW1qatXbs2GjYeExOQcRCfVFdX2+vq6gYbGxu/NnXq1F9zzg2rxJqMJvkKU3B0sAmPNf4MPXoP0tR0cMk/IhVxQ4GaEQa/7keRWoB/nfYtTHaXQedGKkwgpZScMaY0NDR8ZdasWb+1mCAyVqOQjNPiD7/55ptXXHPNNW8QQuxSSjJakIdLDpWpOOA7hEeP/gdCMgyX4gQHx0f5YGAIGEFk0DT827QVmJFeDp3rYISNpgokpVQKIYKvv/569U033bR3PJ4BG4veLysrY3PnzsWVV16Zfuedd75ks9mKhZnLpaPBvspU7PMexCNHfgwNOpzMAX6R6/uU/HxI2KkNQRHGW71/w5y0mSh05oMLjmQyRQghUkqhKIqjuLi4aseOHc8VFxdzTdPQ19eHM7UBkur9rq6uZ/Lz8//Jgn5ldOIrOOQ/gocOPw4dOuyWW/T3Y2jMIMwjcBIHfjTjX1GeNhkGN0Y1DKWUBmNM6ejoWFlcXHxvnD0gUkGBZAxA4t0+K9IX2LFjx22XX375C5xzHtdalVTntwTbsOLQDxAUQdgV+0Vv6Z8RExhheFgG/s+sh1HsLEqVCTghhG7btu0TixYtWr948WLXxo0btRFUgUxFBYzo8rndbnnrrbfmLFu2bK2iKB4pJZLpfQEJRhn6dS8ebHgMvbwPTub8u+SPEi+wERVew4+9vnpcm31lLCA2WpyAMUZzc3Mvb2lpeU5RFC1OFchkAs+SSH+MASoqKmx1dXXBF1988YnMzMwlo0m/ecMmEzx65D/QEDyKdJYGTvjfqZyKTUDsaI90ojV4AtflXg2J5NlEQggRQhg2my1v4cKFZPny5X+pqKhwNjc3i9FRJ7FKiIZ6WX5+fujPf/7zlQUFBXdxzsVoEUQpTel/tvkP2OnbA4+a8Xfij+HghCNT9WDLwA78vvX/QaEKhBzVnmNCCJGfn/+NNWvWVAIIV1VVMZxeTEoSMQAZQf+T9PR0unbtWnrdddf9kFJqk5bPN5ref/vkVjzf+TIy1QwYko+ojEY7zRQrBSQgpJk3kNYvqRWRHs91PwynAQ6PmoHn2l/A9r5dUJkSqytI4hVIRVEcS5YseaSurk7a7XaWiK6JEGCI9NfU1CgbN24MbN269ZPp6ek3cs5FsiJOYUl+d7gH/3X8WVN/RSkmUz+llKCSIGJEMKB5oXEdRACSSwjOoXENXs0Hg+sg0kQcXGynxQo2quCXx55BX6QflNKk0VJCCBNC8PT09Fs2b9788bq6ukBNTY2CJCXlSjLp7+joAAB3RUXFAyn5lUSCEIJfHf8tevV+eGwZ4wr0UFD4dD8mOSdiaf4NmJM+A27mMitwwREROhoDTfhD2/Pw8UHYmHpRhpElkbAzBzq0bjzd/Ht8b/p9MISRND4gpQRjjFRWVn4PwBsWDYlFu9Pa4ZVk0r9u3brgzp07/8Htdl/GORfJDL8o9L/R/Tbe6ttqEn+MIV4JM1ni1Xz4eO71uHfKcriYa8T3zkwrR7l7ClbUPwIhBAi9OGPJXHJ41HRsOvkWrs2uwqLchUldQ0II45yLtLS0q7ds2bJ00aJFL9fU1DitApJ44hMAko4i/c5Zs2Z9czTpl5Cg1JTa/255DnZmg4CI5ftTPZmkGIh4sTinGiumfQMu5gKXHEKa1xJWP4CQArowMDOtHDV5S+DXB0ElHdPf+tCc1rpVquKZltUIGMFRVUGUVhUVFfcBUFtaWkgiOo/ERqS2tpbt2rUr9Oabb97gcrmqrHAvSwY7lFCsOfEy2rR22Jn9FAOk+GXCvg+XeebjO9PujS2cxdX0U5BYB5BCGSQkPlH0caQxNwypx5jxYvsSEHAodhwPt+DF9ldjxbKj2ALC7XZf+9e//vWaffv2heI8ghHdwCG+/8DAAAVA58+ffychBEIIOVrApy3YgT93bUC64h6z3icgCPMI8tU8PDDtm1AIixVRJPuMlBJFjgIszFyAQT2Y9P0felUAjjTFjT91rkNXuAfMEoAkQikopXTBggX/BABxHsGQEv7T4gDV1dV048aN2qpVqyrS0tKWCCFk0mSPGRHE2vaX4TMGwYgyLoNXMzR8Y/KdyLZlgUtuuXmpHbcULAGVzHIVcdGeClHRpw/gT+3rQAhJigIAmJQSGRkZNU888cSMuro6raysjI4aBygtLWUA9KVLl9YqiuKw2rjISPqJSw5GGVoG27Dp5FtIU1xWhi91j5eCwK8P4qqsK3BlzmVmtRBJrVKNElMXVnhmY0baVASNkIUCF2d0gIPDrbjxWs+b6Ah2mRVUUoxoOwAghmFwVVXTbr/99k8B0K655ho23A4YPoSAbt68WVRUVGTl5OTcZkEJTWZqEELwStdr8PPBGCyNZVlCSjAw3F7yqfGFTqUAIxRL8q5DhGsxC+jiPM0C2j5jAOu7Xx/SdJIsq5ubm1ubk5OTvmnTJjk8JkCHGX+0ra0t8rOf/azK4XDMNAxDUkppIstfoQp6w314s/cduJjLvJkxYBqVBEEjiFnu6ZiTMcPU+2Psp4u+vzrvKuSrOYhwDUTiotUDQgo4qQOv99TBp/mhUCWhLWC1nkun03nJM888s6CjoyNiGYMYbgMQAMRut1MAYs6cOTUW3XkyySOUoO7k39ClnYRKFcvuH0uoF9C4jiuzLwfBqNyc0BgUUiBT9WBR9kIEjRAI6EWLAgISdmbDiUgH3undBkpp0udmlY7RysrKmwFwS8UPcQMJAFJeXk42b94siouLczIyMm4cJVQMRhgMbmBT79uw0fFF4oQ0q2Eu8cxOmu1K9VhaeANsRB0XI3240sYAIwo2nXwHQiRHzagKz87OXgwg46233pIjegG5ubm0ra1NW7lyZYXdbi/nnCe0/qNl3Uf87+PwYCMc1AGewBhJdEICutCRqXhQ4iyO+q/jK6SwjMGZ6eWYkzYTASMIIsnFGRiyjG8nc+CgvwHHA81mtjCBABJCqBACDodj7tNPPz2jq6tLq66uPs0GIOXl5RQAr6iouIYxRqWUPFnkDwR4p287wiIybsLpwkC2mmmOYTlDBBBSgIBgacHHoHP9ok8ZU0IxyAPY2r/L7JtMgHqEEHDOuaIo6tVXX30VAD1ODcRUALq6ugDAlpOTsyhR9UgsgUAYdK5j58BuC/7FmKNbZpzbQLqSZvq0Z5jMicLgtblXYoKjEGEeuWgjg9EvhSrY3v8uhEjuOhNitlnl5+dfDYC1trYORYDy8nKyceNGXlNTU+hwOC5J5v4JKUApQ3OgDc2hNtioPSH8pKLLbNQWCyefyUFAwKWAW3HhhrxrETLCIKAXLQIICNipHY2B4+gIdY0WGaQA4HQ6L50yZUpOXV2dKC8vP2UD5ObmUgD68uXLp6mqWsA5l5SOnF6Lwv8e734M8iAYobFCjfGcpwy2Mw/jEuv+LsucDwYKKcVFHBk08yRew4/9vkMAQTLjl0gpYbfbJ373u9+dDEC3aG4GgqL6f/r06XOtOT4imaQBwH5/A6gF3XKcUEtAEOBBC8LPnAGi1+yJ9FoTwS5mFXBqzft89UmFiBBCDMMQiqKoV1xxxSwARnp6OgVg1vRHIhECgGZlZVXE64xE+j+sh/F+4BhUolq1anIcxBJQCEVvpB8RocFObUMqFsarBqSUeLl9vZlQkhfiJJGz6Q4KqERBY6AJnPNYEi0BEwgANDs7ew4AZGZmnlIBhw8flgCcLpdrWjJWEpAglKI93ImuSA9UqlgG4PjCmowo6NX60B3uOWM7gEuzu3Zj12bs9h6w2s7ERRwWNu0Alao4Ee5ET+Rk0joBKSUBALfbPQOA0t3dbSLv7Nmzyb59+2Rubm6GqqoTkzGAlKb+bw21I8jDoISNW74kzHl/fiOAI/73Yxw9/nwAQ0vwBJ48+gyciusj0Wd86hkO4kS403IHEyIAAQCHwzEJQFpDQ4MEADpx4kQCgN9///15iqLkRTNJSQpNcDzYAgPGGetYQEISgXf79447DiBhpqMHjQAe3P8YvNxnVtAScVG7gPF2lCZ1tIROnDLSkyCAoij5t9xyS1ZXV5eorKwkNBQKEQB8ypQp2YqiuK1ZfiRJcgntoU4QSSxzdPwYJqSEgzrwbv8ec8QaoWOKB0TfK6TEDw78BIcH30ea6raSUvjInFJKnAh1JLePrPoBQkhOTU1NrkVzQvPz8wkAUVpaOoFSGhtiPHKwxZx+1a31ghI2xsz/yIkNG7OhNdSO7b27Y3A+FgyUUuLx+iex+eTfkOnwwICAJB8l+ksQQtEd6UmKolb3EFRVVQoKCjIBSL/fT2hWVhYBAJfL5bGgIkk0gULnOnq1ftP/P2MWkFZAkmBdx1/HpAa4NNun63q24k/tryLLkWmWopGPkOhbaoARipNaPyDkaCXjghCCCRMmFAHgCxcuJEowGCRWlChzNLhlhCLAI/Abg9YItDN3sjjM6N32vl045DuKWRnTxjRHL2SEYu+VwEduAzYJCSJNG0gXBhhJGhGUAKCqqvu0ghCn05k7WgwAhCDEzVn7JqedHS6mhCAiNKxuXjuG2L+50Or8q1CeNglBHoqOdP7IIQAlZmFNlC5JDEFYhqATAPH5fIRGg0CUUlcqD14TOjShm0GXs7QMDoF0Wxre7N6CvQP1oISOagsQa0FuxYV7pn4VGtdwMfcKJi2sIRQReYouox1Op9NzGgKMNulDxqVweTTMeoZewNCRBeZE0KeO/nfKhiAlFFwKXJNXhZsLbsRA2Asm2dm7rw/JSSQghIiFv0fLCiqK4og++eF9AaNyQHS3jvHG/5M1P7htbuwc2IM/tb1qEZenwAQm5N037U5McBSa7iToRyIGEB9R4eAQKbbixTf50BGEPFkIwJxwR8jZT7MQkwnSbG481fg/aA2eACMsBVVg+rdZtkx8f+Z90Lge03UfHfLLUxVVKRjB0T0JhjCAVf8/Gv2hUBYbi07OcidOtMjBzwfxo/qfg8fmCsgUVAHHwpxKfG3yP6Iv0g92EdcCJPLQWIpT+Q3DCJ+GAJxbedlRDhu1QYlmAc92jhvmVLEMWwa29r6L3x9bA5aCQQiYRapcCiyf/HncVHAD+sIDUKBc1J1CsZoKIaFAhX2U4txoODgYDPpOY4DBwcH++DclsgOc1AE7VSHAx1gEnrpFY8BApt2DVU3/iwMDDSmpgnh74KHZ38I8z2wMRLxQCLvorUABDqfigI3aLPWXMBpoenKaFoqpALvdLgHIUCjUH/+mkXStkAJO5oCbucCFOPsIEIcEhFBwCPzw4H8iZISSJjqG2wMu5sR/zHsYk50T4Y34wMDOzRAPEECSD3iQCAEXAuksDSpVzZT96AgQAkD6+vokHRgYkABIOBz2jVabJWBO/MxUPeDSiLMdzw1Xu1UXDg824j8P/zql2EDUHhBSINeegycv/XeUOIrNDpqzjAQUBNxyiRmoVdF0/qWfwCyuzbFlgVACOfocIbS0tHQCYMePHwc9efKkBMDef//99tF29YrWA+TZc2EIfm7jbsQclJTp8GBt65/xUtsGS8/zlJmg2FmIpxY8gSmuMvRHBqww6ZnfGwHBoB6AkzphIyr6NS8CetAcaUXOc1cSAQwpUGDPGy0dLBljxDAMo6OjYwAAcTqdMqoC6JEjRwYMwwhaGUGZLP1a4iyCOTLgHKfdLKZLs6Xhx/W/iNkDfAxIUOwsxNOVP8HCrEqcDPWBSWqlssd3T0wy+CJ+fKa4Bs9d8Sv87+Ur8fCsb2Ne+mwEtAB8kUEQSUwv5PyUBQECKHYUjuosWD0C/Zs2bToJgLW0tEimqirr6+tTDxw4IO67777b7Xa7h3M+oiURnQPUE+7Fpp63rVEw8hy7OKaFrwkNW3vexZLC6ljOf7SGlGj3rEtxYmnh9fDpfrzbtwcKVaAQZcwjaxkYfJoPVdmVeGLeg3ArLmSoaZiVMQ23TliKORkz4NcHcWywBUEegp3azN69czoa12wY/ULpZ1DiKjKHTI+gxaMIEAgEmu+8885VOTk5ektLi0EbGxtRXl5OBgYG/JFI5ESyoBCxuHqyayJczJGSJJ7xQUzbw2Vz4kSkEyv2PIoIj6TcTBItMlGogu/Pug+PznkAKhT4NNM4TDWWER3mnGfLwcNzvgMJc89g89VUS4tyr8AvLv0Rnq78CZbkVUPjOrwRb2xvgHNxGIIjXUlDiaso1q6fSAUAQDgcbgYwOHXq1NiQKFleXm4Zh8GjyYozCTFjzhOcRci150AT+vlJwFh6LsOejp0De/HgvidiFn8qTGAmrkxJ+eSEj+N3V/wCV+Vcjr7IADSuWcQhSQdWcilgcAP/Pvd7KHTkW3X5NLbZdBQhJSQWZM3D/7nk3/DsZT/FzYU3whAc/REvpDSzmGfLdiIg0ISOYkch8u155gi5xC6gBAC/338EgJ6dnX0qDmCz2SQA0dPTUz/agzSEgTSbG+WuSee3Fx8ShuTItnuwvmMTHjv4pKXnU2eCaPJoknsiVi54Aj+Y/S/IVXPQG+qDwXUw0BHXQyXgjXixYsY9uCLn0lgF8khoE3WXhRSY65mJxyq+j/+57Ge4tfDjkFxgIDxgdvRaDHwmz4SAIMI1zEibClVRkhrI0U6v1tbWQwDg8/lOJYOOHz8uALBDhw4dFEIg0VCImCFIgHmeOdYcQHIe056mZ5DtzMLq5ufx04anY5HCVGsJWRzT3FZyM/5Q9RS+PuXLcDEX+iL90IQ2ZL9ihSg4GenHl8pux+0TbzXdvlHgnBIaM0KFFJiVMR2PVnwXv73iF/jMhBpASvj1wRgynUk1ACAxzzNntNi/VBSF6rpubN26tQEAi0Qi3LRrAKqqKvH5fMzn8/Ha2trb7Xa72zCMhDOBGWWgoHi183UwQs77fj8SEi7FhS3dOyCkQFXuZTEXNRWdTgiJ9RK6mANX5FyKmwo/hnQlDW3BDnSGuk2Dl5gG79KC6/HDihWxcXip2g2EkJghKiGRa8/GdflXoTrvSnSGunEs0AyVquMuY4pOC7ln6leRqWYkGysvFUUhoVCo+a677vo5IURramriAAQFgLa2NjllyhT2+uuvdwYCgQPWzYuRF0XBOcf09KmY6CxBmGvnNxoWV0SS5czEU42/w08P/dqanTe27WWZZSByKZDvyMXXp34J/7fqaTw8+zuYkzYTVFDclH8DflTxvVOZ0HFw+ylEMA3G8rTJ+Mm8h5Gr5kLj+rieH5EUISOCcvcUlLqKk+r/qAHo9/v3NjU19S1YsCAatYqNipVTpkxBU1NTqKura3teXt51VgnxiFlBQxpwqHYszLoUhwePwskcMM73LiAEEBLIdmZiVdNqBHgQD839VkwyUq0pNI24U0ZiupqG2tJPoLb0EzgZ6UOuPftU7d0Z9i+a0UIzr2FnNuTZs9Gl9cBmhXDHuHxoQsOinCtAGYWuj77RVHt7+98A6Iqi0KgWiX6D9vZ2DoDu3LlzC+c8qR0Q3Rz5+rxFZn/gB7QFjCQSHALZziz8oflPuH/XvyHEwykXk5zOCGyIW5drzx7SgHG2jqh9oHEt1tE8ZvdPcqQxN6rzqqzi6oTSD0VRmK7r+quvvroDgGLRekg2UPp8Pg5AfeSRRw4Eg8FmRVFIoh4BaqmBSzJno9w92ezFt6Jr53uOrjlqjiPbkYUNnW9i+bb70RbsSDlsnIgRYlI/TthPakTD3Fl8QPfFxr6OZbQOBUXQCKEiYxbK0ydDTzI82poYikAgcOjhhx8+4vF41H379p3GAGhra5PV1dWkpaWlp7e3ty6W/0nIgQbsqh1L8qsR4uGYRXuerUHzkRKAw0CWw4N9vnp88W/3Ykv3jphEj3doFDkH1m00xtIZ7kafNmBFJMfYDWXNV7q58AZrShgf9Sl1dna+AcA7f/78IT+n8V6FruscgNy5c+drlg1Ak0bYhMTNRTcgW82CLgx8oFW5hMAAR7o9Hf3ch7vffQArj/yPFXyhseqiC6F6RwJo8DVi0AiOOXkEEEREBBMcRfhY/iIIntzeYYxRwzDEa6+9thEA7enpMeIvyRA3LbS1tVV6PB7b9u3be7/yla98yul0Zln7BJCRpIMLjixnJpoGW7B34CCciiNpOvK8PGBrO3qFMtR1/Q27e/djjmcmch3ZVupUnJVhFGdqDP7vsedR7z8MJ3OMqSuaEQqv5scXSj+N6wsXQeNaQgYQQghVVanP59t//fXX/9Tj8Yi2trYhO4vS4Un9iooKcvTo0e6Ojo5X412IxA8c+IfST8FO7eCCf/D1McTsOQQBsp1Z2N6/G1/4291YdXQ1IkKLuX4fxCzB2FQUI4itvbvgHOMMA4BAFzqy1Ux8ZkINpBh1sqoEgKamppcBDMyfP/+0Ynw6LAoh+/r6dAB0zZo1L+q6bjDGkqoB3dAwN3MmPpa/CH7DbxVjfvCF8qaHwJFuTwMnAj9pWIl/eOfr2NhRFwsLRy3+82W7RLeD/X/NL6M1eAJ2po6pv5KCwKcP4hNFS1CaXmx5ESRZ9I9FIpHBp59++lUASn9/v46hu4hKEqcCaPScPXu2s76+nnZ1da3Nz8+/TtO0hPsECilgU2yoHziML+y815waciGN7ZfRxVEE9CA457gy9zJ8deoduDp/4SniSB5jjHOStZMGFKJgd99+LN/2LRDFYsIUn5WZY+BQYcPzVatQ7CpMGvwRQnC73c5aWlr+VFZWtnz27Nm0vr4+OLSKwIoEDlcDaWlpBoDw22+/vTou7pAQBTRDw5ysmfhk4RIM6Gaa9YI5zLI9cHA4VSfS7GnY2vsu7tr+L/jHLffi5dYN8OuDsZ1Joswg5NlBBXOyp7CIfwD37PweDMLN3sYxCIq5o8ogvlD6aZSMIv2A2eun67pcv379agDCoilwWj9W3A6hca+suLjYGQqF3O+///5fsrKyZkUikVEmhzN0hLpRu+0uBEUo6RTrDxoRKCGQAhjUA+Cco8xVghsKr8YtE27EvKzZQ9YVnUAazR+MRd/H733wUutf8OiBn0GDDodqNxmMpE78MI+gyJ6P56uegUtxxu4rmfT39PS8k5+f/5ni4mLe3t4ejJP8KArIkRAAAMSUKVNEf39//86dO5/FKLdKQKBxHRPSivD1yV80N3G6UBsziLUJJZFIt7mR6cxAl96D3zT9EV/Ycg9uf/treLbxObzvb44FhaIJIC5FbBMrIYf151ij3KO/j362LdiBFbt+iBW7/x2cCNgVu1lIQ8Z0y4jwCO4vvwsZ9vSk0G9JP5FSYtOmTasAhIqKigwk7MgcYa9g61UpKipyCiHSGxoaNmRmZk5LhgKnUsUEX95xH3Z798OtuC/8ncKtMCq1CBzSQ4hwDR4lHXM9M3FtQRWuzLsM0zOmwkbVlC/bEerC2uZX8MfjL6FH64XHnmEap8CYiK+AoU8bwC2FN+LJBY8iokdGmw7ObTYb6+np2Z6fn/+p4uJivb29PQRz9P8Q6R+SDBqGBASAyM3N5fv37+/dsmXLyltuueXJpLMDYM38UWz4ZvlyfHXXtz4cmzkSk3GjYSKX3QW3dMMQBnYM7MGW3p1wMRfK3CWo8MzEvKxZmJYxBYXOfGQoaVCoAkNyDOqD6I3043igFW9378A73dvRFelBms2NTKfHdDvHuIciBUVYRFBkL8B3Z94LLkZv/oyOglm/fv2TAIJFRUWkvb1dDLP+h6ALEqAABcAKCwtdnZ2djq6urjX5+flVkUhEJEIBLgXsqg1/ba/DN/Y8iHRb2oWPACN6zlHdG60b4IgYGiJGJLbHgVtxwcWcsFEVujAQ5CGEeAhhEQEIgVt1wha3fyLGEXyiIPBqfjw1/zEsmXAdwlo4acYvqvtPnDixsaSk5AvTp0+XR44cCVrSH2/9x1S+MsLy47cXFZMmTeKc8/7m5uZN+fn5VUhavWCmTN/u2Q5DmPv6fphntsTH6B2qHU7VYU03EzCkgX7uhTRMfU8pg021wUEcsbm9Q3ZOlXJMPKgSBSfDvfja5C9iSfF1CGuRpMSPVv1qmhZ5+umnf+LxeAyr4VeMYOONuHXscOITANB1nff09GDSpElXWBCT8KYVoiCsRbDHWw+74rC4/yI4yKnyqyhGUlDQIe6ujBWqYIx6/jS9T0y9f23ulfjOrLuhGdqo4WsppVAUhe3bt++/H3300XfLy8uVxsbG8EiGXzwTKAloSQCgpKQEu3bt0mprayekpaUtsKLCI7uCUkBR7Dg88D6OB1pgZyr4RTyrV+LcoJtCGPzaIKY4y/CTSx6KVT8nM/yEEMJmszGfz3fsq1/96i8KCwuV/v7+MEaZyRJPzBFXMmvWLApAu/vuuy9xOp05uq6LRHWC0kxU492+vRg0ApZ0fMRGdp3hwQhFyAjDo2Rg5YIfId+RmzTXHw00UUqllBIvvfTSw7t27erKzs7mvb29RhLCJ909PHY4nU4KQJSXl18TU4sJEICYHRzY3vdebGix/DsDjIH4DGEegUpUPLXgcUz3TEVYD49a5hV1++rr63//pS99af3kyZNt9fX1/gQ6X55uaCbRWFa5eLrH47k62fuktbt1f3gA+70NcFD7h8/6/4CJHzEioJJi5YLHcFneJSkRXwgh7HY76+/vb/jsZz/775MnT1Z8Pl8wzs8flQmUBIEnUlJSQvft26c//vjj0x0OxxzOeUL9L6QEVSgO+A6jPdSNNJvrrMXSL/ZDIQwBPQQXdeBXlY/jyrzLRnX3LOJLRVGgaVrwqaee+tahQ4f6S0pKRALoT76XzLBYAADguuuuowC0W2655QqbzebgnPPEQ6RN63h7725oMpqkkH8/RzkVwuDT/MhRPfifK36GK/MvQygFybe8McEYo2+++ebDDz744PYpU6bQtra20Qw/eXqkcWQEiO4iwgoKCqqTGYrRiBU3OHb07YmVOP9d/pN5lWb7+MlIH+alz8LKyscwKb0UoUgYCh2d+EIIw263KwcPHnx26dKlv5s5c6a9oaHBnwD6kYx+SgK9TtauXSsWLlyY63K5qixjI2Em0EZtaA604Yi/EXZqG61I8SN7SAAMZkn4Sa0ftxYvxWPzHoBHzUBIC5lFrKOoTiGE4XA4lNbW1tfnzp37w9LSUrW7u3swLtqXMvyPpNMJAFJVVUUBaCtWrJjjcDjKNE1LuosoYQS7+w+gT/NaaWCMudCREApqZd4uVtBXiIKAEYLGdXx/1n1YWfkY0pgLYSM12BdCcIfDofT09Oy56aabvpmbm6v7fL6QVcUVPzJiVOgfyQuIIYG1s6RRUVGxSFGUpLuIRo9tve9ZwE9Sh0HCYhIR0IPoi/TDq/mt7NzFM+cvOi3kZLgX09yTsHrhL/HP07+ECI/ASNBpnID4bGBgoPHuu+++8+DBg/02m03zer2RUQieFAGUkfT/wYMHAcCek5NzbXL3z+TqYCSE3f37zYkhCWrs4sutuOAIi4jZXg4gy+ZBRfpMVOVeip5IH/7U9hcQQpBmpZM/rBYFtdJJXt0PO7HhnqlfxjenfRVptrQY5KdyRInv9XqPf+c73/nyCy+80FJYWCitNK8YQfJTDlOeZgSWlZXR+vp6Y/ny5aVOp3PU8K+qOHDQdwTHg21W9isG6nFduBwRHkFEaBBSIkNJw3T3ZMzPnIMrci7FJZmzMdE1AYqiABL4RNES/PzIM3i3fy+cihNOxTGmFvALwcijhCCgh6ALHdfmLsS3ZnwNlbnzYBh6ypY+AHDOudPpZF6v99gDDzzwpWefffZ9q48zmID4Y2ICZbj+r6iooM3NzaEvf/nLlzqdzuxIJCIS6f9o+Hdn3x4EeBC5arZZ5iwFNKEhzCPgksPNXCh1FqPCMwsLsy/FpVlzMcU9EQ7VzJyBm42OIS0EAoLrC6/CVXmXYU3Ln/Gbpj/i6GCTyQjMYc4UvkC3h2fEhPqAEYImdMzLmImvTf0ibp3wcRBCENLMzS1YioWnQgjD6XQqfX19h7797W//029/+9tjkydPlk1NTYEERB83ApBh4V9MmjTp2pTCvxLY0bsHQkr49EFEeAR2akeRMx9zM2bg8uz5qMyah2npk5FuS7NKTQCd6wjp5gBIOmzUiikhFF+c8ll8sngJnm9bhz80v4jD/iYolMGtuMwGywtAPRAL6Lnk8OqDgJSo8MzCF8s+g0+XLIVDdSCiR2JbvabkLZioazgcDqWzs3PrsmXL7tm0aVPn5MmTxbFjxwYxtLZv3MSPEn5IWXhBQYHS1dWlDAwMbPZ4PPPD4fCIBSDR8G9nqBuL37wDClVRkTkDl2VfgsuyL8HsjGnItmeZVxWAIQyrfUymXH7NJYdKVSiKAn9kEBs6NmNt6zrs6t+HoAjByRxwMDsIsfYJPg/5h2izKLE6fMNGGGEeQYaahiuy5uP2ibfixsJr4FDt0HUdhjTGNCAquq+PzWajTU1NL82fP/+7fr9/sLCwUO/s7ByxsDNZsmdMDFBVVaVs27bNePLJJ+d97Wtf28IYs3POR5wUYjKAghPBLhzwNmBBVgUKHHmIJgE559CFfqrDlpBx7wsopIgxguQCu/r3Y33HG3iz629oCjQjIs2tZ+3MDoWyU6NX4uYHyTETOoZxsXuXkDAER5iHoXEdTubAtLTJ+Fj+InyieDHmZM4ACKAZmjVHiI1pxdGKHiEE9u7d+5+VlZVPOp1OkZWVFW5vbw+PQHgRh9JjJn48A1AAdNmyZerq1asDe/fu/ed58+atDIfDnNLEoSkJCYUoYIxBCAFd6OMuo06VESihsDM7QIHBSAC7+w/grZ5t2Nb7Ht4PNGNA80FAQKEMKlGhUsWKL4ztXsyKHgFDGNCEHpsNlKV6MCN9ChbmLMA1eVfg0sy5cNgcgADCRgQSYswj4aR5CIfDwQKBQM/69eu//7nPfe6VCRMmqH6/P+jz+SLDAj0i1WxfKjZA7Mm0trYSAEo0/DtaESgBgSENaLoOahH8XM3Di7922AhDQsLBbLimYCGuKVwIwzBwPNCKeu9R7PXW47CvES3BdpyM9CFgBKEL3SrHTsyWZgWbqattVIVbcWGCqxBlrgmYkT4V87PmYHbGdEx0TQBVTINPN/SY8WqqtTETnzPGmKIorKurq+6RRx556Ne//vWRadOmKUePHvUD0JNY+WdE/CgCMAC0vLycNjY20srKyszNmzdvS0tLm5jMA7gwQqunYN4kmu3U8xeAXxtET6QXneEedIV70Kv1o1/zYtAIIMwjMKRhqjKiwMEcSFfSkGnLQJ49B0WOfOQ5cpBnz0Ga6j7VRSmk5c6KmC0wHpwTQkhCiLDb7SwcDgf37dv384ULFz4LIFxWViaam5sDAIZn9s5Y5yd0A3Nzc2ljY6P20EMPzXE4HKXJwr9nlYimxRtdGCVjGMRzavsa8wjzCCQXMevcqTgwRS3DlIyysdfoWXdkSD2GOCN5LONYbwzuAbCurq63fvOb3zzx4IMPvpeVlWUzDCPS3NycDPLPGvHjVQApLS1l27Zt43PmzLlaURQSiUSM0XYSG+8R5X4AoJQyVVWpFfSAruucEDImRohF3ggZAsFccnOqOR+7dxAbDUNwVhpGo4S32WyMUsoCgUDbtm3bfnnjjTc+DyBUWlrKWltbfZbUixQIf8bEHxIHsMK/juzs7KTh3/EuHoCwpo4wh8MRo5SmaaKvr+9YOBw+lpmZucjlcjkNw4BhGONmhKEIcVaXMm7Cq6rKGGMsHA4PNDY2rr733nt/V1dX15adna3Y7Xa9tbU1PEpG76xK/hAGKCsrI/X19fo999xT5nQ6LxVCJAz/jmHR0Rum8QQXQmBwcPCE1+vd19TUtH3Tpk17f/CDHxwD4P3+978/68477/xSUVHRJx0Oh1NKiUgkwol5fKiyQ0IIQQiRdrudAWDhcNh37Nix53/xi1/8/pe//OVhAEpZWRmam5v9w6Q+kZV/1okfFQ118eLFto0bNwa3bNly+1VXXfXHsRp/8QQnhBBVVYfEjoLB4Emv17u/tbV1544dO3Y/9dRThw8dOnQSgGYxBisoKGBdXV06AKxYsWLu8uXLby8pKfmky+XKAYBIJCKtqWWUUkouRKJLKYWUUlJKmc1mi669s7m5+cWVK1euWbly5WEAZMaMGejs7Ax5vV5tlJDuGbt5KTFAbW2tfe3atYHW1taVJSUld4+m/6PEtl6JqqqUMRZPcN/g4GB9d3f3rt27d7/77LPPNtTV1XUCCEdjD6WlpdLj8fC+vj4jFAoZ/f39KC4uViiljra2NgCQt9122+QVK1YsnTlz5q3p6ekVUaYKh8MSQLREnRDywQz9Gcb41G63EwAwDAM+n++9hoaGFx966KG/vvHGG60AyMSJE6XX6w17vV49STgX5xLyR2IAW0FBgdrV1aV6vd66jIyMeSOFf6PcTQiJGm6nrO9wOBQMBo/29PTsPnDgwPY1a9YcXLNmzQkAgWieJDs7G4WFhXxgYEC3CM5HWCQBQEtKSlS32+04fPiwlSpC5jPPPLOgurp6aWFhYXV6evrE6AcMwwDnnFveBIke54HgsPz3mDczODjY1N7evvn1119/7d57790NwA+AzZw5U3R0dEQJzxMQetw5/TNigOrqakddXR1fuXLl/OXLl29hjKnm85QghAir8SAGaRYc83A4/H5vb+/uhoaGHS+//PLeVatWtVoLlgBodnY2KSws5EIIvaOjg3u9Xj6CbotfHBnOCB6PR5kwYYKjvr6eWQ+OTJs2reDhhx+ev2DBgquLiooWOp3O6Xa73RbvVuq6DilllCnMzSVkLKJNUqAzzP2VTn2eEMJUVR3idkYikUggEDjc2dm5bdu2bW9/73vf29fd3X0SgHQ6nbSwsNDo6+uLeL1eAyM0ZqYA9ec800Xuuusu16pVq4IHDhy4d86cOU+GQiGDUqpG4QwAdF1HKBRq7u/v33Ps2LF3N2/evMcy3AYswlCn00nKysqEYRhGT0+PnoDgybibJHiNTixRMzIybA0NDVFUoAA8K1asmLxkyZKKyZMnX5KZmTnL4XBMstlsWVHJHCnukHhDDJKw99EwDEQikb5wOHy8v7+//tixY3s2bNhw4Kc//elxANEd19iMGTOE3++PtLe3R6VdjCLxHwjhY2tevHixe+PGjeHu7u4X8vLybo3+YnBwsNPv9x84ceLEzrfffvu9xx9//GhPT0+vFZqkAOiMGTOkruuGYRh6S0uLgeRVKakucnjLevz3NDs7m+bn56sAbA0NDTROshgA95IlS/JuvPHGCXPnzi0rKiqamJaWVux2u4tVVc1QVTWDMZZOKVWGXT9q0+i6rg8ahuHTdd0bCATafT5fe3t7e8u+ffuaX3vttRNvvfVWj6XahMX4tKysTADQurq6oqpNJNHpI1n25wXuExqBd9xxR96vf/3rvwoh/G1tbVt37Nix+7/+678a9uzZ0wUgEme4ISsryxgYGNAHBwd5X1+fGIHDUyV8qgxAkvycTpw4UVEURbXZbKy5uZmGQqH4PvhoossOQM3NzXVXVFQ4XS4XY4wRAFAUJWpHSJ/Pxw8dOhQ6efJkwGL0SNz6iEVwlJWVScMwDF3X9ebmZo7EhZiJjLoPnPBDjMDLL788e9q0aYXPPfdcX5ylzkpLS+HxePjAwIAeDAaNMyR4qhBHkrySBPZC7MzKymJut5vl5uYywzCoYRj05MmTCAQCJBQKAYlLpWMqx+l0wu12i9zcXCiKIsLhsAiHwzwQCPBhxmuyxEwyST/rEb0zYQA7ABsAJS8vz15UVCSszQX5MDhLVZpT4W6Zwn2N5TUlxsnOzqZxtgAZwQaQAGAx+pmseSyf+UAPAkC1iM96enpGc0XGQuhUFyuThJ5TIXCin6VyzWT3gzGuS55FAThvx/8HbzW6aM3MFEUAAAAASUVORK5CYII=" width="24" height="24"/></symbol>
+</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+  <symbol id="ram" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="9" rx="1.500"/><path d="M6 10v3M10 10v3M14 10v3M18 10v3M6 16v3M10 16v3M14 16v3M18 16v3"/></symbol>
+  <symbol id="disk" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.700 3.600 3 8 3s8-1.300 8-3V6M4 12v6c0 1.700 3.600 3 8 3s8-1.300 8-3v-6"/></symbol>
+  <symbol id="board" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="5" height="5"/><path d="M15 7h2M15 11h2M7 16h10"/></symbol>
+  <symbol id="gpu" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="11" rx="2"/><circle cx="9" cy="11.500" r="3"/><circle cx="16" cy="11.500" r="2"/><path d="M5 20h14"/></symbol>
+  <symbol id="psu" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M13 8l-3 4h4l-3 4"/></symbol>
+  <symbol id="fan" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 10C10 6 12 3 14 4c2 1 0 4-2 6zM14 12c4-2 7 0 6 2-1 2-4 0-6-2zM12 14c2 4 0 7-2 6-2-1 0-4 2-6zM10 12C6 14 3 12 4 10c1-2 4 0 6 2z"/></symbol>
+  <symbol id="win" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.500h.1M10 6.500h.1"/></symbol>
+</svg>
+<nav class="nav" aria-label="Principal">
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#nosotros">Sobre nosotros</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="computador.html" aria-current="page">Cómo funciona un PC</a></li>
+      <li><a href="referidos.html">Referidos</a></li>
+      <li><a class="navcta" href="cuenta.html">Mi cuenta</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Así funciona tu computador</h1>
+    <p class="lead">Una explicación sencilla de las piezas de tu computador, con animaciones. Y ojo: hay una colmena intrusa que no debería estar ahí.</p>
+  </div>
+</header>
+
+<main>
+<section class="scene-sec" id="escena">
+  <div class="wrap">
+    <h2>Un computador y sus piezas</h2>
+    <p class="sub">Pasa el mouse (o toca) cada pieza para ver qué hace. Una colmena se instaló dentro de la torre y gotea miel sobre las piezas; sus abejas salen por una abertura a las flores y regresan a dejar el polen.</p>
+    <div class="scene" id="scene">
+      <svg id="sv" viewBox="0 0 960 440" role="img" aria-label="Un computador con sus piezas: procesador, memoria, tarjeta gráfica, disco y fuente. Una colmena se instaló dentro de la torre y gotea miel sobre las piezas. Las abejas salen por una abertura a las flores y regresan a dejar el polen.">
+        <rect x="0" y="396" width="960" height="44" fill="#6f9f3d" opacity=".25"/>
+        <g id="grass"></g>
+        <g><ellipse class="pud" id="pud" cx="656" cy="394" rx="46" ry="8" fill="#ffb81c"/><ellipse cx="646" cy="392" rx="16" ry="2.500" fill="#ffe08a" opacity=".7"/></g>
+
+        <g class="part" tabindex="0" data-tip="Pantalla|Muestra el resultado del trabajo. Aquí ves en vivo qué tanto trabajan el procesador, la memoria y la tarjeta gráfica.">
+          <rect x="20" y="110" width="236" height="176" rx="12" fill="#1d1106" stroke="#4a3216" stroke-width="6"/>
+          <rect x="32" y="122" width="212" height="152" rx="6" fill="#150c04"/>
+          <text x="46" y="142" fill="#d9c49c" font-size="12">Administrador de tareas</text>
+          <text x="46" y="166" fill="#f1e3c6" font-size="12">CPU</text><rect x="80" y="157" width="120" height="10" rx="5" fill="#3d280f"/><rect id="bCpu" x="80" y="157" width="30" height="10" rx="5" fill="#46d19b"/><text id="nCpu" x="208" y="166" fill="#f1e3c6" font-size="12">25%</text>
+          <text x="46" y="192" fill="#f1e3c6" font-size="12">RAM</text><rect x="80" y="183" width="120" height="10" rx="5" fill="#3d280f"/><rect id="bRam" x="80" y="183" width="58" height="10" rx="5" fill="#46d19b"/><text id="nRam" x="208" y="192" fill="#f1e3c6" font-size="12">48%</text>
+          <text x="46" y="218" fill="#f1e3c6" font-size="12">GPU</text><rect x="80" y="209" width="120" height="10" rx="5" fill="#3d280f"/><rect id="bGpu" x="80" y="209" width="14" height="10" rx="5" fill="#46d19b"/><text id="nGpu" x="208" y="218" fill="#f1e3c6" font-size="12">12%</text>
+          <text id="stTxt" x="46" y="243" fill="#7fe0b4" font-size="12" font-weight="700">Rendimiento: fluido</text>
+          <text id="tripTxt" x="46" y="263" fill="#ffd24d" font-size="11">Abejas: 3 · Viajes de polen: 0</text>
+          <rect x="124" y="286" width="24" height="34" fill="#4a3216"/><rect x="94" y="318" width="84" height="10" rx="5" fill="#4a3216"/>
+        </g>
+
+        <g class="part" tabindex="0" data-tip="Gabinete|Es la caja que reúne y protege todas las piezas del computador.">
+          <rect x="270" y="34" width="372" height="362" rx="18" fill="#2b1a09" stroke="#6b4a1f" stroke-width="4"/>
+          <rect x="286" y="50" width="340" height="330" rx="10" fill="#101214" stroke="#4a3216"/>
+          <circle cx="302" cy="388" r="3" fill="#46d19b"/><circle cx="314" cy="388" r="3" fill="#ffb81c"/>
+        </g>
+        <g class="part" tabindex="0" data-tip="Placa madre|Es la base donde se conectan todas las piezas. Las líneas verdes son los caminos por donde viajan los datos.">
+          <rect x="296" y="60" width="176" height="262" rx="4" fill="#17231a" stroke="#2e4a30"/><path class="tr" d="M396 100H408" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M396 136H408" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M354 160V170" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M350 184V250" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M440 164V250" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M304 80V250" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/><path class="tr" d="M464 80V250" fill="none" stroke="#6f9f3d" stroke-width="1.6" opacity=".7"/>
+        </g>
+        <g class="part" tabindex="0" data-tip="Procesador (CPU)|Es el cerebro: ejecuta las instrucciones de los programas. Bajo el ventilador hay un disipador que saca el calor.">
+          <rect x="312" y="74" width="84" height="84" rx="8" fill="#4a4d52" stroke="#2a2c30" stroke-width="2"/><path d="M318 84 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 92 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 100 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 108 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 116 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 124 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 132 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 140 H390" stroke="#6b6f75" stroke-width="1"/><path d="M318 148 H390" stroke="#6b6f75" stroke-width="1"/>
+          <circle cx="354" cy="116" r="31" fill="#1a1c1f" stroke="#8a8f96" stroke-width="2"/>
+          <g class="blades" style="transform-origin:354px 116px"><ellipse cx="354" cy="100" rx="6" ry="14" fill="#a85f00" transform="rotate(0 354 116)"/><ellipse cx="354" cy="100" rx="6" ry="14" fill="#a85f00" transform="rotate(72 354 116)"/><ellipse cx="354" cy="100" rx="6" ry="14" fill="#a85f00" transform="rotate(144 354 116)"/><ellipse cx="354" cy="100" rx="6" ry="14" fill="#a85f00" transform="rotate(216 354 116)"/><ellipse cx="354" cy="100" rx="6" ry="14" fill="#a85f00" transform="rotate(288 354 116)"/></g><circle cx="354" cy="116" r="7" fill="#ffb81c"/>
+        </g>
+        <g class="part" tabindex="0" data-tip="Memoria RAM|Memoria rápida y temporal: guarda lo que estás usando ahora. Se vacía al apagar. Con poca RAM, el equipo se traba."><g><rect x="410" y="70" width="9" height="92" rx="1" fill="#20301f" stroke="#3a5a3a"/><rect class="led" style="animation-delay:-0.0s" x="410" y="70" width="9" height="8" fill="#ffb81c"/><rect x="411.5" y="84" width="6" height="12" fill="#111"/><rect x="411.5" y="102" width="6" height="12" fill="#111"/><rect x="411.5" y="120" width="6" height="12" fill="#111"/><rect x="410" y="158" width="9" height="4" fill="#d4a017"/></g><g><rect x="423" y="70" width="9" height="92" rx="1" fill="#20301f" stroke="#3a5a3a"/><rect class="led" style="animation-delay:-0.4s" x="423" y="70" width="9" height="8" fill="#ffb81c"/><rect x="424.5" y="84" width="6" height="12" fill="#111"/><rect x="424.5" y="102" width="6" height="12" fill="#111"/><rect x="424.5" y="120" width="6" height="12" fill="#111"/><rect x="423" y="158" width="9" height="4" fill="#d4a017"/></g><g><rect x="436" y="70" width="9" height="92" rx="1" fill="#20301f" stroke="#3a5a3a"/><rect class="led" style="animation-delay:-0.8s" x="436" y="70" width="9" height="8" fill="#ffb81c"/><rect x="437.5" y="84" width="6" height="12" fill="#111"/><rect x="437.5" y="102" width="6" height="12" fill="#111"/><rect x="437.5" y="120" width="6" height="12" fill="#111"/><rect x="436" y="158" width="9" height="4" fill="#d4a017"/></g><g><rect x="449" y="70" width="9" height="92" rx="1" fill="#20301f" stroke="#3a5a3a"/><rect class="led" style="animation-delay:-1.2s" x="449" y="70" width="9" height="8" fill="#ffb81c"/><rect x="450.5" y="84" width="6" height="12" fill="#111"/><rect x="450.5" y="102" width="6" height="12" fill="#111"/><rect x="450.5" y="120" width="6" height="12" fill="#111"/><rect x="449" y="158" width="9" height="4" fill="#d4a017"/></g></g>
+        <g class="part" tabindex="0" data-tip="Almacenamiento (SSD)|Guarda todo de forma permanente: Windows, programas y archivos. Esta pieza pequeña es un SSD M.2, muy rápido.">
+          <rect x="312" y="170" width="70" height="14" rx="2" fill="#2c2f33" stroke="#666"/><rect x="318" y="172" width="14" height="10" fill="#111"/><rect x="336" y="172" width="14" height="10" fill="#111"/>
+          <text x="354" y="181" fill="#ffb81c" font-size="8" font-weight="700">SSD</text><circle class="blink" cx="376" cy="177" r="2" fill="#ffb81c"/>
+        </g>
+        <g class="part" tabindex="0" data-tip="Tarjeta gráfica (GPU)|Procesa imágenes, video y 3D. Es clave para Revit, AutoCAD en 3D, Photoshop, Premiere y juegos.">
+          <rect x="296" y="250" width="316" height="54" rx="6" fill="#23262a" stroke="#555a60"/><rect x="302" y="252" width="304" height="3" fill="#ffb81c" opacity=".85"/>
+          <circle cx="352" cy="278" r="20" fill="#15171a" stroke="#777"/><g class="blades fast" style="transform-origin:352px 278px"><ellipse cx="352" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(0 352 278)"/><ellipse cx="352" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(120 352 278)"/><ellipse cx="352" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(240 352 278)"/></g><circle cx="352" cy="278" r="4" fill="#ffb81c"/>
+          <circle cx="454" cy="278" r="20" fill="#15171a" stroke="#777"/><g class="blades fast" style="transform-origin:454px 278px"><ellipse cx="454" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(0 454 278)"/><ellipse cx="454" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(120 454 278)"/><ellipse cx="454" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(240 454 278)"/></g><circle cx="454" cy="278" r="4" fill="#ffb81c"/>
+          <circle cx="556" cy="278" r="20" fill="#15171a" stroke="#777"/><g class="blades fast" style="transform-origin:556px 278px"><ellipse cx="556" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(0 556 278)"/><ellipse cx="556" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(120 556 278)"/><ellipse cx="556" cy="267" rx="5" ry="11" fill="#a85f00" transform="rotate(240 556 278)"/></g><circle cx="556" cy="278" r="4" fill="#ffb81c"/>
+          <text x="403" y="282" text-anchor="middle" fill="#ffb81c" font-size="11" font-weight="700">GPU</text>
+        </g>
+        <g class="part" tabindex="0" data-tip="Fuente de poder|Convierte la electricidad de la pared en la que usan las piezas. Una fuente mala puede apagar o dañar el equipo.">
+          <path d="M596 326V304" stroke="#ffb81c" stroke-width="3" fill="none" opacity=".85"/><path d="M312 326V304" stroke="#d9c49c" stroke-width="3" fill="none" opacity=".8"/>
+          <rect x="296" y="326" width="316" height="40" rx="4" fill="#1e2023" stroke="#555"/><circle cx="340" cy="346" r="14" fill="#15171a" stroke="#777"/>
+          <g class="blades" style="transform-origin:340px 346px"><ellipse cx="340" cy="339" rx="4" ry="8" fill="#a85f00" transform="rotate(0 340 346)"/><ellipse cx="340" cy="339" rx="4" ry="8" fill="#a85f00" transform="rotate(120 340 346)"/><ellipse cx="340" cy="339" rx="4" ry="8" fill="#a85f00" transform="rotate(240 340 346)"/></g><circle cx="340" cy="346" r="3" fill="#ffb81c"/>
+          <text x="420" y="350" fill="#d9c49c" font-size="10" font-weight="700">FUENTE</text><path d="M560 334V358M570 334V358M580 334V358M590 334V358" stroke="#444"/>
+        </g>
+
+        <g id="hive" class="part hive" tabindex="0" data-tip="Colmena intrusa|Esta colmena se instaló dentro de la torre. En un computador de verdad, algo que entra sin permiso (virus, programas raros) también es un intruso que gasta recursos y ensucia todo.">
+          <path d="M516 52C524 62 572 62 580 52V70H516Z" fill="#7a4a0a"/>
+          <g id="comb"></g><g id="drips"></g><g id="crawl"></g>
+          <ellipse class="pud" cx="548" cy="251" rx="46" ry="4.500" fill="#ffb81c"/>
+        </g>
+        <g class="part" tabindex="0" data-tip="Abertura del gabinete|Por aquí entran y salen las abejas. En un computador, el equivalente son los puertos y la conexión a internet.">
+          <rect x="630" y="170" width="24" height="60" rx="12" fill="#0f0802" stroke="#ffb81c" stroke-width="3"/>
+        </g>
+        <path d="M648 232V330" stroke="#ffb81c" stroke-width="5" stroke-linecap="round" fill="none"/><circle class="hdr" style="animation-delay:-1s" cx="648" cy="336" r="6" fill="#ffb81c"/>
+        <circle class="fall" style="--d:156px;animation-delay:-.4s" cx="654" cy="236" r="4.500" fill="#ffb81c"/>
+        <circle class="fall" style="--d:56px;animation-delay:-1.4s" cx="648" cy="342" r="4.500" fill="#ffb81c"/>
+
+        <g id="flowers" class="part" tabindex="0" data-tip="Flores|De aquí recogen el polen las abejas. En un computador, el polen son los datos que llegan de internet y de otros dispositivos."><rect x="690" y="140" width="250" height="256" fill="transparent"/></g>
+        <g id="workers"></g>
+      </svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <div class="ctrl">
+      <button type="button" class="btn" id="bAdd">+ Abeja</button>
+      <button type="button" class="btn line" id="bSub">− Abeja</button>
+      <span class="cnt" id="beeCount" aria-live="polite">Abejas en el equipo: 3</span>
+    </div>
+    <p class="fine" id="note">Prueba agregar abejas: cada una gasta recursos. Mira cómo suben el procesador, la memoria y la tarjeta gráfica, cómo giran más rápido los ventiladores y cómo crece el charco de miel. Así se siente un equipo con intrusos: virus y programas no deseados.</p>
+  </div>
+</section>
+
+<section class="sec" id="piezas">
+  <div class="wrap">
+    <h2>Las piezas principales</h2>
+    <p class="sub">Un computador es un equipo de piezas que trabajan juntas, como una colmena.</p>
+    <div class="parts">
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#cpu"/></svg></div><h3>Procesador (CPU)</h3><p>El cerebro. Ejecuta instrucciones y hace cálculos. Más núcleos permiten hacer más tareas a la vez.</p><p class="hive">Imagínalo así: la reina que ordena el trabajo.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#ram"/></svg></div><h3>Memoria RAM</h3><p>Memoria rápida y temporal donde está lo que usas ahora. Se vacía al apagar. Con poca RAM, el equipo se traba.</p><p class="hive">Imagínalo así: las celdas del panal de trabajo.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#disk"/></svg></div><h3>Almacenamiento</h3><p>Guarda todo de forma permanente: Windows, programas y archivos. El SSD es mucho más rápido que el disco duro (HDD).</p><p class="hive">Imagínalo así: el depósito grande de miel.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#board"/></svg></div><h3>Placa madre</h3><p>Es la base donde se conectan todas las piezas y los caminos por donde viajan los datos.</p><p class="hive">Imagínalo así: los caminos que recorren las abejas.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#gpu"/></svg></div><h3>Tarjeta gráfica (GPU)</h3><p>Procesa imágenes, video y 3D. Es clave para programas como Revit, AutoCAD en 3D, Photoshop o Premiere.</p><p class="hive">Imagínalo así: las abejas especializadas en dibujar.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#psu"/></svg></div><h3>Fuente de poder</h3><p>Convierte la electricidad de la pared en la que usan las piezas. Una fuente mala puede apagar o dañar el equipo.</p><p class="hive">Imagínalo así: la luz del sol que da energía.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#fan"/></svg></div><h3>Ventilación</h3><p>Ventiladores y disipadores sacan el calor. Con polvo o calor excesivo, el equipo baja su velocidad para protegerse.</p><p class="hive">Imagínalo así: las abejas que abanican para refrescar.</p></article>
+      <article class="pc"><div class="ic"><svg class="i s"><use href="#win"/></svg></div><h3>Sistema operativo (Windows)</h3><p>El programa que organiza todo: reparte los recursos, abre programas, maneja archivos y controla las piezas.</p><p class="hive">Imagínalo así: el apicultor que coordina.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="arranque">
+  <div class="wrap boot">
+    <div>
+      <h2>¿Qué pasa al encenderlo?</h2>
+      <p class="sub">Pulsa el botón y mira el arranque paso a paso. Es el mismo orden que sigue tu computador cada mañana.</p>
+      <button type="button" class="btn" id="bootGo">Encender el computador</button>
+      <div class="pbar" aria-hidden="true"><i id="bootBar"></i></div>
+      <p class="fine">Si Windows tarda mucho en llegar al escritorio, casi siempre el problema está en los pasos 4 y 5.</p>
+    </div>
+    <ol class="bsteps" id="bsteps">
+      <li><strong>Llega la electricidad</strong><span>Al presionar el botón, la fuente de poder envía corriente a la placa madre.</span></li>
+      <li><strong>La UEFI (BIOS) despierta</strong><span>Hace una revisión rápida del procesador, la memoria y los discos.</span></li>
+      <li><strong>Busca dónde está Windows</strong><span>Encuentra el disco con el sistema operativo y carga el gestor de arranque.</span></li>
+      <li><strong>Windows carga su núcleo</strong><span>Se cargan los controladores que le permiten hablar con cada pieza.</span></li>
+      <li><strong>Se inician servicios y programas</strong><span>Aquí arrancan también los programas de inicio. Si hay muchos, se pierde mucho tiempo.</span></li>
+      <li><strong>Aparece el escritorio</strong><span>Listo para usar.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="programa">
+  <div class="wrap">
+    <h2>¿Qué pasa cuando abres un programa?</h2>
+    <p class="sub">Cada vez que abres Word, Revit o el navegador, los datos hacen este recorrido.</p>
+    <div class="flow" id="flow">
+      <div class="fb" style="--i:0"><svg class="art" viewBox="0 0 160 96" aria-hidden="true"><rect x="10" y="8" width="140" height="80" rx="8" fill="#3a3a3a" stroke="#1a1a1a" stroke-width="2"/><circle cx="64" cy="48" r="32" fill="#c9ced3" stroke="#8a9096" stroke-width="2"/><g class="a-spin" style="transform-origin:64px 48px"><circle cx="64" cy="48" r="24" fill="none" stroke="#9aa0a6"/><circle cx="64" cy="48" r="16" fill="none" stroke="#9aa0a6"/><path d="M64 48V18M64 48L90 63" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/></g><circle cx="64" cy="48" r="6" fill="#6b7075"/><g class="a-arm" style="transform-origin:128px 20px"><path d="M128 20L86 52" stroke="#ffb81c" stroke-width="5" stroke-linecap="round"/><circle cx="128" cy="20" r="6" fill="#777"/></g><g class="a-file"><rect x="112" y="58" width="22" height="26" rx="3" fill="#fff" stroke="#2b1a09" stroke-width="2"/><path d="M117 66h12M117 72h12M117 78h8" stroke="#a85f00" stroke-width="2" stroke-linecap="round"/></g></svg><div class="txt"><h3>1. Disco</h3><p>El programa está guardado aquí. Al abrirlo, se leen sus datos y se envían hacia la memoria.</p></div></div><div class="ar" style="--i:0"><i></i></div>
+      <div class="fb" style="--i:1"><svg class="art" viewBox="0 0 160 96" aria-hidden="true"><rect x="8" y="26" width="144" height="46" rx="4" fill="#1d5a3a" stroke="#0f3a24" stroke-width="2"/><rect class="a-led" x="8" y="22" width="144" height="4" fill="#46d19b"/><rect class="a-chip" style="--k:0" x="16" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect class="a-chip" style="--k:1" x="39" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect class="a-chip" style="--k:2" x="62" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect class="a-chip" style="--k:3" x="85" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect class="a-chip" style="--k:4" x="108" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect class="a-chip" style="--k:5" x="131" y="34" width="18" height="26" rx="2" fill="#ffb81c" stroke="#111"/><rect x="14.0" y="64" width="4" height="8" fill="#d4a017"/><rect x="21.7" y="64" width="4" height="8" fill="#d4a017"/><rect x="29.4" y="64" width="4" height="8" fill="#d4a017"/><rect x="37.1" y="64" width="4" height="8" fill="#d4a017"/><rect x="44.8" y="64" width="4" height="8" fill="#d4a017"/><rect x="52.5" y="64" width="4" height="8" fill="#d4a017"/><rect x="60.2" y="64" width="4" height="8" fill="#d4a017"/><rect x="67.9" y="64" width="4" height="8" fill="#d4a017"/><rect x="75.6" y="64" width="4" height="8" fill="#d4a017"/><rect x="83.3" y="64" width="4" height="8" fill="#d4a017"/><rect x="91.0" y="64" width="4" height="8" fill="#d4a017"/><rect x="98.7" y="64" width="4" height="8" fill="#d4a017"/><rect x="106.4" y="64" width="4" height="8" fill="#d4a017"/><rect x="114.1" y="64" width="4" height="8" fill="#d4a017"/><rect x="121.8" y="64" width="4" height="8" fill="#d4a017"/><rect x="129.5" y="64" width="4" height="8" fill="#d4a017"/><rect x="137.2" y="64" width="4" height="8" fill="#d4a017"/><rect x="144.9" y="64" width="4" height="8" fill="#d4a017"/></svg><div class="txt"><h3>2. Memoria RAM</h3><p>Los datos se copian a la RAM, mucho más rápida que el disco, para tenerlos a la mano.</p></div></div><div class="ar" style="--i:1"><i></i></div>
+      <div class="fb" style="--i:2"><svg class="art" viewBox="0 0 160 96" aria-hidden="true"><path d="M52 4 V12" stroke="#999" stroke-width="2"/><path d="M63 4 V12" stroke="#999" stroke-width="2"/><path d="M74 4 V12" stroke="#999" stroke-width="2"/><path d="M85 4 V12" stroke="#999" stroke-width="2"/><path d="M96 4 V12" stroke="#999" stroke-width="2"/><path d="M107 4 V12" stroke="#999" stroke-width="2"/><path d="M52 84 V92" stroke="#999" stroke-width="2"/><path d="M63 84 V92" stroke="#999" stroke-width="2"/><path d="M74 84 V92" stroke="#999" stroke-width="2"/><path d="M85 84 V92" stroke="#999" stroke-width="2"/><path d="M96 84 V92" stroke="#999" stroke-width="2"/><path d="M107 84 V92" stroke="#999" stroke-width="2"/><rect x="40" y="10" width="80" height="76" rx="6" fill="#2b2b2b" stroke="#777" stroke-width="2"/><rect x="54" y="24" width="52" height="48" rx="4" fill="#1d1106" stroke="#ffb81c" stroke-width="2"/><rect class="a-core" style="--k:0" x="60" y="30" width="18" height="16" rx="2" fill="#ffb81c"/><rect class="a-core" style="--k:1" x="84" y="30" width="18" height="16" rx="2" fill="#ffb81c"/><rect class="a-core" style="--k:2" x="60" y="52" width="18" height="16" rx="2" fill="#ffb81c"/><rect class="a-core" style="--k:3" x="84" y="52" width="18" height="16" rx="2" fill="#ffb81c"/><path class="a-wave" d="M58 66q6-7 12 0t12 0t12 0t12 0" fill="none" stroke="#ffb81c" stroke-width="2"/></svg><div class="txt"><h3>3. Procesador</h3><p>Ejecuta las instrucciones del programa, millones de veces por segundo.</p></div></div><div class="ar" style="--i:2"><i></i></div>
+      <div class="fb" style="--i:3"><svg class="art" viewBox="0 0 160 96" aria-hidden="true"><rect x="22" y="6" width="116" height="70" rx="6" fill="#1d1106" stroke="#4a3216" stroke-width="4"/><rect x="30" y="14" width="100" height="54" rx="2" fill="#fff3d6"/><rect x="30" y="62" width="100" height="6" fill="#4a3216"/><g class="a-win"><rect x="40" y="20" width="80" height="38" rx="3" fill="#fff" stroke="#a85f00" stroke-width="1.5"/><rect x="40" y="20" width="80" height="8" rx="3" fill="#ffb81c"/><rect class="a-bar" style="--k:0" x="50" y="40" width="10" height="14" fill="#a85f00"/><rect class="a-bar" style="--k:1" x="66" y="32" width="10" height="22" fill="#ffb81c"/><rect class="a-bar" style="--k:2" x="82" y="44" width="10" height="10" fill="#a85f00"/><path d="M100 36h14M100 42h14M100 48h10" stroke="#cdbb95" stroke-width="2" stroke-linecap="round"/></g><rect x="74" y="76" width="12" height="10" fill="#4a3216"/><rect x="56" y="86" width="48" height="5" rx="2" fill="#4a3216"/></svg><div class="txt"><h3>4. Pantalla</h3><p>El resultado se dibuja y ves la ventana del programa en tu monitor.</p></div></div>
+    </div>
+    <div class="ctrl"><button type="button" class="btn line" id="flowPause" aria-pressed="false">Pausar animación</button></div>
+    <p class="fine">Por eso un programa abre más rápido cuando el equipo tiene SSD y suficiente RAM.</p>
+  </div>
+</section>
+
+<section class="sec alt" id="lento">
+  <div class="wrap">
+    <h2>¿Por qué se vuelve lento?</h2>
+    <p class="sub">Casi siempre es una de estas causas. La buena noticia: la mayoría se arregla sin comprar nada.</p>
+    <div class="causes">
+      <article class="cz"><h3>Demasiados programas al inicio</h3><p>Muchos programas arrancan solos y consumen memoria desde el principio.</p><p class="fx"><b>Solución:</b> desactivar los que no necesitas.</p></article>
+      <article class="cz"><h3>Disco casi lleno</h3><p>Sin espacio libre, Windows no puede trabajar bien ni guardar archivos temporales.</p><p class="fx"><b>Solución:</b> limpiar archivos basura y mover lo que no uses.</p></article>
+      <article class="cz"><h3>Poca memoria RAM</h3><p>Si el panal se llena, el sistema usa el disco como ayuda y todo se vuelve más lento.</p><p class="fx"><b>Solución:</b> cerrar programas o ampliar la RAM.</p></article>
+      <article class="cz"><h3>Virus y software no deseado</h3><p>Programas ocultos que gastan recursos, muestran anuncios o roban información.</p><p class="fx"><b>Solución:</b> análisis y limpieza completa.</p></article>
+      <article class="cz"><h3>Windows y controladores viejos</h3><p>Las actualizaciones corrigen errores y mejoran el rendimiento y la seguridad.</p><p class="fx"><b>Solución:</b> actualizar Windows y los controladores.</p></article>
+      <article class="cz"><h3>Calor y polvo</h3><p>Si se calienta, el procesador baja su velocidad para no dañarse.</p><p class="fx"><b>Solución:</b> limpiar los ventiladores y cuidar la ventilación.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cuidados">
+  <div class="wrap">
+    <h2>Cuidados básicos</h2>
+    <p class="sub">Hábitos sencillos que alargan la vida de tu computador.</p>
+    <ul class="todo">
+      <li>Reinicia el equipo de vez en cuando; no lo dejes encendido semanas.</li>
+      <li>Mantén Windows y tus programas actualizados.</li>
+      <li>Deja al menos 15% del disco libre.</li>
+      <li>Haz copias de seguridad de tus archivos importantes.</li>
+      <li>No instales programas de fuentes desconocidas.</li>
+      <li>Usa un antivirus y desconfía de los correos raros.</li>
+      <li>Limpia el polvo del equipo cada cierto tiempo.</li>
+      <li>Usa un regulador de voltaje para protegerlo de picos de energía.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec alt" id="glosario">
+  <div class="wrap">
+    <h2>Glosario rápido</h2>
+    <p class="sub" style="margin-bottom:18px">Palabras que escucharás en soporte técnico.</p>
+    <details><summary>SSD y HDD</summary><p>Son dos tipos de almacenamiento. El HDD tiene discos giratorios y es más lento; el SSD usa memoria y es mucho más rápido y silencioso.</p></details>
+    <details><summary>Núcleos</summary><p>Un procesador puede tener varios "cerebros" internos. Más núcleos permiten hacer varias tareas al mismo tiempo.</p></details>
+    <details><summary>Controlador (driver)</summary><p>Un pequeño programa que le enseña a Windows cómo usar una pieza, como la tarjeta de video o la impresora.</p></details>
+    <details><summary>UEFI / BIOS</summary><p>El programa básico que vive en la placa madre y despierta al computador antes de que cargue Windows.</p></details>
+    <details><summary>Malware</summary><p>Cualquier programa dañino: virus, programas espía, anuncios molestos o secuestro de archivos.</p></details>
+    <details><summary>Acceso remoto</summary><p>Permite que un técnico vea y controle tu pantalla por internet, con tu permiso, para arreglar el equipo sin visitarte. Nosotros usamos RustDesk.</p></details>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta">
+      <h2>¿Tu computador no va como debería?</h2>
+      <p>Lo revisamos de forma remota, con descuento este mes. Escríbenos y te decimos qué necesita.</p>
+      <a class="btn wa" href="#" data-wa><svg class="i"><use href="#wa"/></svg>Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="index.html">Inicio</a> · <a href="computador.html">Cómo funciona un PC</a> · <a href="referidos.html">Referidos</a> · <a href="cuenta.html">Mi cuenta</a></div></footer>
+
+<script>
+var WHATSAPP = "573206204196";
+document.getElementById("y").textContent = new Date().getFullYear();
+document.querySelectorAll("[data-wa]").forEach(function (a) {
+  a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hola, leí cómo funciona un computador en tu página y quiero información sobre tus servicios.");
+  a.target = "_blank"; a.rel = "noopener";
+});
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var F = function (n) { return n.toFixed(1); }, pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+  function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var r = rng(5), HONEY = ["#ffb81c", "#f5a800", "#ffc83d", "#e89a00"], EMPTY = "#2b1a09";
+  function hex(cx, cy, R) { var h = R / 2, w = R * 0.866; return [[cx, cy - R], [cx + w, cy - h], [cx + w, cy + h], [cx, cy + R], [cx - w, cy + h], [cx - w, cy - h]].map(function (p) { return F(p[0]) + "," + F(p[1]); }).join(" "); }
+
+  /* Pasto y 2 flores (el mundo exterior) */
+  var PET = [["#b78be8", "#ffd23f"], ["#ff9078", "#ffe08a"]], gr = "", fs = "", flowers = [], x, i, j;
+  for (x = 0; x < 960; x += 14 + r() * 10) gr += '<path d="M' + F(x) + " 396L" + F(x + 3) + " " + F(388 - r() * 10) + "L" + F(x + 6) + ' 396z" fill="#6f9f3d"/>';
+  document.getElementById("grass").innerHTML = gr;
+  [[740, 150], [850, 112]].forEach(function (fp, k) {
+    var fx = fp[0], hg = fp[1], fy = 396 - hg, c = PET[k], p = 14, pet = "";
+    for (j = 0; j < 8; j++) pet += '<ellipse cy="' + F(-p * 1.05) + '" rx="' + F(p * 0.55) + '" ry="' + F(p) + '" transform="rotate(' + F(j * 45) + ')" fill="' + c[0] + '" stroke="#2b1a09" stroke-opacity=".25" stroke-width=".9"/>';
+    fs += '<g class="fw" style="transform-origin:' + F(fx) + "px 396px;animation-duration:" + (3.4 + k) + "s;animation-delay:-" + k * 1.7 + 's"><path d="M' + F(fx) + ' 396L' + F(fx) + " " + F(fy) + '" stroke="#5f8f35" stroke-width="4" stroke-linecap="round"/><ellipse cx="' + F(fx - 12) + '" cy="' + F(396 - hg * 0.35) + '" rx="13" ry="5" transform="rotate(-30 ' + F(fx - 12) + " " + F(396 - hg * 0.35) + ')" fill="#6f9f3d"/><ellipse cx="' + F(fx + 12) + '" cy="' + F(396 - hg * 0.55) + '" rx="13" ry="5" transform="rotate(30 ' + F(fx + 12) + " " + F(396 - hg * 0.55) + ')" fill="#6f9f3d"/><g transform="translate(' + F(fx) + " " + F(fy) + ')"><g class="hd"><g class="pt">' + pet + '<circle r="' + F(p * 0.55) + '" fill="' + c[1] + '" stroke="#2b1a09" stroke-opacity=".3" stroke-width=".8"/></g></g></g></g>';
+    flowers.push({ x: fx, y: fy, busy: 0 });
+  });
+  var gFl = document.getElementById("flowers"); gFl.insertAdjacentHTML("beforeend", fs);
+  var fws = gFl.querySelectorAll(".fw"); flowers.forEach(function (f, k) { f.el = fws[k]; });
+
+  /* Panal dentro de la torre */
+  var cells = [], co = "", RC = 13, wc = RC * 1.732, CX = 548, CY = 140, RX = 64, RY = 76;
+  for (i = 0; i < 10; i++) for (j = 0; j < 7; j++) {
+    var cx = 484 + wc / 2 + j * wc + (i % 2 ? wc / 2 : 0), cy = 70 + i * RC * 1.5;
+    if (Math.pow((cx - CX) / RX, 2) + Math.pow((cy - CY) / RY, 2) > 1) continue;
+    var em = r() < 0.45;
+    cells.push({ x: cx, y: cy, e: em, res: false });
+    co += '<polygon class="cell" points="' + hex(cx, cy, RC - 1.2) + '" fill="' + (em ? EMPTY : HONEY[Math.floor(r() * 4)]) + '" stroke="#7a4a0a" stroke-width="1.3"/>';
+  }
+  document.getElementById("comb").innerHTML = co;
+  var polys = document.querySelectorAll("#comb .cell"); cells.forEach(function (c, k) { c.p = polys[k]; });
+  function fill(c) { c.e = false; c.res = false; c.p.setAttribute("fill", pick(HONEY)); c.p.classList.add("dep"); setTimeout(function () { c.p.classList.remove("dep"); }, 850); }
+  function eat(c) { c.e = true; c.p.setAttribute("fill", EMPTY); }
+
+  /* Miel que gotea sobre las piezas */
+  var dh = "";
+  [500, 520, 540, 560, 580, 600].forEach(function (dx, k) {
+    var y0 = CY + RY * Math.sqrt(Math.max(0, 1 - Math.pow((dx - CX) / RX, 2))) - 8, len = 250 - y0 - 6 - r() * 12;
+    dh += '<g class="hdr" style="animation-delay:-' + F(k * 0.6) + 's"><rect x="' + F(dx - 4) + '" y="' + F(y0) + '" width="8" height="' + F(len) + '" rx="4" fill="#ffc83d" stroke="#b87400" stroke-width="1.2"/><circle cx="' + dx + '" cy="' + F(y0 + len) + '" r="5.5" fill="#ffc83d" stroke="#b87400" stroke-width="1.2"/></g>';
+  });
+  document.getElementById("drips").innerHTML = dh;
+
+  /* Monitor: sube la carga con las abejas */
+  var MON = [{ b: "bCpu", t: "nCpu", v: 25, to: 25 }, { b: "bRam", t: "nRam", v: 48, to: 48 }, { b: "bGpu", t: "nGpu", v: 12, to: 12 }], trips = 0, tripTxt = document.getElementById("tripTxt"), stTxt = document.getElementById("stTxt"), sv = document.getElementById("sv"), pud = document.getElementById("pud"), cnt = document.getElementById("beeCount");
+  MON.forEach(function (m) { m.be = document.getElementById(m.b); m.te = document.getElementById(m.t); });
+  var wk = [];
+  function ranges() { var n = wk.length || 3; return [[6 + n * 5, 20 + n * 9], [28 + n * 3, 40 + n * 6], [3 + n * 3, 15 + n * 7]]; }
+  function retarget() { var rg = ranges(); MON.forEach(function (m, k) { m.to = Math.min(99, rg[k][0] + Math.random() * (rg[k][1] - rg[k][0])); }); }
+  function monPaint() {
+    var mx = 0;
+    MON.forEach(function (m) {
+      mx = Math.max(mx, m.v); var col = m.v > 80 ? "#e5533d" : m.v > 60 ? "#ffb81c" : "#46d19b";
+      m.be.setAttribute("width", F(120 * m.v / 100)); m.be.setAttribute("fill", col); m.te.textContent = Math.round(m.v) + "%";
+    });
+    stTxt.textContent = mx > 80 ? "Rendimiento: lento" : mx > 60 ? "Rendimiento: algo cargado" : "Rendimiento: fluido";
+    stTxt.setAttribute("fill", mx > 80 ? "#ff9a8a" : mx > 60 ? "#ffd24d" : "#7fe0b4");
+    tripTxt.textContent = "Abejas: " + wk.length + " · Viajes de polen: " + trips;
+  }
+  function effects() {
+    var n = wk.length; sv.style.setProperty("--fan", F(1.5 / (1 + 0.3 * n)) + "s"); pud.setAttribute("rx", 36 + n * 8);
+    cnt.textContent = "Abejas en el equipo: " + n; retarget(); if (reduce) MON.forEach(function (m) { m.v = m.to; }); monPaint();
+  }
+
+  /* Abejas */
+  var BEE = '<g transform="rotate(-18 22 22)"><ellipse class="wing" cx="22" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".92" stroke="#2b1a09" stroke-width=".9"/></g><g transform="rotate(18 31 22)"><ellipse class="wing" cx="31" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".92" stroke="#2b1a09" stroke-width=".9"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><rect x="22" y="22" width="3.4" height="14" fill="#2b1a09"/><rect x="28" y="22" width="3.4" height="14" fill="#2b1a09"/><circle cx="13.5" cy="29" r="5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><circle cx="12" cy="28" r="1.2" fill="#2b1a09"/><path d="M11 25.5L8 21.5M15.5 25L14 20.5" stroke="#2b1a09" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M36.5 26.5l5 2.5-5 2.5z" fill="#2b1a09"/><circle class="pl" cx="26" cy="40" r="4.5" fill="#ffe45c" stroke="#2b1a09" stroke-width="1" opacity="0"/>';
+  var IN = [612, 200], OUT = [670, 200], hive = document.getElementById("hive"), gW = document.getElementById("workers"), crawl = [], vis = true, MAXB = 10;
+
+  var gCr = document.getElementById("crawl");
+  for (i = 0; i < 6; i++) {
+    var cc = pick(cells);
+    gCr.insertAdjacentHTML("beforeend", '<g class="cb"><g transform="scale(.36) translate(-26 -26)">' + BEE + "</g></g>");
+    crawl.push({ g: gCr.lastElementChild, hx: cc.x, hy: cc.y, rot: (r() - 0.5) * 80, ph: r() * 6.28, sp: 0.0006 + r() * 0.0007, rx: 5 + r() * 5, ry: 3 + r() * 4 });
+  }
+  function crawlStep(t) {
+    crawl.forEach(function (c) { var a = t * c.sp + c.ph; c.g.setAttribute("transform", "translate(" + F(c.hx + Math.sin(a) * c.rx) + " " + F(c.hy + Math.cos(a * 1.3) * c.ry) + ") rotate(" + F(c.rot + Math.sin(a * 1.7) * 16) + ")"); });
+  }
+  crawlStep(0);
+
+  function addWorker() {
+    if (wk.length >= MAXB) return;
+    gW.insertAdjacentHTML("beforeend", '<g class="wk"><g class="fc"><g transform="scale(.62) translate(-26 -26)">' + BEE + "</g></g></g>");
+    var g = gW.lastElementChild, c0 = pick(cells);
+    wk.push({ g: g, fc: g.querySelector(".fc"), pl: g.querySelector(".pl"), x: c0.x, y: c0.y, face: 1, ph: r() * 6.28, s: "wait", until: performance.now() + 150 + wk.length * 500, path: [], f: null, c: null });
+    effects();
+  }
+  function removeWorker() {
+    if (wk.length <= 1) return;
+    var b = wk.pop();
+    if (b.s === "col" && b.f) { b.f.busy = Math.max(0, b.f.busy - 1); if (!b.f.busy) b.f.el.classList.remove("busy"); }
+    if (b.c) b.c.res = false; b.g.remove(); effects();
+  }
+  if (reduce) { gW.style.display = "none"; for (i = 0; i < 3; i++) wk.push({}); effects(); } else { addWorker(); addWorker(); addWorker(); }
+
+  function go(b, tx, ty, dt) {
+    var dx = tx - b.x, dy = ty - b.y, d = Math.hypot(dx, dy);
+    if (d < 4) return true;
+    var s = Math.min(d, Math.min(3, Math.max(0.9, d * 0.05)) * dt);
+    b.x += dx / d * s; b.y += dy / d * s; if (Math.abs(dx) > 3) b.face = dx > 0 ? -1 : 1; return false;
+  }
+  function freeCell() { var a = cells.filter(function (c) { return c.e && !c.res; }); return a.length ? pick(a) : null; }
+  function work(b, t, dt) {
+    var ox = 0, oy = 0, f = b.f;
+    if (b.s === "wait") { if (t > b.until) { b.f = pick(flowers); b.s = "out"; b.path = [IN, OUT, [b.f.x, b.f.y - 8]]; } }
+    else if (b.s === "out" || b.s === "in") {
+      ox = Math.sin(t / 210 + b.ph) * 2; oy = Math.cos(t / 170 + b.ph) * 2;
+      var p = b.path[0];
+      if (go(b, p[0], p[1], dt)) {
+        b.path.shift();
+        if (!b.path.length) {
+          if (b.s === "out") { b.s = "col"; b.until = t + 1600 + Math.random() * 1200; f.busy++; f.el.classList.add("busy"); }
+          else { b.s = "dep"; b.until = t + 1400 + Math.random() * 1200; b.off = t + 600; fill(b.c); b.c = null; trips++; monPaint(); hive.classList.add("pulse"); setTimeout(function () { hive.classList.remove("pulse"); }, 480); }
+        }
+      }
+    } else if (b.s === "col") {
+      b.x = f.x + Math.sin(t / 160 + b.ph) * 6; b.y = f.y - 8 + Math.cos(t / 130 + b.ph) * 3;
+      if (t > b.until) { f.busy = Math.max(0, f.busy - 1); if (!f.busy) f.el.classList.remove("busy"); b.pl.setAttribute("opacity", 1); b.s = "full"; }
+    } else if (b.s === "full") {
+      var c = freeCell();
+      if (c) { c.res = true; b.c = c; b.s = "in"; b.path = [OUT, IN, [c.x, c.y]]; }
+      else { b.x = 640 + Math.sin(t / 200 + b.ph) * 8; b.y = 200 + Math.cos(t / 170 + b.ph) * 10; if (Math.abs(b.x - 640) < 9) b.face = -1; }
+    } else if (b.s === "dep") {
+      if (t > b.off) b.pl.setAttribute("opacity", 0);
+      if (t > b.until) { b.s = "wait"; b.until = t + 300 + Math.random() * 900; }
+    }
+    b.g.setAttribute("transform", "translate(" + F(b.x + ox) + " " + F(b.y + oy) + ")");
+    b.fc.setAttribute("transform", "scale(" + b.face + " 1)");
+  }
+  if (!reduce) {
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(document.getElementById("scene"));
+    var last = 0, monT = 0, eatT = 0;
+    (function loop(t) {
+      requestAnimationFrame(loop);
+      var dt = Math.min(40, t - last) / 16.7; last = t; if (!vis) return;
+      crawlStep(t);
+      wk.forEach(function (b) { work(b, t, dt); });
+      if (t > monT) { monT = t + 1000; retarget(); }
+      MON.forEach(function (m) { m.v += (m.to - m.v) * 0.05; }); monPaint();
+      if (t > eatT) { eatT = t + 3200; var h = cells.filter(function (c) { return !c.e; }); if (h.length > 4 && Math.random() < 0.75) eat(pick(h)); }
+    })(0);
+  }
+  document.getElementById("bAdd").addEventListener("click", function () { if (!reduce) addWorker(); });
+  document.getElementById("bSub").addEventListener("click", removeWorker);
+  var fp = document.getElementById("flowPause");
+  fp.addEventListener("click", function () { var on = document.getElementById("flow").classList.toggle("paused"); fp.setAttribute("aria-pressed", on); fp.textContent = on ? "Reanudar animación" : "Pausar animación"; });
+
+  /* Mensajes al pasar el mouse */
+  var sc = document.getElementById("scene"), tip = document.getElementById("tip");
+  function showTip(el, x, y) {
+    var d = el.getAttribute("data-tip").split("|"); tip.innerHTML = "<b>" + d[0] + "</b>" + d[1]; tip.hidden = false;
+    var rc = sc.getBoundingClientRect(); tip.style.left = Math.max(6, Math.min(x - rc.left + sc.scrollLeft + 14, sc.scrollWidth - tip.offsetWidth - 8)) + "px"; tip.style.top = (y - rc.top + 14) + "px";
+  }
+  sc.addEventListener("pointermove", function (e) { var p = e.target.closest("[data-tip]"); if (p) showTip(p, e.clientX, e.clientY); else tip.hidden = true; });
+  sc.addEventListener("pointerleave", function () { tip.hidden = true; });
+  sc.addEventListener("focusin", function (e) { var p = e.target.closest("[data-tip]"); if (p) { var b = p.getBoundingClientRect(); showTip(p, b.left + b.width / 2, b.top + b.height / 2); } });
+  sc.addEventListener("focusout", function () { tip.hidden = true; });
+
+  /* Arranque paso a paso */
+  var steps = [].slice.call(document.querySelectorAll("#bsteps li")), bootBtn = document.getElementById("bootGo"), bootBar = document.getElementById("bootBar"), running = false;
+  bootBtn.addEventListener("click", function () {
+    if (running) return; running = true; bootBtn.disabled = true; bootBtn.textContent = "Arrancando…";
+    steps.forEach(function (s) { s.classList.remove("on", "done"); }); bootBar.style.width = "0";
+    var k = 0;
+    (function nextStep() {
+      if (k > 0) { steps[k - 1].classList.remove("on"); steps[k - 1].classList.add("done"); }
+      if (k >= steps.length) { running = false; bootBtn.disabled = false; bootBtn.textContent = "Volver a encender"; return; }
+      steps[k].classList.add("on"); bootBar.style.width = ((k + 1) / steps.length * 100) + "%"; k++;
+      setTimeout(nextStep, reduce ? 150 : 1200);
+    })();
+  });
+})();
+(function () {
+  var bee = document.getElementById("bee");
+  if (!bee || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var W = innerWidth, H = innerHeight, x = W * 0.3, y = H * 0.3, tx = x, ty = y, mx = null, my = 0, mt, face = 1, last = 0;
+  var pick = function () { tx = 40 + Math.random() * Math.max(60, W - 120); ty = 60 + Math.random() * Math.max(60, H - 140); }; pick();
+  addEventListener("resize", function () { W = innerWidth; H = innerHeight; });
+  addEventListener("pointermove", function (e) { mx = e.clientX; my = e.clientY; clearTimeout(mt); mt = setTimeout(function () { mx = null; }, 3000); }, { passive: true });
+  document.addEventListener("pointerleave", function () { mx = null; });
+  function frame(t) {
+    requestAnimationFrame(frame);
+    var dt = Math.min(40, t - last) / 16.7; last = t;
+    var gx = mx !== null ? mx + 30 : tx, gy = mx !== null ? my - 30 : ty, dx = gx - x, dy = gy - y;
+    if (mx === null && Math.hypot(dx, dy) < 30) pick();
+    var k = (mx !== null ? 0.07 : 0.016) * dt;
+    x += dx * k; y += dy * k + Math.sin(t / 160) * 0.6;
+    if (Math.abs(dx) > 12) face = dx > 0 ? -1 : 1;
+    bee.style.transform = "translate(" + (x - 27).toFixed(1) + "px," + (y - 27).toFixed(1) + "px) scaleX(" + face + ")";
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
