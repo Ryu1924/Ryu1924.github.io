@@ -41,7 +41,7 @@ svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none}
 .logo svg{width:36px;height:36px}
 .nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
-.nav li a{display:block;padding:8px 12px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.98rem}
+.nav li a{display:block;padding:8px 9px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.92rem}
 .nav li a:hover{background:#4a3216;color:#fff}
 .nav li a[aria-current="page"]{background:#4a3216;color:#fff}
 .nav li a.navcta,.nav li a.navcta:hover{background:var(--tag);color:var(--tag-ink)}
@@ -169,6 +169,19 @@ details p{margin-top:8px;color:var(--muted)}
 .hive{transform-box:fill-box;transform-origin:50% 100%}
 .hive.pulse{animation:hp .45s ease-out}
 @keyframes hp{40%{transform:scale(1.04)}}
+
+.dp>*{animation-duration:var(--T,5s);animation-delay:var(--D,0s);animation-iteration-count:infinite;animation-fill-mode:both}
+.dpt{transform-box:fill-box;transform-origin:50% 0;animation-name:dpt;animation-timing-function:ease-in-out}
+.dpb{transform-box:fill-box;transform-origin:center;animation-name:dpb;animation-timing-function:ease-in-out}
+.dpd{animation-name:dpd;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+@keyframes dpt{0%{transform:scaleY(.1)}56%,64%{transform:scaleY(1)}76%,100%{transform:scaleY(.1)}}
+@keyframes dpb{0%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:1}56%{transform:translateY(var(--L)) scale(1.2)}63%{transform:translateY(var(--L)) scale(1.35);opacity:1}64%{transform:translateY(var(--L)) scale(1.35);opacity:0}76%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:0}77%,100%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:1}}
+@keyframes dpd{0%,63%{opacity:0;transform:translateY(var(--L))}64%{opacity:1;transform:translateY(var(--L))}92%{opacity:1;transform:translateY(calc(var(--L) + var(--F)))}100%{opacity:0;transform:translateY(calc(var(--L) + var(--F)))}}
+.dp:hover .dpb,.dp:hover .dpd{fill:#ffe08a}
+@media (prefers-reduced-motion:reduce){.dp>*{animation:none}.dpb{transform:translateY(var(--L))}.dpd{opacity:0}}
+.flowline{stroke-dasharray:5 16;animation:flowd 1.1s linear infinite}
+@keyframes flowd{to{stroke-dashoffset:-21}}
+@media (prefers-reduced-motion:reduce){.flowline{animation:none}}
 @media (prefers-reduced-motion:reduce){.fb,.ar i,.a-spin,.a-arm,.a-file,.a-chip,.a-led,.a-core,.a-wave,.a-win,.a-bar,.pud,.hdr,.fall,.led,.blink,.tr,.hive.pulse{animation:none}.fall{opacity:0}.ar i{opacity:0}}
 @media (prefers-reduced-motion:reduce){.fw,.fw.busy .pt,.blades,.queen,.cell.dep,.ar{animation:none}}
 @media (max-width:900px){.parts,.legend{grid-template-columns:repeat(2,1fr)}.boot,.causes{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.ar{width:4px;height:36px;justify-self:center;background:repeating-linear-gradient(180deg,var(--tag) 0 8px,transparent 8px 14px)}.ar i{left:-6px;top:0;animation-name:pkv}.todo{columns:1}}
@@ -193,13 +206,15 @@ details p{margin-top:8px;color:var(--muted)}
 </svg>
 <nav class="nav" aria-label="Principal">
   <div class="wrap bar">
-    <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
+    <a class="logo" href="index.html#inicio"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
     <ul>
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#servicios">Servicios</a></li>
-      <li><a href="index.html#nosotros">Sobre nosotros</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="index.html#plan">Plan anual</a></li>
+      <li><a href="index.html#nosotros">Nosotros</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
-      <li><a href="computador.html" aria-current="page">Cómo funciona un PC</a></li>
+      <li><a href="computador.html" aria-current="page">Aprende</a></li>
       <li><a href="referidos.html">Referidos</a></li>
       <li><a class="navcta" href="cuenta.html">Mi cuenta</a></li>
     </ul>
@@ -276,9 +291,10 @@ details p{margin-top:8px;color:var(--muted)}
         <g class="part" tabindex="0" data-tip="Abertura del gabinete|Por aquí entran y salen las abejas. En un computador, el equivalente son los puertos y la conexión a internet.">
           <rect x="630" y="170" width="24" height="60" rx="12" fill="#0f0802" stroke="#ffb81c" stroke-width="3"/>
         </g>
-        <path d="M648 232V330" stroke="#ffb81c" stroke-width="5" stroke-linecap="round" fill="none"/><circle class="hdr" style="animation-delay:-1s" cx="648" cy="336" r="6" fill="#ffb81c"/>
-        <circle class="fall" style="--d:156px;animation-delay:-.4s" cx="654" cy="236" r="4.500" fill="#ffb81c"/>
-        <circle class="fall" style="--d:56px;animation-delay:-1.4s" cx="648" cy="342" r="4.500" fill="#ffb81c"/>
+        <path d="M648 232V330" stroke="#ffb81c" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path class="flowline" d="M648 238V326" stroke="#ffe9a8" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <g id="leak"></g>
+
 
         <g id="flowers" class="part" tabindex="0" data-tip="Flores|De aquí recogen el polen las abejas. En un computador, el polen son los datos que llegan de internet y de otros dispositivos."><rect x="690" y="140" width="250" height="256" fill="transparent"/></g>
         <g id="workers"></g>
@@ -401,7 +417,7 @@ details p{margin-top:8px;color:var(--muted)}
   </div>
 </section>
 </main>
-<footer><div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="index.html">Inicio</a> · <a href="computador.html">Cómo funciona un PC</a> · <a href="referidos.html">Referidos</a> · <a href="cuenta.html">Mi cuenta</a></div></footer>
+<footer><div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="index.html">Inicio</a> · <a href="computador.html">Cómo funciona un PC</a> · <a href="productos.html">Productos</a> · <a href="referidos.html">Referidos</a> · <a href="politicas.html">Políticas</a> · <a href="cuenta.html">Mi cuenta</a></div></footer>
 
 <script>
 var WHATSAPP = "573206204196";
@@ -444,13 +460,18 @@ document.querySelectorAll("[data-wa]").forEach(function (a) {
   function fill(c) { c.e = false; c.res = false; c.p.setAttribute("fill", pick(HONEY)); c.p.classList.add("dep"); setTimeout(function () { c.p.classList.remove("dep"); }, 850); }
   function eat(c) { c.e = true; c.p.setAttribute("fill", EMPTY); }
 
-  /* Miel que gotea sobre las piezas */
+  /* Miel que gotea: el hilo se alarga, la gota se suelta y cae */
+  function dp(x, y, L, Fd, T, D, w, stroke) {
+    var st = stroke ? ' stroke="#b87400" stroke-width="1.2"' : "";
+    return '<g class="dp" style="--L:' + F(L) + "px;--F:" + F(Fd) + "px;--T:" + F(T) + "s;--D:-" + F(D) + 's"><rect class="dpt" x="' + F(x - w / 2) + '" y="' + F(y) + '" width="' + w + '" height="' + F(L) + '" rx="' + w / 2 + '" fill="#ffc83d"' + st + '/><circle class="dpb" cx="' + F(x) + '" cy="' + F(y) + '" r="' + F(w * 0.75) + '" fill="#ffc83d"' + st + '/><circle class="dpd" cx="' + F(x) + '" cy="' + F(y) + '" r="' + F(w * 0.6) + '" fill="#ffc83d"' + st + "/></g>";
+  }
   var dh = "";
   [500, 520, 540, 560, 580, 600].forEach(function (dx, k) {
-    var y0 = CY + RY * Math.sqrt(Math.max(0, 1 - Math.pow((dx - CX) / RX, 2))) - 8, len = 250 - y0 - 6 - r() * 12;
-    dh += '<g class="hdr" style="animation-delay:-' + F(k * 0.6) + 's"><rect x="' + F(dx - 4) + '" y="' + F(y0) + '" width="8" height="' + F(len) + '" rx="4" fill="#ffc83d" stroke="#b87400" stroke-width="1.2"/><circle cx="' + dx + '" cy="' + F(y0 + len) + '" r="5.5" fill="#ffc83d" stroke="#b87400" stroke-width="1.2"/></g>';
+    var y0 = CY + RY * Math.sqrt(Math.max(0, 1 - Math.pow((dx - CX) / RX, 2))) - 8;
+    dh += dp(dx, y0, 250 - y0 - 14 - r() * 8, 12, 4.2 + r() * 2.4, r() * 6, 8, true);
   });
   document.getElementById("drips").innerHTML = dh;
+  document.getElementById("leak").innerHTML = dp(648, 326, 8, 62, 4.4, 0.8, 7, false) + dp(654, 232, 16, 150, 5.6, 2.6, 6, false);
 
   /* Monitor: sube la carga con las abejas */
   var MON = [{ b: "bCpu", t: "nCpu", v: 25, to: 25 }, { b: "bRam", t: "nRam", v: 48, to: 48 }, { b: "bGpu", t: "nGpu", v: 12, to: 12 }], trips = 0, tripTxt = document.getElementById("tripTxt"), stTxt = document.getElementById("stTxt"), sv = document.getElementById("sv"), pud = document.getElementById("pud"), cnt = document.getElementById("beeCount");
@@ -559,7 +580,11 @@ document.querySelectorAll("[data-wa]").forEach(function (a) {
   var sc = document.getElementById("scene"), tip = document.getElementById("tip");
   function showTip(el, x, y) {
     var d = el.getAttribute("data-tip").split("|"); tip.innerHTML = "<b>" + d[0] + "</b>" + d[1]; tip.hidden = false;
-    var rc = sc.getBoundingClientRect(); tip.style.left = Math.max(6, Math.min(x - rc.left + sc.scrollLeft + 14, sc.scrollWidth - tip.offsetWidth - 8)) + "px"; tip.style.top = (y - rc.top + 14) + "px";
+    var rc = sc.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, px = x - rc.left + sc.scrollLeft, py = y - rc.top + sc.scrollTop;
+    var left = px + 16, top = py + 16;
+    if (left + tw > sc.scrollLeft + sc.clientWidth - 6) left = px - tw - 16;
+    if (top + th > sc.scrollTop + sc.clientHeight - 6) top = py - th - 16;
+    tip.style.left = Math.max(sc.scrollLeft + 6, left) + "px"; tip.style.top = Math.max(6, top) + "px";
   }
   sc.addEventListener("pointermove", function (e) { var p = e.target.closest("[data-tip]"); if (p) showTip(p, e.clientX, e.clientY); else tip.hidden = true; });
   sc.addEventListener("pointerleave", function () { tip.hidden = true; });

@@ -41,7 +41,7 @@ svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none}
 .logo svg{width:36px;height:36px}
 .nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
-.nav li a{display:block;padding:8px 12px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.98rem}
+.nav li a{display:block;padding:8px 9px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.92rem}
 .nav li a:hover{background:#4a3216;color:#fff}
 .nav li a[aria-current="page"]{background:#4a3216;color:#fff}
 .nav li a.navcta,.nav li a.navcta:hover{background:var(--tag);color:var(--tag-ink)}
@@ -148,13 +148,15 @@ details p{margin-top:8px;color:var(--muted)}
 </svg>
 <nav class="nav" aria-label="Principal">
   <div class="wrap bar">
-    <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
+    <a class="logo" href="index.html#inicio"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
     <ul>
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#servicios">Servicios</a></li>
-      <li><a href="index.html#nosotros">Sobre nosotros</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="index.html#plan">Plan anual</a></li>
+      <li><a href="index.html#nosotros">Nosotros</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
-      <li><a href="computador.html">Cómo funciona un PC</a></li>
+      <li><a href="computador.html">Aprende</a></li>
       <li><a href="referidos.html" aria-current="page">Referidos</a></li>
       <li><a class="navcta" href="cuenta.html">Mi cuenta</a></li>
     </ul>
@@ -164,7 +166,7 @@ details p{margin-top:8px;color:var(--muted)}
 <header class="hero">
   <div class="wrap">
     <h1>Programa de referidos</h1>
-    <p class="lead">Recomienda BeeSystems y recibe el <b>20%</b> de lo que se cobre por cada persona que refieras.</p>
+    <p class="lead">Recomienda BeeSystems y recibe el <b>20%</b> de lo que se cobre por cada persona que refieras, con un tope de <b>$40.000 COP por referido</b>.</p>
   </div>
 </header>
 
@@ -196,10 +198,11 @@ details p{margin-top:8px;color:var(--muted)}
   <div class="steps3">
     <div class="s3"><div class="n">1</div><h3>Crea tu cuenta</h3><span>Es gratis. Recibes un código y un enlace personal.</span></div>
     <div class="s3"><div class="n">2</div><h3>Comparte tu enlace</h3><span>Tu referido crea su cuenta con tu código y contrata nuestros servicios.</span></div>
-    <div class="s3"><div class="n">3</div><h3>Gana el 20%</h3><span>Recibes el 20% de lo que se cobre por los servicios de cada referido.</span></div>
+    <div class="s3"><div class="n">3</div><h3>Gana el 20%</h3><span>Recibes el 20% de lo que se cobre por los servicios de cada referido, hasta $40.000 COP por persona.</span></div>
   </div>
   <ul class="rules">
     <li>Tu comisión se calcula sobre el valor cobrado, en pesos colombianos (COP).</li>
+    <li><b>Tope máximo:</b> la comisión por cada referido no puede superar $40.000 COP en total. Lee las <a href="politicas.html#referidos">políticas del programa</a>.</li>
     <li>Ves tus referidos, lo que han contratado y tu 20% en tu panel de abajo.</li>
     <li>Las condiciones de pago de las comisiones se acuerdan por WhatsApp.</li>
   </ul>
@@ -220,14 +223,13 @@ details p{margin-top:8px;color:var(--muted)}
 <section class="sec alt" id="panel"><div class="wrap">
   <h2>Tu panel de referidos</h2>
   <p class="sub">Tu código, tu enlace y tus referidos en un solo lugar.</p>
-  <div class="notice" role="note"><b>Modo demostración.</b> Las cuentas y los datos se guardan solo en este navegador y dispositivo. Los servicios de tus referidos los registra BeeSystems desde su panel de administración.</div>
   <div id="refApp"></div>
 </div></section>
 
 <section class="sec" id="faq"><div class="wrap">
   <h2>Preguntas frecuentes</h2>
   <p class="sub" style="margin-bottom:18px">Lo que más nos preguntan sobre el programa.</p>
-  <details><summary>¿Cuánto gano por cada referido?</summary><p>El 20% de lo que se cobre por los servicios que contrate tu referido.</p></details>
+  <details><summary>¿Cuánto gano por cada referido?</summary><p>El 20% de lo que se cobre por los servicios que contrate tu referido, con un tope máximo de $40.000 COP por referido. Por ejemplo, si un referido paga $250.000 COP en servicios, el 20% serían $50.000 COP, pero tu comisión es de $40.000 COP.</p></details>
   <details><summary>¿Cómo se registran los servicios de mi referido?</summary><p>Los registramos nosotros cuando el servicio se completa y se paga. Después lo verás en tu panel.</p></details>
   <details><summary>¿Cuándo y cómo recibo mi comisión?</summary><p>Lo acordamos contigo por WhatsApp. Escríbenos y te contamos los detalles.</p></details>
   <details><summary>¿Dónde veo mis servicios contratados?</summary><p>En <a href="cuenta.html">Mi cuenta</a>. Esta página es solo para tus referidos y tus ganancias.</p></details>
@@ -241,8 +243,10 @@ details p{margin-top:8px;color:var(--muted)}
   </div>
 </div></section>
 </main>
-<footer><div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="index.html">Inicio</a> · <a href="computador.html">Cómo funciona un PC</a> · <a href="referidos.html">Referidos</a> · <a href="cuenta.html">Mi cuenta</a></div></footer>
+<footer><div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="index.html">Inicio</a> · <a href="computador.html">Cómo funciona un PC</a> · <a href="productos.html">Productos</a> · <a href="referidos.html">Referidos</a> · <a href="politicas.html">Políticas</a> · <a href="cuenta.html">Mi cuenta</a></div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 <script>
 var WHATSAPP = "573206204196";
 document.getElementById("y").textContent = new Date().getFullYear();
@@ -380,38 +384,42 @@ document.getElementById("y").textContent = new Date().getFullYear();
 })();
 
 (function () {
-  var KEY = "bee_db_v1", SES = "bee_session";
   var CAT = [["Mantenimiento remoto de Windows", 52000], ["Licencia de Microsoft Office", 65000], ["Eliminación de virus y malware", 45000], ["Instalación de Windows desde cero", 70000], ["Revit", 60000], ["AutoCAD", 50000], ["Photoshop", 45000]];
-  var money = function (n) { return "$" + Math.round(n).toLocaleString("es-CO") + " COP"; };
+  var money = function (n) { return "$" + Math.round(n).toLocaleString("es-CO"); }; money = function (n) { return "$" + Math.round(n).toLocaleString("es-CO") + " COP"; };
   var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var fdate = function (t) { return new Date(t).toLocaleDateString("es-CO"); };
-  function load() { try { var d = JSON.parse(localStorage.getItem(KEY)); if (d && d.users) return d; } catch (e) {} return { users: [], services: [] }; }
-  function sget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-  function me(db) { var id = sget(SES); return id ? db.users.filter(function (u) { return u.id === id; })[0] : null; }
-  var app = document.getElementById("refApp");
+  var app = document.getElementById("refApp"), sb = window.beeClient ? window.beeClient() : null;
 
-  function render() {
-    var db = load(), u = me(db), n = 0;
-    if (!u) {
+  async function render() {
+    var n = 0, logged = false;
+    if (!sb) { app.innerHTML = '<div class="notice" role="alert"><b>No se pudo conectar.</b> Revisa tu conexión a internet y recarga la página.</div>'; if (window.hiveSet) window.hiveSet(0, false); return; }
+    var ss = (await sb.auth.getSession()).data.session;
+    if (!ss) {
       app.innerHTML = '<div class="box gate"><h3>Inicia sesión para ver tu panel</h3><p>Crea tu cuenta (o ingresa) para obtener tu código y tu enlace personal de referido.</p><div class="crow"><a class="btn" href="cuenta.html">Crear mi cuenta</a><a class="btn line" href="cuenta.html">Ingresar</a></div></div>';
     } else {
-      var refs = db.users.filter(function (x) { return x.refBy === u.code; }).map(function (x) {
-        var sv = db.services.filter(function (s) { return s.userId === x.id; }), tot = sv.reduce(function (a, s) { return a + s.amount; }, 0);
-        return { name: x.name, date: x.created, n: sv.length, tot: tot, com: Math.round(tot * 0.2) };
-      });
-      n = refs.length;
-      var tot = refs.reduce(function (a, r) { return a + r.tot; }, 0), com = refs.reduce(function (a, r) { return a + r.com; }, 0);
-      var paid = (db.payments || []).filter(function (p) { return p.userId === u.id; }).reduce(function (a, p) { return a + p.amount; }, 0), pend = Math.max(0, com - paid);
-      var link = new URL("index.html?ref=" + u.code, location.href).href;
-      var share = "https://wa.me/?text=" + encodeURIComponent("Te recomiendo BeeSystems, soporte remoto para Windows con descuento. Crea tu cuenta con mi código " + u.code + ": " + link);
-      var tbl = refs.length ? '<div class="tbl"><table><thead><tr><th>Referido</th><th>Desde</th><th class="r">Servicios</th><th class="r">Total cobrado</th><th class="r">Tu 20%</th></tr></thead><tbody>' + refs.map(function (r) { return "<tr><td>" + esc(r.name) + "</td><td>" + fdate(r.date) + '</td><td class="r">' + r.n + '</td><td class="r">' + money(r.tot) + '</td><td class="r"><b>' + money(r.com) + "</b></td></tr>"; }).join("") + "</tbody></table></div>"
-        : '<p class="empty">Todavía no tienes referidos. Comparte tu enlace para empezar a ganar.</p>';
-      app.innerHTML = '<p style="margin-bottom:14px">Hola, <b>' + esc(u.name) + '</b>.</p>' +
-        '<div class="stats"><div class="st"><span>Referidos</span><b>' + refs.length + '</b></div><div class="st"><span>Total cobrado a tus referidos</span><b>' + money(tot) + '</b></div><div class="st hl"><span>Tu comisión acumulada (20%)</span><b>' + money(com) + "</b><small>Pagada: " + money(paid) + " · Pendiente: " + money(pend) + "</small></div></div>" +
-        '<div class="box"><h3>Tu enlace de referido</h3><p>Tu código: <span class="code">' + u.code + '</span></p><div class="crow"><input id="refLink" readonly value="' + esc(link) + '" aria-label="Tu enlace de referido"><button type="button" class="btn" data-act="copy">Copiar</button><a class="btn wa" href="' + share + '" target="_blank" rel="noopener"><svg class="i"><use href="#wa"/></svg>Compartir</a></div></div>' +
-        '<div class="box"><h3>Mis referidos</h3>' + tbl + "</div>";
+      app.innerHTML = '<p class="empty">Cargando tu panel…</p>';
+      try {
+        var uid = ss.user.id;
+        var q = await Promise.all([sb.from("profiles").select("*").eq("id", uid).maybeSingle(), sb.rpc("my_referrals"), sb.from("payments").select("*").eq("user_id", uid)]);
+        if (q[0].error || q[1].error || q[2].error) throw new Error("load");
+        var p = q[0].data;
+        if (!p) { app.innerHTML = '<div class="notice" role="status">Tu perfil se está preparando. Recarga la página en unos segundos.</div>'; return; }
+        logged = true;
+        var refs = (q[1].data || []).map(function (x) { var t = Number(x.total) || 0; return { name: x.ref_name, date: x.since, n: Number(x.n_services) || 0, tot: t, com: Math.min(Math.round(t * 0.2), 40000) }; });
+        n = refs.length;
+        var tot = refs.reduce(function (a, x) { return a + x.tot; }, 0), com = refs.reduce(function (a, x) { return a + x.com; }, 0);
+        var paid = (q[2].data || []).reduce(function (a, x) { return a + x.amount; }, 0), pend = Math.max(0, com - paid);
+        var link = new URL("index.html?ref=" + p.code, location.href).href;
+        var share = "https://wa.me/?text=" + encodeURIComponent("Te recomiendo BeeSystems, soporte remoto para Windows con descuento. Crea tu cuenta con mi código " + p.code + ": " + link);
+        var tbl = refs.length ? '<div class="tbl"><table><thead><tr><th>Referido</th><th>Desde</th><th class="r">Servicios</th><th class="r">Total cobrado</th><th class="r">Tu comisión</th></tr></thead><tbody>' + refs.map(function (x) { return "<tr><td>" + esc(x.name) + "</td><td>" + fdate(x.date) + '</td><td class="r">' + x.n + '</td><td class="r">' + money(x.tot) + '</td><td class="r"><b>' + money(x.com) + "</b></td></tr>"; }).join("") + "</tbody></table></div>"
+          : '<p class="empty">Todavía no tienes referidos. Comparte tu enlace para empezar a ganar.</p>';
+        app.innerHTML = '<p style="margin-bottom:14px">Hola, <b>' + esc(p.name) + '</b>.</p>' +
+          '<div class="stats"><div class="st"><span>Referidos</span><b>' + refs.length + '</b></div><div class="st"><span>Total cobrado a tus referidos</span><b>' + money(tot) + '</b></div><div class="st hl"><span>Tu comisión acumulada (20%)</span><b>' + money(com) + "</b><small>Pagada: " + money(paid) + " · Pendiente: " + money(pend) + "</small></div></div>" +
+          '<div class="box"><h3>Tu enlace de referido</h3><p>Tu código: <span class="code">' + esc(p.code) + '</span></p><div class="crow"><input id="refLink" readonly value="' + esc(link) + '" aria-label="Tu enlace de referido"><button type="button" class="btn" data-act="copy">Copiar</button><a class="btn wa" href="' + share + '" target="_blank" rel="noopener"><svg class="i"><use href="#wa"/></svg>Compartir</a></div></div>' +
+          '<div class="box"><h3>Mis referidos</h3>' + tbl + '<p class="fine">Tu comisión es el 20% de lo cobrado, con un tope de $40.000 COP por referido. Ver <a href="politicas.html#referidos">políticas</a>.</p></div>';
+      } catch (e) { app.innerHTML = '<div class="notice" role="alert">No pudimos cargar tu panel. Recarga la página e inténtalo de nuevo.</div>'; }
     }
-    if (window.hiveSet) window.hiveSet(n, !!u);
+    if (window.hiveSet) window.hiveSet(n, logged);
   }
   app.addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b || b.dataset.act !== "copy") return;
@@ -419,14 +427,15 @@ document.getElementById("y").textContent = new Date().getFullYear();
     (navigator.clipboard ? navigator.clipboard.writeText(inp.value) : Promise.reject()).catch(function () { document.execCommand("copy"); });
     b.textContent = "¡Copiado!"; setTimeout(function () { b.textContent = "Copiar"; }, 1600);
   });
+  if (sb) sb.auth.onAuthStateChange(function (ev) { if (ev === "SIGNED_OUT") setTimeout(render, 0); });
   render();
 
   /* Calculadora de comisión */
   var cs = document.getElementById("cs"), cn = document.getElementById("cn"), cnv = document.getElementById("cnv"), out = document.getElementById("cOut"), ctx = document.getElementById("cTxt"), shown = 0, raf = 0;
   cs.innerHTML = CAT.map(function (c, i) { return '<option value="' + i + '">' + c[0] + " — " + money(c[1]) + "</option>"; }).join("");
   function calc() {
-    var c = CAT[+cs.value], n = +cn.value, to = n * c[1] * 0.2, from = shown, t0 = performance.now();
-    cnv.textContent = n; ctx.textContent = n + (n === 1 ? " referido" : " referidos") + " × " + money(c[1]) + " × 20%";
+    var c = CAT[+cs.value], n = +cn.value, per = Math.min(c[1] * 0.2, 40000), to = n * per, from = shown, t0 = performance.now();
+    cnv.textContent = n; ctx.textContent = n + (n === 1 ? " referido" : " referidos") + " × " + money(per) + " (20% de " + money(c[1]) + ", tope " + money(40000) + ")";
     cancelAnimationFrame(raf);
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { shown = to; out.textContent = money(to); return; }
     (function s(t) { var p = Math.min(1, (t - t0) / 400); shown = from + (to - from) * p; out.textContent = money(shown); if (p < 1) raf = requestAnimationFrame(s); })(t0);

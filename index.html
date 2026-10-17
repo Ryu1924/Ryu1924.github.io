@@ -47,7 +47,7 @@ svg.s{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none}
 .logo svg{width:36px;height:36px}
 .nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
-.nav li a{display:block;padding:8px 12px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.98rem}
+.nav li a{display:block;padding:8px 9px;border-radius:6px;color:#f1e3c6;text-decoration:none;font-weight:600;font-size:.92rem}
 .nav li a:hover{background:#4a3216;color:#fff}
 
 .hero{background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97'%3E%3Cpath d='M28 0l28 16.17v32.33L28 64.67 0 48.5V16.17zM28 64.67V97' fill='none' stroke='%23ffb81c' stroke-opacity='.14' stroke-width='1.5'/%3E%3C/svg%3E");color:#fff;padding:48px 0 70px}
@@ -288,8 +288,77 @@ footer{padding:22px 0 90px;text-align:center;color:var(--muted);font-size:.92rem
 .fab:hover{background:transparent;transform:scale(1.08)}
 .fab svg{width:100%;height:100%}
 footer a{color:var(--blue)}
+
+.dp>*{animation-duration:var(--T,5s);animation-delay:var(--D,0s);animation-iteration-count:infinite;animation-fill-mode:both}
+.dpt{transform-box:fill-box;transform-origin:50% 0;animation-name:dpt;animation-timing-function:ease-in-out}
+.dpb{transform-box:fill-box;transform-origin:center;animation-name:dpb;animation-timing-function:ease-in-out}
+.dpd{animation-name:dpd;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+@keyframes dpt{0%{transform:scaleY(.1)}56%,64%{transform:scaleY(1)}76%,100%{transform:scaleY(.1)}}
+@keyframes dpb{0%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:1}56%{transform:translateY(var(--L)) scale(1.2)}63%{transform:translateY(var(--L)) scale(1.35);opacity:1}64%{transform:translateY(var(--L)) scale(1.35);opacity:0}76%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:0}77%,100%{transform:translateY(calc(var(--L) * .1)) scale(.8);opacity:1}}
+@keyframes dpd{0%,63%{opacity:0;transform:translateY(var(--L))}64%{opacity:1;transform:translateY(var(--L))}92%{opacity:1;transform:translateY(calc(var(--L) + var(--F)))}100%{opacity:0;transform:translateY(calc(var(--L) + var(--F)))}}
+.dp:hover .dpb,.dp:hover .dpd{fill:#ffe08a}
+@media (prefers-reduced-motion:reduce){.dp>*{animation:none}.dpb{transform:translateY(var(--L))}.dpd{opacity:0}}
+
+.virus{padding:0 0 70px}
+.virus-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.virus h3{margin:18px 0 6px}
+.vsigns,.vdo{list-style:none;margin:6px 0 4px;padding:0}
+.vsigns li,.vdo li{padding:4px 0 4px 30px;position:relative;color:var(--muted)}
+.vsigns li::before{content:"!";position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:#e5533d;color:#fff;font:800 .8rem/20px var(--head);text-align:center}
+.vdo li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+.cta-row2{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.vscene{background:linear-gradient(#fff3d6,#fff8ea);border:2px solid var(--ink);border-radius:16px;padding:8px}
+.vscene svg{display:block;width:100%;height:auto}
+.vscene svg text{font-family:var(--body)}
+.vctrl{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.vcap{font-weight:600;color:var(--muted);font-size:.95rem}
+.vsh{opacity:0;transform:scale(.55);transform-box:fill-box;transform-origin:center;transition:opacity .5s,transform .65s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+.vsh.on{opacity:1;transform:scale(1);animation:vglow 2s ease-in-out .7s infinite}
+@keyframes vglow{50%{filter:drop-shadow(0 0 14px #ffd24d)}}
+#vring.on{animation:vring 1.5s ease-out 3}
+#vring{transform-box:fill-box;transform-origin:center}
+@keyframes vring{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.45)}}
+.vhit{animation:vhit .55s ease-out forwards;transform-box:fill-box;transform-origin:center}
+@keyframes vhit{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){.vsh,.vsh.on,#vring.on,.vhit{animation:none;transition:none}}
+
+.more{display:inline-block;margin:8px 0 0;font-weight:600;font-size:.92rem;text-decoration:none}
+.more:hover{text-decoration:underline}
+.plan{padding:0 0 70px;scroll-margin-top:70px}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+.plancard{position:relative;background:var(--ink);color:#fff;border-radius:18px;padding:30px 26px;border:3px solid var(--tag)}
+.ribbon{position:absolute;top:-14px;right:20px;background:var(--tag);color:var(--tag-ink);font:800 .9rem var(--head);padding:5px 14px;border-radius:8px;transform:rotate(2deg)}
+.pp{display:flex;align-items:baseline;gap:8px;margin:10px 0 2px;flex-wrap:wrap}
+.pnew{font:800 2.8rem var(--head);color:var(--tag)}
+.pm{color:#ecdcbc;margin-bottom:14px}
+.pl{list-style:none;margin:0 0 18px;padding:0}
+.pl li{padding:7px 0 7px 28px;position:relative;border-bottom:1px solid #4a3216}
+.pl li::before{content:"✓";position:absolute;left:0;color:var(--tag);font-weight:700}
+.pl li span{display:block;color:#ecdcbc;font-size:.85rem}
+.plancard .btn{width:100%}
+.plancard .fine,.plancard .fine a{color:#d9c49c}
+.plancalc{background:var(--white);border:2px solid var(--ink);border-radius:18px;padding:26px}
+.plancalc h3{margin-bottom:12px}
+.plancalc input[type=range]{width:100%;accent-color:var(--blue);margin:6px 0 4px}
+.bars{margin:18px 0}
+.br{margin-bottom:14px}
+.br span{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;margin-bottom:5px}
+.br em{font-style:normal;font-weight:600}
+.trk{height:24px;background:var(--line);border-radius:12px;overflow:hidden}
+.trk i{display:block;height:100%;border-radius:12px;transition:width .5s;background:#e5533d}
+.br.ok .trk i{background:var(--ok)}
+.save{background:#e0f5ec;border-radius:12px;padding:14px 16px}
+.save span{color:var(--muted);font-size:.92rem}
+.save b{display:block;font:800 1.9rem var(--head);color:var(--ok)}
+.save small{color:var(--muted)}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.bn{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px}
+.bn b{display:block;font-family:var(--head);margin-bottom:4px}
+.bn span{color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.trk i{transition:none}}
 @media (max-width:860px){
-  .hero-grid,.grid2,.about-grid,.calc-grid,.tm-grid,.dopts{grid-template-columns:1fr}
+  .hero-grid,.grid2,.about-grid,.calc-grid,.tm-grid,.dopts,.virus-grid,.plan-grid{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr 1fr}
   .calc-sum{position:static}
   .cards{grid-template-columns:1fr}
 }
@@ -330,11 +399,13 @@ footer a{color:var(--blue)}
   <div class="wrap bar">
     <a class="logo" href="#inicio"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
     <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#nosotros">Sobre nosotros</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a href="computador.html">Cómo funciona un PC</a></li>
+      <li><a href="#inicio" aria-current="page">Inicio</a></li>
+      <li><a href="#servicios" aria-current="page">Servicios</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="#plan" aria-current="page">Plan anual</a></li>
+      <li><a href="#nosotros" aria-current="page">Nosotros</a></li>
+      <li><a href="#contacto" aria-current="page">Contacto</a></li>
+      <li><a href="computador.html">Aprende</a></li>
       <li><a href="referidos.html">Referidos</a></li>
       <li><a class="navcta" href="cuenta.html">Mi cuenta</a></li>
     </ul>
@@ -428,7 +499,91 @@ footer a{color:var(--blue)}
       </div>
     </div>
   </div>
-  <div class="refbn"><div class="wrap refbn-in"><div><h2>Gana con tus referidos</h2><p>Crea tu cuenta, comparte tu enlace y recibe el <b>20%</b> de lo que se cobre por cada persona que refieras.</p></div><a class="btn" href="referidos.html">Conocer el programa</a></div></div>
+  <div class="virus" id="virus">
+    <div class="wrap virus-grid">
+      <div>
+        <h2>Los virus son intrusos en tu colmena</h2>
+        <p class="sub">Un virus (o malware) es un programa que entra a tu computador sin permiso para dañarlo, espiarte o llenarte de anuncios. Mira cómo defendemos el panal.</p>
+        <h3>Señales de que tu PC tiene uno</h3>
+        <ul class="vsigns">
+          <li>Se puso lento de repente</li>
+          <li>Aparecen anuncios o ventanas que tú no abriste</li>
+          <li>Hay programas o barras de herramientas que no instalaste</li>
+          <li>El navegador cambió su página de inicio</li>
+          <li>El ventilador suena fuerte sin que hagas nada</li>
+        </ul>
+        <h3>Qué hacemos nosotros</h3>
+        <ul class="vdo">
+          <li>Análisis completo y limpieza remota</li>
+          <li>Eliminamos programas no deseados</li>
+          <li>Dejamos la protección de Windows configurada</li>
+          <li>Te damos consejos para no volver a infectarte</li>
+        </ul>
+        <div class="cta-row2"><a class="btn wa" href="#" data-wa data-prog="Eliminación de virus y malware"><svg class="i"><use href="#wa"/></svg>Revisar mi PC</a><a class="btn line" href="politicas.html#garantia">Garantía de 6 meses</a></div>
+      </div>
+      <div>
+        <div class="vscene" id="vscene">
+          <svg id="vsvg" viewBox="0 0 640 420" role="img" aria-label="Animación: un panal de abejas se defiende. Intrusos con forma de virus intentan entrar, las abejas guardianas los sacan corriendo y al final el panal queda protegido con un escudo.">
+            <defs><linearGradient id="vgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd24d"/><stop offset="1" stop-color="#e89a00"/></linearGradient></defs>
+            <rect x="0" y="396" width="640" height="24" fill="#6f9f3d" opacity=".25"/>
+            <text id="vTxt" x="18" y="32" fill="#2b1a09" font-size="21" font-weight="700">Panal en alerta · intrusos expulsados: 0/6</text>
+            <circle cx="200" cy="210" r="124" fill="#1d1106" stroke="#7a4a0a" stroke-width="9"/>
+            <g id="vcells"></g>
+            <rect x="306" y="184" width="28" height="52" rx="14" fill="#0f0802" stroke="#ffb81c" stroke-width="3.500"/>
+            <circle id="vring" cx="200" cy="210" r="124" fill="none" stroke="#ffd24d" stroke-width="5" opacity="0"/>
+            <g id="vents"></g>
+            <g id="vshield" class="vsh"><path d="M200 92L284 120V206C284 262 246 300 200 324C154 300 116 262 116 206V120Z" fill="url(#vgrad)" fill-opacity=".93" stroke="#2b1a09" stroke-width="5" stroke-linejoin="round"/><path d="M158 208l30 30 54-62" stroke="#fff" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </svg>
+        </div>
+        <div class="vctrl"><button type="button" class="btn" id="vSend">Enviar intrusos</button><span class="vcap" id="vCap" aria-live="polite">Las abejas guardianas protegen la entrada.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="plan" id="plan">
+    <div class="wrap">
+      <h2>Plan anual: tu PC cuidado todo el año</h2>
+      <p class="sub">Un solo pago al año y tu equipo siempre al día: mantenimiento cada 3 meses, revisión de virus, atención prioritaria y descuentos. Cuesta bastante menos que pagar todo por separado.</p>
+      <div class="plan-grid">
+        <article class="plancard">
+          <span class="ribbon">Más conveniente</span>
+          <h3>Plan Anual BeeSystems</h3>
+          <div class="pp"><span class="pnew" id="pPrice">$179.000</span><span>COP / año</span></div>
+          <p class="pm" id="pMonth">Equivale a unos $14.900 al mes por 1 equipo</p>
+          <ul class="pl">
+            <li>4 mantenimientos remotos, uno cada 3 meses <span>valor $208.000</span></li>
+            <li>1 análisis y limpieza de virus y malware <span>valor $45.000</span></li>
+            <li>1 reinstalación de Windows si la necesitas <span>valor $70.000</span></li>
+            <li>Atención prioritaria por WhatsApp</li>
+            <li>15% de descuento en instalación de programas y servicios adicionales</li>
+            <li>Garantía de 6 meses en cada servicio</li>
+            <li>Te avisamos cuándo toca tu próximo mantenimiento</li>
+          </ul>
+          <a class="btn" id="pBtn" href="#" target="_blank" rel="noopener">Quiero el Plan Anual</a>
+          <p class="fine">Pago único anual con Nequi o Llave Bre-B. No se renueva solo. <a href="politicas.html#plan">Ver condiciones</a>.</p>
+        </article>
+        <div class="plancalc">
+          <h3>Mira cuánto ahorras</h3>
+          <label for="pEq">Número de equipos: <b id="pEqv">1</b></label>
+          <input id="pEq" type="range" min="1" max="5" value="1">
+          <div class="bars" aria-live="polite">
+            <div class="br"><span><em>Pagando todo por separado</em><b id="pSepT">$253.000</b></span><div class="trk"><i id="pSepB" style="width:100%"></i></div></div>
+            <div class="br ok"><span><em>Con el Plan Anual</em><b id="pPlanT">$179.000</b></span><div class="trk"><i id="pPlanB" style="width:70%"></i></div></div>
+          </div>
+          <div class="save"><span>Ahorras desde</span><b id="pSave">$74.000 COP</b><small id="pSave2"></small></div>
+          <p class="fine">"Por separado" suma 4 mantenimientos ($52.000 c/u) y 1 revisión de virus ($45.000) por equipo, a los precios de esta página. El plan cuesta $179.000 por el primer equipo y $129.000 por cada equipo adicional.</p>
+        </div>
+      </div>
+      <div class="benefits">
+        <div class="bn"><b>Equipo siempre al día</b><span>Un mantenimiento cada 3 meses evita que se ponga lento.</span></div>
+        <div class="bn"><b>Atención prioritaria</b><span>Tus mensajes por WhatsApp pasan primero.</span></div>
+        <div class="bn"><b>15% de descuento</b><span>En programas y servicios adicionales. Revit desde $60.000 queda en $51.000.</span></div>
+        <div class="bn"><b>6 meses de garantía</b><span>En cada servicio que te hagamos durante el año.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="refbn"><div class="wrap refbn-in"><div><h2>Gana con tus referidos</h2><p>Crea tu cuenta, comparte tu enlace y recibe el <b>20%</b> de lo que se cobre por cada persona que refieras (tope de $40.000 COP por referido).</p></div><a class="btn" href="referidos.html">Conocer el programa</a></div></div>
 
 </section>
 
@@ -445,6 +600,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#tool"/></svg></div>
         <h3>Mantenimiento y limpieza</h3>
         <p>Libero espacio, quito lo que ralentiza el arranque y dejo el equipo más rápido.</p>
+        <a class="more" href="productos.html#mant">Ver detalles y requisitos →</a>
         <span class="from">$52.000 COP <s>$80.000 COP</s></span>
         <a class="btn line" href="#" data-wa data-prog="Mantenimiento remoto de Windows">Cotizar servicio</a>
       </div>
@@ -452,6 +608,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#shield"/></svg></div>
         <h3>Eliminación de virus</h3>
         <p>Detecto y elimino virus, malware y programas no deseados, y dejo la protección configurada.</p>
+        <a class="more" href="productos.html#virus">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn line" href="#" data-wa data-prog="Eliminación de virus y malware">Cotizar servicio</a>
       </div>
@@ -459,6 +616,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#pc"/></svg></div>
         <h3>Windows desde cero</h3>
         <p>Instalación limpia con tus programas y controladores. Te explico cómo respaldar tus archivos.</p>
+        <a class="more" href="productos.html#windows">Ver detalles y requisitos →</a>
         <span class="from">Desde $70.000 COP</span>
         <a class="btn line" href="#" data-wa data-prog="Instalación de Windows desde cero">Cotizar servicio</a>
       </div>
@@ -470,6 +628,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#office"/></svg></div>
         <h3>Microsoft Office</h3>
         <p>Licencia original con instalación y configuración inicial. Word, Excel, PowerPoint y más.</p>
+        <a class="more" href="productos.html#office">Ver detalles y requisitos →</a>
         <span class="from">$65.000 COP <s>$150.000 COP</s></span>
         <a class="btn" href="#" data-wa data-prog="Microsoft Office">Cotizar programa</a>
       </div>
@@ -477,6 +636,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#revit"/></svg></div>
         <h3>Revit</h3>
         <p>Instalación y ajuste del equipo para que corra fluido con modelos pesados.</p>
+        <a class="more" href="productos.html#revit">Ver detalles y requisitos →</a>
         <span class="from">Desde $60.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Revit">Cotizar programa</a>
       </div>
@@ -484,6 +644,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#cad"/></svg></div>
         <h3>AutoCAD</h3>
         <p>Instalación para empezar a dibujar de inmediato.</p>
+        <a class="more" href="productos.html#autocad">Ver detalles y requisitos →</a>
         <span class="from">Desde $50.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="AutoCAD">Cotizar programa</a>
       </div>
@@ -491,6 +652,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#road"/></svg></div>
         <h3>Civil 3D</h3>
         <p>Instalación y configuración para diseño de obras civiles, topografía y vías.</p>
+        <a class="more" href="productos.html#civil3d">Ver detalles y requisitos →</a>
         <span class="from">Desde $60.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Civil 3D">Cotizar programa</a>
       </div>
@@ -498,6 +660,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#gantt"/></svg></div>
         <h3>Microsoft Project</h3>
         <p>Instalación y configuración para planear y controlar cronogramas de obra.</p>
+        <a class="more" href="productos.html#project">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Microsoft Project">Cotizar programa</a>
       </div>
@@ -505,6 +668,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#pdf"/></svg></div>
         <h3>Adobe Acrobat</h3>
         <p>Instalación para editar, firmar y convertir archivos PDF.</p>
+        <a class="more" href="productos.html#acrobat">Ver detalles y requisitos →</a>
         <span class="from">Desde $40.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Adobe Acrobat">Cotizar programa</a>
       </div>
@@ -516,6 +680,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#img"/></svg></div>
         <h3>Photoshop</h3>
         <p>Instalación y ajuste de rendimiento para editar fotos sin que se trabe.</p>
+        <a class="more" href="productos.html#photoshop">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Photoshop">Cotizar programa</a>
       </div>
@@ -523,6 +688,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#pen"/></svg></div>
         <h3>Illustrator</h3>
         <p>Instalación y configuración para diseño vectorial, logos e ilustración.</p>
+        <a class="more" href="productos.html#illustrator">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Illustrator">Cotizar programa</a>
       </div>
@@ -530,6 +696,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#film"/></svg></div>
         <h3>Premiere Pro</h3>
         <p>Instalación y ajustes para editar video con fluidez.</p>
+        <a class="more" href="productos.html#premiere">Ver detalles y requisitos →</a>
         <span class="from">Desde $55.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Premiere Pro">Cotizar programa</a>
       </div>
@@ -537,6 +704,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#fx"/></svg></div>
         <h3>After Effects</h3>
         <p>Instalación y configuración de memoria y caché para animación y efectos.</p>
+        <a class="more" href="productos.html#aftereffects">Ver detalles y requisitos →</a>
         <span class="from">Desde $55.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="After Effects">Cotizar programa</a>
       </div>
@@ -544,6 +712,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#cube"/></svg></div>
         <h3>SketchUp</h3>
         <p>Instalación y configuración para modelado 3D de arquitectura y diseño.</p>
+        <a class="more" href="productos.html#sketchup">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="SketchUp">Cotizar programa</a>
       </div>
@@ -551,6 +720,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#sliders"/></svg></div>
         <h3>Lightroom</h3>
         <p>Instalación y ajustes para revelar y organizar tus fotos.</p>
+        <a class="more" href="productos.html#lightroom">Ver detalles y requisitos →</a>
         <span class="from">Desde $45.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Lightroom">Cotizar programa</a>
       </div>
@@ -558,6 +728,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#layers"/></svg></div>
         <h3>3ds Max</h3>
         <p>Instalación y ajuste del equipo para modelado y renders.</p>
+        <a class="more" href="productos.html#3dsmax">Ver detalles y requisitos →</a>
         <span class="from">Desde $60.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="3ds Max">Cotizar programa</a>
       </div>
@@ -565,6 +736,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#sun"/></svg></div>
         <h3>Lumion</h3>
         <p>Instalación y configuración de la tarjeta gráfica para renders de arquitectura.</p>
+        <a class="more" href="productos.html#lumion">Ver detalles y requisitos →</a>
         <span class="from">Desde $60.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Lumion">Cotizar programa</a>
       </div>
@@ -572,6 +744,7 @@ footer a{color:var(--blue)}
         <div class="ic"><svg class="i s"><use href="#eye"/></svg></div>
         <h3>Enscape</h3>
         <p>Instalación y vinculación con Revit, SketchUp o ArchiCAD para renders en tiempo real.</p>
+        <a class="more" href="productos.html#enscape">Ver detalles y requisitos →</a>
         <span class="from">Desde $55.000 COP</span>
         <a class="btn" href="#" data-wa data-prog="Enscape">Cotizar programa</a>
       </div>
@@ -622,6 +795,8 @@ footer a{color:var(--blue)}
           <details><summary>¿Qué es RustDesk?</summary><p>Es el programa de acceso remoto que usamos: gratuito y de código abierto. Te guío para descargarlo; tú me compartes el ID y la contraseña que muestra y, al cerrar el programa, la conexión termina.</p></details>
           <details><summary>¿Qué necesito para la sesión?</summary><p>Un computador con Windows, internet estable, RustDesk instalado (te ayudo con eso) y estar frente a la pantalla durante la sesión.</p></details>
           <details><summary>¿Cómo es el pago?</summary><p>50% al inicio para reservar tu sesión y 50% al final, cuando revisas que todo funcione. Se paga con Nequi o Llave Bre-B; te enviamos los datos por WhatsApp.</p></details>
+          <details><summary>¿Los servicios tienen garantía?</summary><p>Sí. Cada servicio tiene una garantía de 6 meses. Todos los detalles están en las <a href="politicas.html#garantia">políticas</a>.</p></details>
+          <details><summary>¿Qué incluye el Plan Anual?</summary><p>4 mantenimientos remotos al año (uno por trimestre), 1 revisión de virus, 1 reinstalación de Windows si la necesitas, atención prioritaria y 15% de descuento en programas. <a href="#plan">Míralo aquí</a>.</p></details>
           <details><summary>¿Y si el problema no se resuelve?</summary><p>Si no logro solucionar lo que acordamos, te devuelvo el 50% que pagaste al inicio y no pagas el resto.</p></details>
         </div>
       </div>
@@ -663,7 +838,7 @@ footer a{color:var(--blue)}
 </main>
 
 <footer>
-  <div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="computador.html">Cómo funciona un PC</a> · <a href="referidos.html">Referidos</a> · <a href="cuenta.html">Mi cuenta</a></div>
+  <div class="wrap">© <span id="y"></span> BeeSystems · Soporte técnico remoto · Colombia · <a href="computador.html">Cómo funciona un PC</a> · <a href="productos.html">Productos</a> · <a href="#plan">Plan anual</a> · <a href="referidos.html">Referidos</a> · <a href="politicas.html">Políticas</a> · <a href="cuenta.html">Mi cuenta</a></div>
 </footer>
 
 <a class="fab" href="#" data-wa aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
@@ -727,13 +902,13 @@ footer a{color:var(--blue)}
     var h = r / 2, w = r * 0.866;
     return [[cx, cy - r], [cx + w, cy - h], [cx + w, cy + h], [cx, cy + r], [cx - w, cy + h], [cx - w, cy - h]].map(function (p) { return F(p[0]) + "," + F(p[1]); }).join(" ");
   }
-  function drop(x, y, L) {
-    return '<g class="dr"><rect x="' + F(x - 4.5) + '" y="' + y + '" width="9" height="' + F(L) + '" rx="4.5" fill="#ffb81c"/><circle cx="' + F(x) + '" cy="' + F(y + L) + '" r="6" fill="#ffb81c"/></g>';
+  function drop(x, y, L, Fd, T, D) {
+    return '<g class="dp" style="--L:' + F(L) + "px;--F:" + F(Fd) + "px;--T:" + F(T) + "s;--D:-" + F(D) + 's"><rect class="dpt" x="' + F(x - 4.5) + '" y="' + y + '" width="9" height="' + F(L) + '" rx="4.5" fill="#ffb81c"/><circle class="dpb" cx="' + F(x) + '" cy="' + y + '" r="6" fill="#ffb81c"/><circle class="dpd" cx="' + F(x) + '" cy="' + y + '" r="5" fill="#ffb81c"/></g>';
   }
   document.querySelectorAll(".drips").forEach(function (el) {
     var r = rng(11), W = 2000, o = '<rect width="' + W + '" height="12" fill="#ffb81c"/>', x;
     for (x = 0; x < W; x += 20) o += '<circle cx="' + x + '" cy="' + F(11 + r() * 3) + '" r="' + F(8 + r() * 3) + '" fill="#ffb81c"/>';
-    for (x = 60; x < W; x += 60 + r() * 150) o += drop(x, 10, 10 + r() * 16);
+    for (x = 60; x < W; x += 60 + r() * 150) o += drop(x, 10, 16 + r() * 22, 46, 4 + r() * 3, r() * 7);
     el.innerHTML = '<svg viewBox="0 0 ' + W + ' 62" preserveAspectRatio="xMidYMin slice" width="100%" height="62">' + o + '</svg>';
   });
   /* Ecosistema: flores, panal y abejas obreras que van y vienen */
@@ -748,7 +923,7 @@ footer a{color:var(--blue)}
       var cy = R + 6 + i * R * 1.5, e = r() < 0.2;
       o += '<polygon class="cell' + (e ? " e" : "") + '" points="' + hex(x, cy, R - 1.5) + '" fill="' + (e ? "#4a3012" : HONEY[Math.floor(r() * 4)]) + '"/>';
       cells.push({ x: x, y: cy + OY, e: e });
-      if (i && r() < 0.2) d += drop(x, 94, 10 + r() * 16);
+      if (i && r() < 0.2) d += drop(x, 94, 14 + r() * 20, 22, 4 + r() * 3, r() * 7);
     }
     for (k = 0; k < 3; k++) {
       var cx = 1000 + (k - 1) * 300 + (r() - 0.5) * 120, cyy = 48 + r() * 30, gg = "";
@@ -876,6 +1051,18 @@ footer a{color:var(--blue)}
   /* Ventana arrastrable + pantalla azul */
   var win = document.getElementById("win"), wbar = document.getElementById("winBar"), wmin = document.getElementById("winMin"), wclose = document.getElementById("winClose");
   var bsod = document.getElementById("bsod"), fix = document.getElementById("bsFix"), pctEl = document.getElementById("bsPct"), toast = document.getElementById("toast");
+  /* Pantalla completa (como F11): la X la activa y el botón amarillo la desactiva */
+  function enterFs() {
+    try {
+      var d = document.documentElement, f = d.requestFullscreen || d.webkitRequestFullscreen || d.msRequestFullscreen;
+      if (f && !(document.fullscreenElement || document.webkitFullscreenElement)) { var r = f.call(d); if (r && r.catch) r.catch(function () {}); }
+    } catch (e) {}
+  }
+  function exitFs() {
+    try {
+      if (document.fullscreenElement || document.webkitFullscreenElement) { var x = document.exitFullscreen || document.webkitExitFullscreen, r = x.call(document); if (r && r.catch) r.catch(function () {}); }
+    } catch (e) {}
+  }
   if (win && wbar) {
     var ox = 0, oy = 0, sx = 0, sy = 0, base = null, drag = false, pctT, rebooting = false;
     wbar.addEventListener("pointerdown", function (e) {
@@ -902,6 +1089,7 @@ footer a{color:var(--blue)}
       wmin.setAttribute("aria-label", m ? "Restaurar ventana" : "Minimizar ventana"); wmin.textContent = m ? "▢" : "–";
     });
     wclose.addEventListener("click", function () {
+      enterFs();
       win.classList.add("gone");
       setTimeout(function () {
         bsod.classList.remove("fixing"); bsod.hidden = false; document.documentElement.style.overflow = "hidden";
@@ -918,6 +1106,7 @@ footer a{color:var(--blue)}
       wclose.focus({ preventScroll: true });
     };
     fix.addEventListener("click", function () {
+      exitFs();
       if (rebooting) return; rebooting = true; bsod.classList.add("fixing");
       setTimeout(function () { rebooting = false; closeBsod(); }, reduce ? 300 : 2500);
     });
@@ -1002,6 +1191,108 @@ footer a{color:var(--blue)}
       card.addEventListener("focusin", start); card.addEventListener("focusout", stop);
     });
   });
+
+  /* Panal que se defiende de los virus */
+  var vsvg = document.getElementById("vsvg");
+  if (vsvg) {
+    var gEnt = document.getElementById("vents"), shield = document.getElementById("vshield"), ring = document.getElementById("vring"), vTxt = document.getElementById("vTxt"), vCap = document.getElementById("vCap"), vSend = document.getElementById("vSend");
+    var HX = 200, HY = 210, GX = 320, GY = 210, GOAL = 6, vr = rng(31), vcs = "", i2, j2, vw = 19 * 1.732;
+    for (i2 = 0; i2 < 11; i2++) for (j2 = 0; j2 < 9; j2++) {
+      var cx = 200 - 4.5 * vw + vw / 2 + j2 * vw + (i2 % 2 ? vw / 2 : 0) - vw / 4, cy = 210 - 5 * 28.5 + i2 * 28.5;
+      if (Math.hypot(cx - HX, cy - HY) > 98) continue;
+      vcs += '<polygon points="' + hex(cx, cy, 17.6) + '" fill="' + (vr() < 0.3 ? "#3a2410" : HONEY[Math.floor(vr() * 4)]) + '" stroke="#7a4a0a" stroke-width="1.4"/>';
+    }
+    document.getElementById("vcells").innerHTML = vcs;
+    var VBEE = '<g transform="rotate(-18 22 22)"><ellipse class="wing" cx="22" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".92" stroke="#2b1a09" stroke-width=".9"/></g><g transform="rotate(18 31 22)"><ellipse class="wing" cx="31" cy="16" rx="5" ry="9" fill="#fff" fill-opacity=".92" stroke="#2b1a09" stroke-width=".9"/></g><ellipse cx="26" cy="29" rx="11" ry="8.5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><rect x="22" y="22" width="3.4" height="14" fill="#2b1a09"/><rect x="28" y="22" width="3.4" height="14" fill="#2b1a09"/><circle cx="13.5" cy="29" r="5" fill="#ffb81c" stroke="#2b1a09" stroke-width="1.6"/><circle cx="12" cy="28" r="1.2" fill="#2b1a09"/><path d="M11 25.5L8 21.5M15.5 25L14 20.5" stroke="#2b1a09" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M36.5 26.5l5 2.5-5 2.5z" fill="#2b1a09"/>';
+    var POSTS = [[352, 160], [364, 210], [352, 260]], guards = [], intr = [], count = 0, blocked = 0, stage = "alert", nextSpawn = 900, securedUntil = 0, vlast = 0, vvis = true;
+    POSTS.forEach(function (p) {
+      gEnt.insertAdjacentHTML("beforeend", '<g class="vg"><g class="fc"><g transform="scale(.95) translate(-26 -26)">' + VBEE + "</g></g></g>");
+      var g = gEnt.lastElementChild; guards.push({ g: g, fc: g.querySelector(".fc"), x: p[0], y: p[1], post: p, s: "post", t: null, until: 0, face: 1 });
+    });
+    function spikes() { var o = ""; for (var k = 0; k < 8; k++) o += '<path d="M0 -10L0 -17" stroke="#2b1a09" stroke-width="3.5" stroke-linecap="round" transform="rotate(' + k * 45 + ')"/>'; return o; }
+    function mkIntruder(y) {
+      var ball = Math.random() < 0.6;
+      gEnt.insertAdjacentHTML("beforeend", ball
+        ? '<g class="vi"><g class="rot">' + spikes() + '<circle r="11" fill="#c0392b" stroke="#2b1a09" stroke-width="2"/></g><circle cx="-4" cy="-2" r="3" fill="#fff"/><circle cx="4" cy="-2" r="3" fill="#fff"/><circle cx="-4" cy="-1.500" r="1.300" fill="#2b1a09"/><circle cx="4" cy="-1.500" r="1.300" fill="#2b1a09"/><path d="M-8 -7L-2 -4M8 -7L2 -4" stroke="#2b1a09" stroke-width="2" stroke-linecap="round"/></g>'
+        : '<g class="vi"><g class="rot"><rect x="-15" y="-12" width="30" height="24" rx="3" fill="#fff" stroke="#2b1a09" stroke-width="2"/><rect x="-15" y="-12" width="30" height="7" rx="3" fill="#e5533d"/><text y="8" text-anchor="middle" font-size="10" font-weight="800" fill="#e5533d">AD</text></g></g>');
+      var g = gEnt.lastElementChild;
+      return { g: g, rot: g.querySelector(".rot"), x: 670, y: y, s: "in", ang: 0, sp: 1.2 + Math.random() * 0.7, vx: 0, vy: 0, claimed: false, ball: ball, wob: Math.random() * 6 };
+    }
+    function spawn(n) { for (var k = 0; k < n && intr.length < 8; k++) { var it = mkIntruder(60 + Math.random() * 300); it.x += k * 55; intr.push(it); } }
+    function hit(x, y) {
+      gEnt.insertAdjacentHTML("beforeend", '<path class="vhit" transform="translate(' + F(x) + " " + F(y) + ')" d="M0-16L5-5 16 0 5 5 0 16-5 5-16 0-5-5z" fill="#ffd24d" stroke="#2b1a09" stroke-width="2"/>');
+      var el = gEnt.lastElementChild; setTimeout(function () { el.remove(); }, 600);
+    }
+    function vgo(e, tx, ty, dt, mx) { var dx = tx - e.x, dy = ty - e.y, d = Math.hypot(dx, dy); if (d < 3) return true; var s = Math.min(d, Math.min(mx, Math.max(1, d * 0.08)) * dt); e.x += dx / d * s; e.y += dy / d * s; if (Math.abs(dx) > 2) e.face = dx > 0 ? -1 : 1; return false; }
+    function flee(it, fromX, fromY) { var a = Math.atan2(it.y - fromY, it.x - fromX) + (Math.random() - 0.5) * 0.7; it.s = "flee"; it.vx = Math.cos(a) * 4.8; it.vy = Math.sin(a) * 4.8; }
+    function label() {
+      if (stage === "secured") { vTxt.textContent = "Panal asegurado ✓" + (blocked ? " · ataques bloqueados: " + blocked : ""); vCap.textContent = "El escudo protege el panal. Prueba enviar intrusos."; }
+      else { vTxt.textContent = "Panal en alerta · intrusos expulsados: " + count + "/" + GOAL; vCap.textContent = "Las abejas guardianas protegen la entrada."; }
+    }
+    function setSecured(on) { shield.classList.toggle("on", on); ring.classList.remove("on"); if (on) { void ring.getBBox(); ring.classList.add("on"); } }
+    function draw(it) { it.g.setAttribute("transform", "translate(" + F(it.x) + " " + F(it.y) + ") scale(1.4)"); if (it.rot) it.rot.setAttribute("transform", "rotate(" + F(it.ang) + ")"); }
+    function vstep(t, dt) {
+      var active = intr.filter(function (n) { return n.s === "in"; }).length;
+      if (stage === "alert" && t > nextSpawn && active < 3 && count + active < GOAL) { spawn(1); nextSpawn = t + 1400 + Math.random() * 1200; }
+      intr.forEach(function (n) {
+        if (n.s === "in") {
+          var tx = GX - 6, ty = GY + Math.sin(t / 300 + n.wob) * 18, dx = tx - n.x, dy = ty - n.y, d = Math.hypot(dx, dy);
+          n.x += dx / d * n.sp * dt; n.y += dy / d * n.sp * dt; n.ang += (n.ball ? 3 : 0.6) * dt;
+          if (stage === "secured" && Math.hypot(n.x - HX, n.y - HY) <= 148) { flee(n, HX, HY); blocked++; hit(n.x, n.y); label(); }
+          else if (d < 26) { flee(n, HX, HY); count++; hit(n.x, n.y); label(); }
+        } else { n.x += n.vx * dt; n.y += n.vy * dt; n.ang += 9 * dt; }
+        draw(n);
+      });
+      intr = intr.filter(function (n) { var out = n.x > 720 || n.x < -40 || n.y < -40 || n.y > 470; if (out) n.g.remove(); return !out; });
+      guards.forEach(function (g, k) {
+        var wob = Math.sin(t / 400 + k * 2) * 5;
+        if (g.s === "post") {
+          vgo(g, g.post[0] + wob, g.post[1] + Math.cos(t / 330 + k) * 4, dt, 1.4);
+          if (stage === "alert") {
+            var c = intr.filter(function (n) { return n.s === "in" && !n.claimed && Math.hypot(n.x - GX, n.y - GY) < 250; }).sort(function (a, b) { return a.x - b.x; })[0];
+            if (c) { c.claimed = true; g.t = c; g.s = "attack"; }
+          }
+        } else if (g.s === "attack") {
+          if (!g.t || g.t.s !== "in") g.s = "back";
+          else if (vgo(g, g.t.x, g.t.y, dt, 3.8) || Math.hypot(g.t.x - g.x, g.t.y - g.y) < 24) { flee(g.t, g.x, g.y); count++; hit(g.t.x, g.t.y); label(); g.s = "chase"; g.until = t + 700; }
+        } else if (g.s === "chase") {
+          if (g.t) vgo(g, g.t.x, g.t.y, dt, 4);
+          if (t > g.until) g.s = "back";
+        } else if (g.s === "back") { if (vgo(g, g.post[0], g.post[1], dt, 3)) g.s = "post"; }
+        g.g.setAttribute("transform", "translate(" + F(g.x) + " " + F(g.y) + ")"); g.fc.setAttribute("transform", "scale(" + g.face + " 1)");
+      });
+      if (stage === "alert" && count >= GOAL && intr.every(function (n) { return n.s === "flee"; })) { stage = "secured"; securedUntil = t + 8000; setSecured(true); label(); }
+      else if (stage === "secured" && t > securedUntil) { stage = "alert"; count = 0; blocked = 0; nextSpawn = t + 1200; setSecured(false); label(); }
+    }
+    if (reduce) {
+      stage = "secured"; shield.classList.add("on"); vSend.hidden = true; label();
+      guards.forEach(function (g) { g.g.setAttribute("transform", "translate(" + g.x + " " + g.y + ")"); });
+    } else {
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { vvis = en[0].isIntersecting; }).observe(document.getElementById("vscene"));
+      (function loop(t) { requestAnimationFrame(loop); var dt = Math.min(40, t - vlast) / 16.7; vlast = t; if (vvis) vstep(t, dt); })(0);
+      vSend.addEventListener("click", function () { spawn(3); });
+      label();
+    }
+  }
+
+  /* Plan anual: calculadora de ahorro */
+  var pEq = document.getElementById("pEq");
+  if (pEq) {
+    var SEP = 253000, FULL = 323000, P1 = 179000, PX = 129000, pBtn = document.getElementById("pBtn");
+    var pcalc = function () {
+      var n = +pEq.value, plan = P1 + (n - 1) * PX, sep = SEP * n, save = sep - plan, max = FULL * n - plan;
+      document.getElementById("pEqv").textContent = n;
+      document.getElementById("pPrice").textContent = "$" + plan.toLocaleString("es-CO");
+      document.querySelector("#pPrice + span").textContent = "COP / año" + (n > 1 ? " por " + n + " equipos" : "");
+      document.getElementById("pMonth").textContent = "Equivale a unos $" + (Math.round(plan / 12 / 100) * 100).toLocaleString("es-CO") + " al mes" + (n > 1 ? " por los " + n + " equipos" : " por 1 equipo");
+      document.getElementById("pSepT").textContent = money(sep); document.getElementById("pPlanT").textContent = money(plan);
+      document.getElementById("pSepB").style.width = "100%"; document.getElementById("pPlanB").style.width = Math.round(plan / sep * 100) + "%";
+      document.getElementById("pSave").textContent = money(save) + " (" + Math.round(save / sep * 100) + "%)";
+      document.getElementById("pSave2").textContent = "y hasta " + money(max) + " si usas la reinstalación de Windows";
+      pBtn.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hola, quiero el Plan Anual para " + n + (n === 1 ? " equipo" : " equipos") + " (" + money(plan) + " al año).");
+    };
+    pEq.addEventListener("input", pcalc); pcalc();
+  }
 
   /* Cotizador interactivo: se arma con las tarjetas de servicios */
   var host = document.getElementById("calcItems"), items = [], sel = {};
