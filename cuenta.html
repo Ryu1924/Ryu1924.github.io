@@ -108,10 +108,9 @@ td.r,th.r{text-align:right}
 </svg>
 <nav class="nav" aria-label="Principal">
   <div class="wrap bar">
-    <a class="logo" href="index.html#inicio"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
+    <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#logo"/></svg>BeeSystems</a>
     <ul>
       <li><a href="index.html">Inicio</a></li>
-      <li><a href="index.html#servicios">Servicios</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="index.html#plan">Plan anual</a></li>
       <li><a href="index.html#nosotros">Nosotros</a></li>
@@ -187,7 +186,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
     if (!p) return '<div class="notice" role="status">Tu perfil se está preparando. Recarga la página en unos segundos.</div>';
     var paid = mine.reduce(function (a, s) { return a + s.amount; }, 0);
     var svc = mine.length ? '<div class="tbl"><table><thead><tr><th>Fecha</th><th>Servicio</th><th class="r">Valor</th><th>Estado</th></tr></thead><tbody>' + mine.map(function (s) { return "<tr><td>" + fdate(s.date) + "</td><td>" + esc(s.name) + '</td><td class="r">' + money(s.amount) + '</td><td class="ok">Completado</td></tr>'; }).join("") + "</tbody></table></div>"
-      : '<p class="empty">Aún no tienes servicios contratados. <a href="index.html#servicios">Mira los servicios</a> o escríbenos por WhatsApp.</p>';
+      : '<p class="empty">Aún no tienes servicios contratados. <a href="productos.html">Mira los productos</a> o escríbenos por WhatsApp.</p>';
     return '<div class="ph"><div><h2>Hola, ' + esc(p.name) + '</h2><p class="sub" style="margin:4px 0 0">' + esc(session.user.email) + '</p></div><button type="button" class="btn line" data-act="out">Cerrar sesión</button></div>' +
       '<div class="stats"><div class="st"><span>Servicios contratados</span><b>' + mine.length + '</b></div><div class="st"><span>Total pagado</span><b>' + money(paid) + '</b></div><div class="st hl"><span>Mis referidos</span><b>' + refs.length + "</b></div></div>" +
       '<div class="box"><h3>Mis servicios</h3>' + svc + '<p class="fine">Los servicios los registra BeeSystems cuando se completan y se pagan.</p></div>' +
