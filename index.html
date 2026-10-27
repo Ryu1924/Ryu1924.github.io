@@ -326,6 +326,12 @@ footer a{color:var(--blue)}
 .more{display:inline-block;margin:8px 0 0;font-weight:600;font-size:.92rem;text-decoration:none}
 .more:hover{text-decoration:underline}
 .plan{padding:0 0 70px;scroll-margin-top:70px}
+.ptabs{display:flex;gap:10px;margin:0 0 24px;flex-wrap:wrap}
+.ptabs button{flex:1;min-width:220px;padding:14px 20px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:800 1.1rem var(--head);cursor:pointer;text-align:left;transition:background .2s,border-color .2s}
+.ptabs button small{display:block;margin-top:2px;font:400 .88rem var(--body);color:var(--muted)}
+.ptabs button:hover{border-color:var(--ink)}
+.ptabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.ptabs button[aria-selected="true"] small{color:#ecdcbc}
 .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
 .plancard{position:relative;background:var(--ink);color:#fff;border-radius:18px;padding:30px 26px;border:3px solid var(--tag)}
 .ribbon{position:absolute;top:-14px;right:20px;background:var(--tag);color:var(--tag-ink);font:800 .9rem var(--head);padding:5px 14px;border-radius:8px;transform:rotate(2deg)}
@@ -542,47 +548,37 @@ footer a{color:var(--blue)}
 
   <div class="plan" id="plan">
     <div class="wrap">
-      <h2>Plan anual: tu PC cuidado todo el año</h2>
-      <p class="sub">Un solo pago al año y tu equipo siempre al día: mantenimiento cada 3 meses, revisión de virus, atención prioritaria y descuentos. Cuesta bastante menos que pagar todo por separado.</p>
+      <h2>Planes anuales: tu PC cuidado todo el año</h2>
+      <p class="sub">Un solo pago al año y tus equipos siempre al día: mantenimiento, revisión de virus, atención prioritaria y descuentos. Elige el plan para ti o para toda tu familia.</p>
+      <div class="ptabs" role="tablist" aria-label="Tipo de plan">
+        <button type="button" role="tab" id="tabInd" data-plan="ind" aria-selected="true">Plan Anual<small>Para ti · 1 a 5 equipos</small></button>
+        <button type="button" role="tab" id="tabFam" data-plan="fam" aria-selected="false">Plan Familiar<small>Para el hogar · 3 a 6 equipos</small></button>
+      </div>
       <div class="plan-grid">
         <article class="plancard">
-          <span class="ribbon">Más conveniente</span>
-          <h3>Plan Anual BeeSystems</h3>
-          <div class="pp"><span class="pnew" id="pPrice">$179.000</span><span>COP / año</span></div>
-          <p class="pm" id="pMonth">Equivale a unos $14.900 al mes por 1 equipo</p>
-          <ul class="pl">
-            <li>4 mantenimientos remotos, uno cada 3 meses <span>valor $208.000</span></li>
-            <li>1 análisis y limpieza de virus y malware <span>valor $45.000</span></li>
-            <li>1 reinstalación de Windows si la necesitas <span>valor $70.000</span></li>
-            <li>Atención prioritaria por WhatsApp</li>
-            <li>15% de descuento en instalación de programas y servicios adicionales</li>
-            <li>Garantía de 6 meses en cada servicio</li>
-            <li>Te avisamos cuándo toca tu próximo mantenimiento</li>
-          </ul>
-          <a class="btn" id="pBtn" href="#" target="_blank" rel="noopener">Quiero el Plan Anual</a>
+          <span class="ribbon" id="pRibbon">Más conveniente</span>
+          <h3 id="pTitle">Plan Anual BeeSystems</h3>
+          <div class="pp"><span class="pnew" id="pPrice">$179.000</span><span id="pUnit">COP / año</span></div>
+          <p class="pm" id="pMonth"></p>
+          <ul class="pl" id="pItems"></ul>
+          <a class="btn" id="pBtn" href="#" target="_blank" rel="noopener">Quiero este plan</a>
           <p class="fine">Pago único anual con Nequi o Llave Bre-B. No se renueva solo. <a href="politicas.html#plan">Ver condiciones</a>.</p>
         </article>
         <div class="plancalc">
           <h3>Mira cuánto ahorras</h3>
-          <label for="pEq">Número de equipos: <b id="pEqv">1</b></label>
+          <label for="pEq"><span id="pEqLbl">Número de equipos</span>: <b id="pEqv">1</b></label>
           <input id="pEq" type="range" min="1" max="5" value="1">
           <div class="bars" aria-live="polite">
             <div class="br"><span><em>Pagando todo por separado</em><b id="pSepT">$253.000</b></span><div class="trk"><i id="pSepB" style="width:100%"></i></div></div>
-            <div class="br ok"><span><em>Con el Plan Anual</em><b id="pPlanT">$179.000</b></span><div class="trk"><i id="pPlanB" style="width:70%"></i></div></div>
+            <div class="br ok"><span><em id="pPlanLbl">Con el Plan Anual</em><b id="pPlanT">$179.000</b></span><div class="trk"><i id="pPlanB" style="width:70%"></i></div></div>
           </div>
           <div class="save"><span>Ahorras desde</span><b id="pSave">$74.000 COP</b><small id="pSave2"></small></div>
-          <p class="fine">"Por separado" suma 4 mantenimientos ($52.000 c/u) y 1 revisión de virus ($45.000) por equipo, a los precios de esta página. El plan cuesta $179.000 por el primer equipo y $129.000 por cada equipo adicional.</p>
+          <p class="fine" id="pNote"></p>
         </div>
       </div>
-      <div class="benefits">
-        <div class="bn"><b>Equipo siempre al día</b><span>Un mantenimiento cada 3 meses evita que se ponga lento.</span></div>
-        <div class="bn"><b>Atención prioritaria</b><span>Tus mensajes por WhatsApp pasan primero.</span></div>
-        <div class="bn"><b>15% de descuento</b><span>En programas y servicios adicionales. Revit desde $60.000 queda en $51.000.</span></div>
-        <div class="bn"><b>6 meses de garantía</b><span>En cada servicio que te hagamos durante el año.</span></div>
-      </div>
+      <div class="benefits" id="pBen"></div>
     </div>
   </div>
-
   <div class="refbn"><div class="wrap refbn-in"><div><h2>Gana con tus referidos</h2><p>Crea tu cuenta, comparte tu enlace y recibe el <b>20%</b> de lo que se cobre por cada persona que refieras (tope de $40.000 COP por referido).</p></div><a class="btn" href="referidos.html">Conocer el programa</a></div></div>
 
 </section>
@@ -602,7 +598,7 @@ footer a{color:var(--blue)}
           <details><summary>¿Qué necesito para la sesión?</summary><p>Un computador con Windows, internet estable, RustDesk instalado (te ayudo con eso) y estar frente a la pantalla durante la sesión.</p></details>
           <details><summary>¿Cómo es el pago?</summary><p>50% al inicio para reservar tu sesión y 50% al final, cuando revisas que todo funcione. Se paga con Nequi o Llave Bre-B; te enviamos los datos por WhatsApp.</p></details>
           <details><summary>¿Los servicios tienen garantía?</summary><p>Sí. Cada servicio tiene una garantía de 6 meses. Todos los detalles están en las <a href="politicas.html#garantia">políticas</a>.</p></details>
-          <details><summary>¿Qué incluye el Plan Anual?</summary><p>4 mantenimientos remotos al año (uno por trimestre), 1 revisión de virus, 1 reinstalación de Windows si la necesitas, atención prioritaria y 15% de descuento en programas. <a href="#plan">Míralo aquí</a>.</p></details>
+          <details><summary>¿Qué incluyen los planes anuales?</summary><p>El Plan Anual incluye 4 mantenimientos remotos (uno por trimestre), 1 revisión de virus y 1 reinstalación de Windows si la necesitas. El Plan Familiar cubre de 3 a 6 equipos del hogar con 2 mantenimientos y 1 revisión de virus por equipo, y una charla de seguridad para toda la familia. Los dos incluyen atención prioritaria y 15% de descuento. <a href="#plan">Míralos aquí</a>.</p></details>
           <details><summary>¿Y si el problema no se resuelve?</summary><p>Si no logro solucionar lo que acordamos, te devuelvo el 50% que pagaste al inicio y no pagas el resto.</p></details>
         </div>
       </div>
@@ -1054,25 +1050,50 @@ footer a{color:var(--blue)}
     }
   }
 
-  /* Plan anual: calculadora de ahorro */
+  /* Planes anuales: individual y familiar */
   var pEq = document.getElementById("pEq");
   if (pEq) {
-    var SEP = 253000, FULL = 323000, P1 = 179000, PX = 129000, pBtn = document.getElementById("pBtn");
-    var pcalc = function () {
-      var n = +pEq.value, plan = P1 + (n - 1) * PX, sep = SEP * n, save = sep - plan, max = FULL * n - plan;
-      document.getElementById("pEqv").textContent = n;
-      document.getElementById("pPrice").textContent = "$" + plan.toLocaleString("es-CO");
-      document.querySelector("#pPrice + span").textContent = "COP / año" + (n > 1 ? " por " + n + " equipos" : "");
-      document.getElementById("pMonth").textContent = "Equivale a unos $" + (Math.round(plan / 12 / 100) * 100).toLocaleString("es-CO") + " al mes" + (n > 1 ? " por los " + n + " equipos" : " por 1 equipo");
-      document.getElementById("pSepT").textContent = money(sep); document.getElementById("pPlanT").textContent = money(plan);
-      document.getElementById("pSepB").style.width = "100%"; document.getElementById("pPlanB").style.width = Math.round(plan / sep * 100) + "%";
-      document.getElementById("pSave").textContent = money(save) + " (" + Math.round(save / sep * 100) + "%)";
-      document.getElementById("pSave2").textContent = "y hasta " + money(max) + " si usas la reinstalación de Windows";
-      pBtn.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hola, quiero el Plan Anual para " + n + (n === 1 ? " equipo" : " equipos") + " (" + money(plan) + " al año).");
+    var fmt = function (n) { return "$" + n.toLocaleString("es-CO"); };
+    var PLANS = {
+      ind: {
+        title: "Plan Anual BeeSystems", ribbon: "Más conveniente", lbl: "Número de equipos", lblPlan: "Con el Plan Anual", msg: "Plan Anual", min: 1, max: 5, val: 1,
+        price: function (n) { return 179000 + (n - 1) * 129000; }, sep: function (n) { return 253000 * n; }, full: function (n) { return 323000 * n; },
+        items: [["4 mantenimientos remotos, uno cada 3 meses", "valor $208.000"], ["1 análisis y limpieza de virus y malware", "valor $45.000"], ["1 reinstalación de Windows si la necesitas", "valor $70.000"], ["Atención prioritaria por WhatsApp"], ["15% de descuento en instalación de programas y servicios adicionales"], ["Garantía de 6 meses en cada servicio"], ["Te avisamos cuándo toca tu próximo mantenimiento"]],
+        ben: [["Equipo siempre al día", "Un mantenimiento cada 3 meses evita que se ponga lento."], ["Atención prioritaria", "Tus mensajes por WhatsApp pasan primero."], ["15% de descuento", "En programas y servicios adicionales. Revit desde $60.000 queda en $51.000."], ["6 meses de garantía", "En cada servicio que te hagamos durante el año."]],
+        note: '"Por separado" suma 4 mantenimientos ($52.000 c/u) y 1 revisión de virus ($45.000) por equipo, a los precios de esta página. El plan cuesta $179.000 por el primer equipo y $129.000 por cada equipo adicional.'
+      },
+      fam: {
+        title: "Plan Familiar BeeSystems", ribbon: "Ideal para el hogar", lbl: "Equipos en tu hogar", lblPlan: "Con el Plan Familiar", msg: "Plan Familiar", min: 3, max: 6, val: 4,
+        price: function (n) { return 349000 + Math.max(0, n - 4) * 79000; }, sep: function (n) { return 149000 * n; }, full: function (n) { return 149000 * n + 70000; },
+        items: [["Hasta 4 equipos del mismo hogar", "el 5.º y el 6.º suman $79.000 cada uno"], ["2 mantenimientos remotos al año por equipo, uno cada 6 meses", "valor $104.000 por equipo"], ["1 análisis y limpieza de virus por equipo", "valor $45.000 por equipo"], ["1 reinstalación de Windows para el equipo que la necesite", "valor $70.000"], ["1 charla de seguridad para toda la familia: enlaces, correos y programas que conviene evitar"], ["Atención prioritaria por WhatsApp para toda la familia"], ["15% de descuento en instalación de programas y servicios adicionales"], ["Garantía de 6 meses en cada servicio"]],
+        ben: [["Toda la familia protegida", "Cada equipo del hogar recibe mantenimiento y revisión de virus."], ["Un solo pago", "En vez de pagar servicio por servicio, equipo por equipo."], ["Charla de seguridad", "Para que todos en casa aprendan a no caer en virus ni estafas."], ["6 meses de garantía", "En cada servicio que te hagamos durante el año."]],
+        note: '"Por separado" suma 2 mantenimientos ($52.000 c/u) y 1 revisión de virus ($45.000) por equipo, a los precios de esta página. El Plan Familiar cuesta $349.000 hasta 4 equipos y $79.000 por cada equipo adicional. Con 1 o 2 equipos te conviene más el Plan Anual individual.'
+      }
     };
-    pEq.addEventListener("input", pcalc); pcalc();
+    var cur = "ind", pBtn = document.getElementById("pBtn"), tabs = [].slice.call(document.querySelectorAll(".ptabs button")), vals = { ind: 1, fam: 4 };
+    var $ = function (id) { return document.getElementById(id); };
+    var pcalc = function () {
+      var P = PLANS[cur], n = +pEq.value, plan = P.price(n), sep = P.sep(n), save = sep - plan, max = P.full(n) - plan;
+      vals[cur] = n; $("pEqv").textContent = n;
+      $("pPrice").textContent = fmt(plan); $("pUnit").textContent = "COP / año" + (n > 1 ? " por " + n + " equipos" : "");
+      $("pMonth").textContent = "Equivale a unos " + fmt(Math.round(plan / 12 / 100) * 100) + " al mes" + (n > 1 ? " por los " + n + " equipos · unos " + fmt(Math.round(plan / n / 1000) * 1000) + " al año por equipo" : " por 1 equipo");
+      $("pSepT").textContent = money(sep); $("pPlanT").textContent = money(plan);
+      $("pSepB").style.width = "100%"; $("pPlanB").style.width = Math.round(plan / sep * 100) + "%";
+      $("pSave").textContent = money(save) + " (" + Math.round(save / sep * 100) + "%)";
+      $("pSave2").textContent = "y hasta " + money(max) + " si usas la reinstalación de Windows";
+      pBtn.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hola, quiero el " + P.msg + " para " + n + (n === 1 ? " equipo" : " equipos") + " (" + money(plan) + " al año).");
+    };
+    var show = function (k) {
+      cur = k; var P = PLANS[k];
+      tabs.forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-plan") === k); });
+      $("pTitle").textContent = P.title; $("pRibbon").textContent = P.ribbon; $("pEqLbl").textContent = P.lbl; $("pPlanLbl").textContent = P.lblPlan; $("pNote").textContent = P.note;
+      $("pItems").innerHTML = P.items.map(function (i) { return "<li>" + i[0] + (i[1] ? "<span>" + i[1] + "</span>" : "") + "</li>"; }).join("");
+      $("pBen").innerHTML = P.ben.map(function (b) { return '<div class="bn"><b>' + b[0] + "</b><span>" + b[1] + "</span></div>"; }).join("");
+      pEq.min = P.min; pEq.max = P.max; pEq.value = vals[k]; pcalc();
+    };
+    tabs.forEach(function (t) { t.addEventListener("click", function () { show(t.getAttribute("data-plan")); }); });
+    pEq.addEventListener("input", pcalc); show("ind");
   }
-
 })();
 </script>
 </body>
